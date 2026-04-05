@@ -12,77 +12,87 @@
 :root{
   --bg:#000;--c1:#0f0f0f;--c2:#1a1a1a;--c3:#252525;
   --t1:#f5f5f7;--t2:rgba(245,245,247,.65);--t3:rgba(245,245,247,.35);--t4:rgba(255,255,255,.06);
-  --gr:#34c759;--bl:#007aff;--rd:#ff3b30;--gd:#ffd60a;--pr:#af52de;--or:#ff9500;--tl:#32ade6;
+  --gr:#34c759;--bl:#007aff;--rd:#ff3b30;--gd:#ffd60a;--pr:#af52de;--or:#ff9500;
 }
 html,body{background:var(--bg);min-height:100vh}
-body{color:var(--t1);font-family:-apple-system,BlinkMacSystemFont,'SF Pro Text','Helvetica Neue',sans-serif;padding-bottom:calc(76px + env(safe-area-inset-bottom,0px));overflow-x:hidden}
+body{color:var(--t1);font-family:-apple-system,BlinkMacSystemFont,'SF Pro Text','Helvetica Neue',sans-serif;padding-bottom:calc(68px + env(safe-area-inset-bottom,0px));overflow-x:hidden}
 
-.top{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(0,0,0,.85);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-bottom:.5px solid rgba(255,255,255,.1);padding:calc(env(safe-area-inset-top,14px) + 10px) 16px 10px;display:flex;align-items:center;justify-content:space-between}
+/* TOP BAR */
+.top{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(0,0,0,.88);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-bottom:.5px solid rgba(255,255,255,.1);display:flex;align-items:center;justify-content:space-between;padding:calc(env(safe-area-inset-top,0px) + 10px) 16px 10px;min-height:52px}
 .top h1{font-size:17px;font-weight:700;letter-spacing:-.3px}
 .top p{font-size:11px;color:var(--t3);margin-top:2px}
 .topr{text-align:right}
-.clk{font-size:18px;font-weight:600;font-variant-numeric:tabular-nums}
+.clk{font-size:17px;font-weight:600;font-variant-numeric:tabular-nums}
 .dte{font-size:10px;color:var(--t3);margin-top:2px}
 
-.tkr{position:fixed;top:calc(env(safe-area-inset-top,14px)+50px);left:0;right:0;z-index:99;background:rgba(0,0,0,.78);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:.5px solid rgba(255,255,255,.07);overflow:hidden;height:30px;mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent)}
-.tscrl{display:flex;align-items:center;height:30px;animation:scroll 40s linear infinite;white-space:nowrap}
+/* TICKER */
+.tkr{position:fixed;left:0;right:0;z-index:99;background:rgba(0,0,0,.8);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:.5px solid rgba(255,255,255,.07);overflow:hidden;height:28px;mask-image:linear-gradient(90deg,transparent,#000 5%,#000 95%,transparent);top:calc(env(safe-area-inset-top,0px) + 52px)}
+.tscrl{display:flex;align-items:center;height:28px;animation:scroll 40s linear infinite;white-space:nowrap}
 @keyframes scroll{to{transform:translateX(-50%)}}
 .ti{display:inline-flex;align-items:center;gap:5px;padding:0 14px;flex-shrink:0}
 .tsm{font-size:10px;font-weight:700;letter-spacing:.05em;color:var(--t3)}
 .tprc{font-size:11px;font-weight:500;font-variant-numeric:tabular-nums}
 .tch{font-size:10px;font-weight:700;font-variant-numeric:tabular-nums}
 .up{color:var(--gr)}.dn{color:var(--rd)}
-.tdot{color:rgba(255,255,255,.15);font-size:8px;padding:0 2px}
+.tdot{color:rgba(255,255,255,.2);padding:0 3px;font-size:9px}
 
-.nav{position:fixed;bottom:0;left:0;right:0;z-index:100;background:rgba(0,0,0,.9);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-top:.5px solid rgba(255,255,255,.1);display:flex;padding:8px 0 calc(8px + env(safe-area-inset-bottom,0px))}
-.nb{flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;background:none;border:none;cursor:pointer;padding:4px 0}
+/* NAV */
+.nav{position:fixed;bottom:0;left:0;right:0;z-index:100;background:rgba(0,0,0,.9);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-top:.5px solid rgba(255,255,255,.1);display:flex;padding:6px 0 calc(6px + env(safe-area-inset-bottom,0px))}
+.nb{flex:1;display:flex;flex-direction:column;align-items:center;gap:2px;background:none;border:none;cursor:pointer;padding:4px 0;font-family:inherit}
 .ni{font-size:22px;line-height:1;transition:transform .15s}
 .nl{font-size:10px;font-weight:500;color:var(--t3);transition:color .15s}
 .nb.on .ni{transform:scale(1.1)}.nb.on .nl{color:var(--bl)}
 
-.pg{display:none;padding:calc(env(safe-area-inset-top,14px)+96px) 14px 20px}
+/* PAGES — key fix: correct padding-top */
+.pg{display:none;padding:calc(env(safe-area-inset-top,0px) + 88px) 14px 20px}
 .pg.on{display:block}
 
+/* CARDS */
 .card{background:var(--c1);border:.5px solid rgba(255,255,255,.08);border-radius:20px;padding:16px;margin-bottom:10px}
 .lbl{font-size:10px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--t3);margin-bottom:10px}
-.big{font-size:34px;font-weight:700;letter-spacing:-.6px;line-height:1;font-variant-numeric:tabular-nums}
+.big{font-size:32px;font-weight:700;letter-spacing:-.5px;line-height:1;font-variant-numeric:tabular-nums}
 .sub{font-size:13px;color:var(--t2);margin-top:5px;line-height:1.5}
 
+/* GRIDS */
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px}
+
+/* PILLS */
 .pill{display:inline-flex;align-items:center;padding:3px 9px;border-radius:100px;font-size:11px;font-weight:700;margin-top:6px}
 .pg2{background:rgba(52,199,89,.12);color:var(--gr)}
 .pr2{background:rgba(255,59,48,.12);color:var(--rd)}
 .pa2{background:rgba(255,214,10,.12);color:var(--gd)}
 .pb2{background:rgba(0,122,255,.12);color:var(--bl)}
-.pp2{background:rgba(175,82,222,.12);color:var(--pr)}
 
-.g2{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px}
-.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
-
+/* ROWS */
 .row{display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:.5px solid rgba(255,255,255,.06)}
 .row:last-child{border-bottom:none}
 .rl{font-size:13px;color:var(--t2)}
 .rv{font-size:13px;font-weight:600}
 
+/* WEATHER */
 .wx{display:flex;align-items:flex-end;gap:14px;margin-bottom:14px}
 .wxic{font-size:52px;line-height:1}
 .wxtmp{font-size:46px;font-weight:200;letter-spacing:-2px}
 .wxd{font-size:14px;color:var(--t2);margin-top:4px}
 .wxf{font-size:12px;color:var(--t3);margin-top:2px}
-.wxg{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-top:12px}
+.wxg{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin-top:12px}
 .wxc{background:var(--t4);border-radius:12px;padding:10px 8px;text-align:center}
 .wxcv{font-size:15px;font-weight:600}
 .wxcl{font-size:10px;color:var(--t3);margin-top:2px}
 
+/* STREAK */
 .strn{font-size:52px;font-weight:700;letter-spacing:-2px;color:var(--or);line-height:1}
 .strbar{display:flex;gap:4px;margin-top:12px}
 .srd{flex:1;height:4px;border-radius:2px;background:var(--t4)}
 .srd.ok{background:var(--or)}.srd.now{background:var(--gr)}
 
+/* COUNTDOWN */
 .cdg{display:grid;grid-template-columns:repeat(4,1fr);gap:6px}
 .cdc{background:var(--c2);border-radius:14px;padding:12px 8px;text-align:center}
 .cdn{font-size:24px;font-weight:700;letter-spacing:-.5px;font-variant-numeric:tabular-nums}
 .cdl{font-size:9px;color:var(--t3);text-transform:uppercase;letter-spacing:.07em;margin-top:3px}
 
+/* QUIZ */
 .qq{font-size:15px;font-weight:500;line-height:1.55;margin-bottom:14px}
 .qo{display:flex;flex-direction:column;gap:8px}
 .qb{background:var(--c2);border:1.5px solid var(--c3);border-radius:14px;padding:12px 14px;font-size:13px;color:var(--t1);cursor:pointer;text-align:left;transition:all .15s;font-family:inherit}
@@ -91,22 +101,26 @@ body{color:var(--t1);font-family:-apple-system,BlinkMacSystemFont,'SF Pro Text',
 .qb.no{border-color:var(--rd);background:rgba(255,59,48,.08);color:var(--rd)}
 .qexp{font-size:13px;color:var(--t2);line-height:1.6;margin-top:10px;display:none;padding:12px;background:var(--t4);border-radius:12px}
 
+/* WORD */
 .ww{font-size:28px;font-weight:700;letter-spacing:-.3px}
 .wp{font-size:13px;color:var(--bl);font-style:italic;margin:5px 0 8px}
 .wt{font-size:10px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--pr);margin-bottom:7px}
 .wd{font-size:14px;color:var(--t2);line-height:1.6;margin-bottom:8px}
 .we{font-size:13px;color:var(--t3);font-style:italic}
 
+/* HISTORY */
 .hdate{font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--bl);margin-bottom:10px}
 .hev{padding:10px 0;border-bottom:.5px solid rgba(255,255,255,.06);display:flex;gap:8px}
 .hev:last-child{border-bottom:none}
 .hyr{font-size:13px;font-weight:800;color:var(--gd);flex-shrink:0;min-width:42px}
 .htx{font-size:13px;color:var(--t1);line-height:1.5}
 
+/* TIP */
 .tn{width:28px;height:28px;border-radius:8px;background:rgba(0,122,255,.15);color:var(--bl);font-size:12px;font-weight:700;display:flex;align-items:center;justify-content:center;margin-bottom:10px}
 .tt{font-size:16px;font-weight:600;margin-bottom:8px}
 .tb{font-size:14px;color:var(--t2);line-height:1.65}
 
+/* CRYPTO */
 .cr{display:flex;align-items:center;justify-content:space-between;padding:10px 0;border-bottom:.5px solid rgba(255,255,255,.06)}
 .cr:last-child{border-bottom:none}
 .crl{display:flex;align-items:center;gap:10px}
@@ -116,6 +130,7 @@ body{color:var(--t1);font-family:-apple-system,BlinkMacSystemFont,'SF Pro Text',
 .crp{font-size:14px;font-weight:600;font-variant-numeric:tabular-nums}
 .crc{font-size:11px;font-weight:700;font-variant-numeric:tabular-nums;margin-top:1px}
 
+/* ETF */
 .ef{display:flex;align-items:center;justify-content:space-between;padding:11px 0;border-bottom:.5px solid rgba(255,255,255,.06)}
 .ef:last-child{border-bottom:none}
 .efl{display:flex;align-items:center;gap:10px}
@@ -130,52 +145,24 @@ body{color:var(--t1);font-family:-apple-system,BlinkMacSystemFont,'SF Pro Text',
 .s2{color:var(--gd);background:rgba(255,214,10,.08);border:.5px solid rgba(255,214,10,.2)}
 .s3{color:var(--t2);background:var(--c2);border:.5px solid rgba(255,255,255,.08)}
 
+/* FOREX */
 .fxg{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-top:8px}
 .fxi{background:var(--t4);border-radius:12px;padding:10px 12px}
 .fxp{font-size:10px;font-weight:700;letter-spacing:.06em;color:var(--t3);text-transform:uppercase}
 .fxv{font-size:18px;font-weight:700;margin-top:3px;font-variant-numeric:tabular-nums}
 
+/* AQI */
 .aqib{height:6px;border-radius:3px;background:linear-gradient(90deg,var(--gr),var(--gd),var(--or),var(--rd));margin:10px 0 5px;position:relative}
 .aqin{position:absolute;top:-4px;width:14px;height:14px;border-radius:50%;background:#fff;border:2px solid #000;transform:translateX(-50%);transition:left .6s}
 
+/* AI BOX */
 .ai{background:var(--c1);border:.5px solid rgba(0,122,255,.2);border-radius:20px;padding:18px;margin-bottom:10px;position:relative;overflow:hidden}
 .ai::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--bl),var(--pr),transparent)}
 .aibdg{display:inline-flex;align-items:center;gap:6px;font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--bl);background:rgba(0,122,255,.1);border:.5px solid rgba(0,122,255,.2);padding:3px 10px;border-radius:6px;margin-bottom:12px}
 .aitx{font-size:14px;color:var(--t2);line-height:1.7;margin-bottom:12px}
 .aiact{font-size:13px;font-weight:600;color:var(--gr);background:rgba(52,199,89,.07);border:.5px solid rgba(52,199,89,.15);border-radius:12px;padding:11px 14px}
 
-.prow{display:flex;align-items:baseline;justify-content:space-between;padding:10px 0;border-bottom:.5px solid rgba(255,255,255,.06)}
-.prow:last-child{border-bottom:none}
-.pyr{font-size:12px;color:var(--t2)}
-.pval{font-size:20px;font-weight:700;letter-spacing:-.3px;font-variant-numeric:tabular-nums}
-.pgn{font-size:11px;font-weight:700;color:var(--gr);font-variant-numeric:tabular-nums}
-.sr{display:flex;align-items:center;gap:10px;margin-bottom:10px}
-.sr label{font-size:11px;color:var(--t3);min-width:95px}
-.sr input[type=range]{flex:1;accent-color:var(--bl);height:2px;cursor:pointer}
-.sv{font-size:11px;font-weight:700;color:var(--bl);min-width:36px;text-align:right;font-variant-numeric:tabular-nums}
-.cwrap{position:relative;height:160px;margin-top:12px}
-
-.ni2{padding:11px 0;border-bottom:.5px solid rgba(255,255,255,.06)}
-.ni2:last-child{border-bottom:none}
-.na{text-decoration:none;color:inherit;display:block}
-.na:active .nt{color:var(--bl)}
-.nt{font-size:13px;color:var(--t1);line-height:1.45}
-.ns{font-size:11px;color:var(--t3);margin-top:3px}
-
-.mv{display:flex;gap:14px}
-.mpo{width:72px;height:108px;border-radius:12px;background:var(--c2);flex-shrink:0;overflow:hidden}
-.mpo img{width:100%;height:100%;object-fit:cover}
-.mtt{font-size:15px;font-weight:600;margin-bottom:7px}
-.mds{font-size:12px;color:var(--t3);line-height:1.5}
-
-.nasaimg{width:100%;border-radius:14px;aspect-ratio:16/9;object-fit:cover;margin-bottom:12px;background:var(--c2);display:none}
-
-.horo{font-size:14px;color:var(--t2);line-height:1.65;margin-bottom:14px}
-.horog{display:grid;grid-template-columns:repeat(2,1fr);gap:6px}
-.horc{background:var(--t4);border-radius:12px;padding:10px}
-.horcl{font-size:9px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--t3)}
-.horcv{font-size:13px;font-weight:500;margin-top:3px}
-
+/* PLAN */
 .plan-row{display:flex;align-items:center;gap:12px;padding:10px 0;border-bottom:.5px solid rgba(255,255,255,.06)}
 .plan-row:last-child{border-bottom:none}
 .plan-ic{width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;flex-shrink:0}
@@ -185,12 +172,66 @@ body{color:var(--t1);font-family:-apple-system,BlinkMacSystemFont,'SF Pro Text',
 .plan-t{font-size:13px;font-weight:500}
 .plan-s{font-size:11px;color:var(--t3);margin-top:1px}
 
+/* PROJ */
+.sr{display:flex;align-items:center;gap:10px;margin-bottom:10px}
+.sr label{font-size:11px;color:var(--t3);min-width:95px}
+.sr input[type=range]{flex:1;accent-color:var(--bl);height:2px;cursor:pointer}
+.sv{font-size:11px;font-weight:700;color:var(--bl);min-width:36px;text-align:right;font-variant-numeric:tabular-nums}
+.cwrap{position:relative;height:160px;margin-top:12px}
+
+/* NEWS */
+.ni2{padding:11px 0;border-bottom:.5px solid rgba(255,255,255,.06)}
+.ni2:last-child{border-bottom:none}
+.na{text-decoration:none;color:inherit;display:block}
+.na:active .nt{color:var(--bl)}
+.nt{font-size:13px;color:var(--t1);line-height:1.45}
+.ns{font-size:11px;color:var(--t3);margin-top:3px}
+
+/* MOVIE */
+.mv{display:flex;gap:14px}
+.mpo{width:72px;height:108px;border-radius:12px;background:var(--c2);flex-shrink:0;overflow:hidden}
+.mpo img{width:100%;height:100%;object-fit:cover}
+.mtt{font-size:15px;font-weight:600;margin-bottom:7px}
+.mds{font-size:12px;color:var(--t3);line-height:1.5}
+
+/* NASA */
+.nasaimg{width:100%;border-radius:14px;aspect-ratio:16/9;object-fit:cover;margin-bottom:12px;background:var(--c2);display:none}
+
+/* HOROSCOPE */
+.horo{font-size:14px;color:var(--t2);line-height:1.65;margin-bottom:14px}
+.horog{display:grid;grid-template-columns:repeat(2,1fr);gap:6px}
+.horc{background:var(--t4);border-radius:12px;padding:10px}
+.horcl{font-size:9px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--t3)}
+.horcv{font-size:13px;font-weight:500;margin-top:3px}
+
+/* SPORT SCORES */
+.score-match{display:flex;align-items:center;justify-content:space-between;padding:12px 0;border-bottom:.5px solid rgba(255,255,255,.06)}
+.score-match:last-child{border-bottom:none}
+.team{display:flex;flex-direction:column;align-items:center;gap:4px;flex:1}
+.team-name{font-size:11px;color:var(--t2);text-align:center;font-weight:500}
+.score-box{display:flex;align-items:center;gap:8px;flex-shrink:0}
+.score-num{font-size:22px;font-weight:700;font-variant-numeric:tabular-nums;letter-spacing:-.5px}
+.score-sep{font-size:14px;color:var(--t3);font-weight:300}
+.match-status{font-size:9px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;text-align:center;margin-top:3px}
+.live-badge{color:var(--rd);display:flex;align-items:center;gap:3px}
+.live-badge::before{content:'';width:5px;height:5px;border-radius:50%;background:var(--rd);animation:pulse 1.5s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
+
+/* SPORT TABS */
+.sport-tabs{display:flex;gap:6px;margin-bottom:12px;overflow-x:auto;-webkit-overflow-scrolling:touch;padding-bottom:2px}
+.sport-tab{background:var(--c2);border:.5px solid rgba(255,255,255,.08);border-radius:100px;padding:5px 14px;font-size:11px;font-weight:600;color:var(--t3);cursor:pointer;white-space:nowrap;flex-shrink:0;font-family:inherit;transition:all .15s}
+.sport-tab.on{background:rgba(0,122,255,.15);border-color:rgba(0,122,255,.3);color:var(--bl)}
+
+/* CRYPTO CHART mini sparkline */
+.spark-wrap{height:40px;position:relative;margin-top:4px}
+
 ::-webkit-scrollbar{display:none}
 @media(max-width:380px){.g2{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
 
+<!-- TOP BAR -->
 <div class="top">
   <div>
     <h1 id="greet">Isaac</h1>
@@ -202,14 +243,16 @@ body{color:var(--t1);font-family:-apple-system,BlinkMacSystemFont,'SF Pro Text',
   </div>
 </div>
 
+<!-- TICKER -->
 <div class="tkr">
-  <div class="tscrl" id="tscrl">
+  <div class="tscrl">
     <div class="ti"><span class="tsm">VOO</span><span class="tprc" id="k1p">$---</span><span class="tch" id="k1c"></span></div><span class="tdot">·</span>
     <div class="ti"><span class="tsm">QQQ</span><span class="tprc" id="k2p">$---</span><span class="tch" id="k2c"></span></div><span class="tdot">·</span>
     <div class="ti"><span class="tsm">SCHD</span><span class="tprc" id="k3p">$---</span><span class="tch" id="k3c"></span></div><span class="tdot">·</span>
     <div class="ti"><span class="tsm">BTC</span><span class="tprc" id="k4p">$---</span><span class="tch" id="k4c"></span></div><span class="tdot">·</span>
     <div class="ti"><span class="tsm">ETH</span><span class="tprc" id="k5p">$---</span><span class="tch" id="k5c"></span></div><span class="tdot">·</span>
     <div class="ti"><span class="tsm">SOL</span><span class="tprc" id="k6p">$---</span><span class="tch" id="k6c"></span></div><span class="tdot">·</span>
+    <!-- loop -->
     <div class="ti"><span class="tsm">VOO</span><span class="tprc" id="k7p">$---</span><span class="tch" id="k7c"></span></div><span class="tdot">·</span>
     <div class="ti"><span class="tsm">QQQ</span><span class="tprc" id="k8p">$---</span><span class="tch" id="k8c"></span></div><span class="tdot">·</span>
     <div class="ti"><span class="tsm">SCHD</span><span class="tprc" id="k9p">$---</span><span class="tch" id="k9c"></span></div><span class="tdot">·</span>
@@ -219,17 +262,17 @@ body{color:var(--t1);font-family:-apple-system,BlinkMacSystemFont,'SF Pro Text',
   </div>
 </div>
 
-<!-- HOME -->
+<!-- ====== HOME ====== -->
 <div class="pg on" id="pg-home">
   <div class="g2">
     <div class="card">
-      <div class="lbl">🔥 Racha diaria</div>
+      <div class="lbl">🔥 Racha</div>
       <div class="strn" id="strn">1</div>
       <div class="sub" id="strsub">Día 1 ⭐</div>
       <div class="strbar" id="strbar"></div>
     </div>
     <div class="card">
-      <div class="lbl">⏳ Próximo evento</div>
+      <div class="lbl">⏳ Próximo</div>
       <div style="font-size:11px;color:var(--t2);font-weight:500;margin-bottom:10px" id="cdnm">-</div>
       <div class="cdg">
         <div class="cdc"><div class="cdn" id="cdd">--</div><div class="cdl">Días</div></div>
@@ -239,62 +282,69 @@ body{color:var(--t1);font-family:-apple-system,BlinkMacSystemFont,'SF Pro Text',
       </div>
     </div>
   </div>
+
+  <!-- CLIMA + AQI juntos -->
   <div class="card">
     <div class="lbl">🌤 Clima — Panamá City</div>
     <div class="wx">
       <div class="wxic" id="wxic">🌡</div>
-      <div><div class="wxtmp" id="wxtmp">--°</div><div class="wxd" id="wxd">cargando...</div><div class="wxf" id="wxf"></div></div>
+      <div>
+        <div class="wxtmp" id="wxtmp">--°</div>
+        <div class="wxd" id="wxd">cargando...</div>
+        <div class="wxf" id="wxf"></div>
+      </div>
     </div>
     <div class="wxg" id="wxg">
-      <div class="wxc"><div class="wxcv">--%</div><div class="wxcl">Humedad</div></div>
-      <div class="wxc"><div class="wxcv">-- km/h</div><div class="wxcl">Viento</div></div>
+      <div class="wxc"><div class="wxcv">--</div><div class="wxcl">Humedad</div></div>
+      <div class="wxc"><div class="wxcv">--</div><div class="wxcl">Viento</div></div>
       <div class="wxc"><div class="wxcv">--</div><div class="wxcl">UV</div></div>
+      <div class="wxc"><div class="wxcv" id="aqiv2" style="color:var(--gr)">--</div><div class="wxcl">AQI</div></div>
     </div>
   </div>
+
   <div class="card">
     <div class="lbl">🔭 NASA — Cosmos hoy</div>
     <img id="nasaimg" class="nasaimg" alt="NASA">
     <div style="font-size:15px;font-weight:600;margin-bottom:6px" id="nasatit"><span style="color:var(--t3);font-size:13px">Cargando imagen del universo...</span></div>
     <div style="font-size:13px;color:var(--t2);line-height:1.6" id="nasadesc"></div>
   </div>
+
   <div class="card">
     <div class="lbl">🇵🇦 Panamá hoy</div>
     <div id="newspan"><span style="color:var(--t3);font-size:13px">Cargando noticias...</span></div>
   </div>
 </div>
 
-<!-- INVEST -->
+<!-- ====== INVEST ====== -->
 <div class="pg" id="pg-invest">
   <div class="ai">
     <div class="aibdg">Análisis automático</div>
     <div class="aitx" id="aitx">Cargando datos del mercado...</div>
     <div class="aiact" id="aiact">→ Obteniendo recomendación...</div>
   </div>
+
   <div class="g2">
-    <div class="card"><div class="lbl">VOO — S&P 500</div><div class="big" id="mv1">---</div><div class="sub" id="mc1">--</div></div>
-    <div class="card"><div class="lbl">QQQ — NASDAQ</div><div class="big" id="mv2">---</div><div class="sub" id="mc2">--</div></div>
-    <div class="card"><div class="lbl">SCHD — Dividendos</div><div class="big" id="mv3">---</div><div class="sub" id="mc3">--</div></div>
-    <div class="card"><div class="lbl">VIX — Volatilidad</div><div class="big" id="mv4">---</div><div class="sub" id="mc4">--</div></div>
+    <div class="card"><div class="lbl">VOO</div><div class="big" id="mv1">---</div><div class="sub" id="mc1">--</div></div>
+    <div class="card"><div class="lbl">QQQ</div><div class="big" id="mv2">---</div><div class="sub" id="mc2">--</div></div>
+    <div class="card"><div class="lbl">SCHD</div><div class="big" id="mv3">---</div><div class="sub" id="mc3">--</div></div>
+    <div class="card"><div class="lbl">VIX</div><div class="big" id="mv4">---</div><div class="sub" id="mc4">--</div></div>
   </div>
+
   <div class="card">
     <div class="lbl">Tus ETFs — señales en vivo</div>
     <div id="etflist"><span style="color:var(--t3);font-size:13px">Cargando precios...</span></div>
   </div>
+
   <div class="card">
-    <div class="lbl">₿ Crypto — actualización en vivo</div>
+    <div class="lbl">₿ Crypto en vivo</div>
     <div id="clist"><span style="color:var(--t3);font-size:13px">Cargando...</span></div>
   </div>
+
   <div class="card">
     <div class="lbl">💱 Tipos de cambio</div>
     <div class="fxg" id="fxdata"><span style="color:var(--t3);font-size:13px">Cargando...</span></div>
   </div>
-  <div class="card">
-    <div class="lbl">💨 Calidad del aire — Panamá</div>
-    <div style="display:flex;align-items:baseline;gap:8px"><div class="big" id="aqiv">--</div><div style="font-size:13px;color:var(--t2)" id="aqil">AQI</div></div>
-    <div class="aqib"><div class="aqin" id="aqin" style="left:10%"></div></div>
-    <div style="display:flex;justify-content:space-between;font-size:9px;color:var(--t3)"><span>Bueno</span><span>Moderado</span><span>Malo</span></div>
-    <div style="font-size:12px;color:var(--t2);margin-top:8px" id="aqitip"></div>
-  </div>
+
   <div class="card">
     <div class="lbl">📈 Proyección de crecimiento</div>
     <div class="sr"><label>Capital inicial</label><input type="range" min="50" max="1000" step="50" value="200" id="sl1"><span class="sv" id="sv1">$200</span></div>
@@ -308,6 +358,7 @@ body{color:var(--t1);font-family:-apple-system,BlinkMacSystemFont,'SF Pro Text',
     </div>
     <div class="cwrap"><canvas id="pc"></canvas></div>
   </div>
+
   <div class="card">
     <div class="lbl">📋 Tu plan de acción</div>
     <div class="plan-row"><div class="plan-ic pc-g">✓</div><div><div class="plan-t">Cuenta eToro creada</div><div class="plan-s">Pasaporte subido ✓</div></div></div>
@@ -318,23 +369,23 @@ body{color:var(--t1);font-family:-apple-system,BlinkMacSystemFont,'SF Pro Text',
   </div>
 </div>
 
-<!-- LEARN -->
+<!-- ====== LEARN ====== -->
 <div class="pg" id="pg-learn">
   <div class="card">
-    <div class="lbl">🧩 Quiz del día — API real</div>
-    <div id="quizbox"><span style="color:var(--t3);font-size:13px">Cargando pregunta real...</span></div>
+    <div class="lbl">🧩 Quiz del día</div>
+    <div id="quizbox"><span style="color:var(--t3);font-size:13px">Cargando pregunta...</span></div>
     <div style="font-size:11px;color:var(--t3);margin-top:8px" id="qscore"></div>
   </div>
   <div class="card">
-    <div class="lbl">🔤 Palabra del día — Dictionary API</div>
+    <div class="lbl">🔤 Palabra del día</div>
     <div id="wordbox"><span style="color:var(--t3);font-size:13px">Cargando...</span></div>
   </div>
   <div class="card">
-    <div class="lbl">📜 Hoy en la historia — Wikipedia API</div>
+    <div class="lbl">📜 Hoy en la historia</div>
     <div id="histbox"><span style="color:var(--t3);font-size:13px">Cargando...</span></div>
   </div>
   <div class="card">
-    <div class="lbl">🧠 Dato curioso — Useless Facts API</div>
+    <div class="lbl">🧠 Dato curioso</div>
     <div style="font-size:14px;color:var(--t2);line-height:1.7;font-style:italic" id="factbox"><span style="color:var(--t3);font-size:13px">Cargando...</span></div>
   </div>
   <div class="card">
@@ -343,27 +394,43 @@ body{color:var(--t1);font-family:-apple-system,BlinkMacSystemFont,'SF Pro Text',
   </div>
 </div>
 
-<!-- MORE -->
+<!-- ====== MORE ====== -->
 <div class="pg" id="pg-more">
+
+  <!-- SPORTS — nueva sección con API real -->
   <div class="card">
-    <div class="lbl">♉ Tauro — Aztro API</div>
+    <div class="lbl">⚽ Deportes en vivo</div>
+    <div class="sport-tabs">
+      <button class="sport-tab on" onclick="showSport('football',this)">Fútbol</button>
+      <button class="sport-tab" onclick="showSport('basketball',this)">NBA</button>
+      <button class="sport-tab" onclick="showSport('baseball',this)">MLB</button>
+    </div>
+    <div id="sportContent"><span style="color:var(--t3);font-size:13px">Cargando partidos...</span></div>
+  </div>
+
+  <div class="card">
+    <div class="lbl">♉ Tauro — hoy</div>
     <div id="horobox"><span style="color:var(--t3);font-size:13px">Cargando...</span></div>
   </div>
+
   <div class="card">
-    <div class="lbl">🎬 Película del día — TMDB API</div>
+    <div class="lbl">🎬 Película del día</div>
     <div id="moviebox"><span style="color:var(--t3);font-size:13px">Cargando...</span></div>
   </div>
+
   <div class="card">
     <div class="lbl">🌍 Noticias globales</div>
     <div id="newsglobal"><span style="color:var(--t3);font-size:13px">Cargando...</span></div>
   </div>
+
   <div class="card">
-    <div class="lbl">💬 Frase del día — Quotable API</div>
+    <div class="lbl">💬 Frase del día</div>
     <div style="font-size:16px;font-style:italic;line-height:1.65" id="qtx"><span style="color:var(--t3);font-size:13px">Cargando...</span></div>
     <div style="font-size:12px;color:var(--t3);margin-top:10px" id="qau"></div>
   </div>
 </div>
 
+<!-- NAV -->
 <nav class="nav">
   <button class="nb on" onclick="go('home',this)"><span class="ni">🏠</span><span class="nl">Inicio</span></button>
   <button class="nb" onclick="go('invest',this)"><span class="ni">📈</span><span class="nl">Invertir</span></button>
@@ -373,6 +440,7 @@ body{color:var(--t1);font-family:-apple-system,BlinkMacSystemFont,'SF Pro Text',
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
 <script>
+// ── NAV ──
 function go(id,btn){
   document.querySelectorAll('.pg').forEach(p=>p.classList.remove('on'));
   document.querySelectorAll('.nb').forEach(b=>b.classList.remove('on'));
@@ -381,11 +449,19 @@ function go(id,btn){
   window.scrollTo({top:0,behavior:'instant'});
 }
 
+// ── UTILS ──
 function pty(){return new Date(new Date().toLocaleString('en-US',{timeZone:'America/Panama'}))}
 const DAYS=['Domingo','Lunes','Martes','Miércoles','Jueves','Viernes','Sábado'];
 const MONTHS=['enero','febrero','marzo','abril','mayo','junio','julio','agosto','septiembre','octubre','noviembre','diciembre'];
+function ago(d){if(!d)return'';try{const m=Math.floor((Date.now()-new Date(d))/60000);return m<60?`hace ${m}m`:m<1440?`hace ${Math.floor(m/60)}h`:`hace ${Math.floor(m/1440)}d`;}catch{return'';}}
+async function sf(url,opts={},ms=8000){
+  const ctrl=new AbortController();
+  const tid=setTimeout(()=>ctrl.abort(),ms);
+  try{const r=await fetch(url,{...opts,signal:ctrl.signal});clearTimeout(tid);if(!r.ok)throw new Error(r.status);return r;}
+  catch(e){clearTimeout(tid);throw e;}
+}
 
-// COUNTDOWN — declared first so tick() can use it
+// ── COUNTDOWN — must be before tick() ──
 const EVTS=[
   {n:'Fin de semana',f:d=>{const t=new Date(d),diff=(6-t.getDay()+7)%7||7;t.setDate(t.getDate()+diff);t.setHours(0,0,0,0);return t;}},
   {n:'Fin de mes',f:d=>new Date(d.getFullYear(),d.getMonth()+1,1)},
@@ -404,6 +480,7 @@ function countdown(now){
   document.getElementById('cds').textContent=String(s%60).padStart(2,'0');
 }
 
+// ── CLOCK ──
 function tick(){
   const n=pty();
   document.getElementById('clk').textContent=n.toLocaleTimeString('en-US',{hour:'2-digit',minute:'2-digit',hour12:true});
@@ -414,26 +491,18 @@ function tick(){
 }
 setInterval(tick,1000);tick();
 
-// STREAK
+// ── STREAK ──
 (function(){
   const today=new Date().toDateString(),prev=new Date(Date.now()-86400000).toDateString();
-  let d=JSON.parse(localStorage.getItem('is3')||'{"n":0,"last":"","h":[]}');
-  if(d.last!==today){d.n=(d.last===prev)?d.n+1:1;d.last=today;d.h=[...d.h.slice(-6),1];localStorage.setItem('is3',JSON.stringify(d));}
+  let d=JSON.parse(localStorage.getItem('is4')||'{"n":0,"last":"","h":[]}');
+  if(d.last!==today){d.n=(d.last===prev)?d.n+1:1;d.last=today;d.h=[...d.h.slice(-6),1];localStorage.setItem('is4',JSON.stringify(d));}
   document.getElementById('strn').textContent=d.n;
   document.getElementById('strsub').textContent='Día '+d.n+(d.n>=7?' 🏆':d.n>=3?' 🔥':' ⭐');
   const bar=document.getElementById('strbar');
   for(let i=0;i<7;i++){const el=document.createElement('div');el.className='srd'+(i<d.h.length?' ok':'')+(i===6?' now':'');bar.appendChild(el);}
 })();
 
-// SAFE FETCH with timeout
-async function sf(url,opts={},ms=8000){
-  const ctrl=new AbortController();
-  const tid=setTimeout(()=>ctrl.abort(),ms);
-  try{const r=await fetch(url,{...opts,signal:ctrl.signal});clearTimeout(tid);if(!r.ok)throw new Error(r.status);return r;}
-  catch(e){clearTimeout(tid);throw e;}
-}
-
-// WEATHER
+// ── WEATHER (Open-Meteo) ──
 async function loadWx(){
   try{
     const r=await sf('https://api.open-meteo.com/v1/forecast?latitude=8.9936&longitude=-79.5197&current=temperature_2m,apparent_temperature,relative_humidity_2m,weather_code,wind_speed_10m,uv_index&timezone=America%2FPanama');
@@ -443,32 +512,31 @@ async function loadWx(){
     document.getElementById('wxic').textContent=IC[c.weather_code]||'🌡';
     document.getElementById('wxtmp').textContent=Math.round(c.temperature_2m)+'°';
     document.getElementById('wxd').textContent=DC[c.weather_code]||'Variable';
-    document.getElementById('wxf').textContent='Sensación '+Math.round(c.apparent_temperature)+'°C';
+    document.getElementById('wxf').textContent='Sensación '+Math.round(c.apparent_temperature)+'°C · Panamá City';
     document.getElementById('wxg').innerHTML=`
       <div class="wxc"><div class="wxcv">${c.relative_humidity_2m}%</div><div class="wxcl">Humedad</div></div>
-      <div class="wxc"><div class="wxcv">${Math.round(c.wind_speed_10m)} km/h</div><div class="wxcl">Viento</div></div>
-      <div class="wxc"><div class="wxcv">${c.uv_index??'--'}</div><div class="wxcl">UV</div></div>`;
+      <div class="wxc"><div class="wxcv">${Math.round(c.wind_speed_10m)}<span style="font-size:9px"> km/h</span></div><div class="wxcl">Viento</div></div>
+      <div class="wxc"><div class="wxcv">${c.uv_index??'--'}</div><div class="wxcl">UV</div></div>
+      <div class="wxc"><div class="wxcv" id="aqiv2" style="color:var(--gr)">--</div><div class="wxcl">AQI</div></div>`;
+    loadAQI();
   }catch{}
 }
 
-// AQI
+// ── AQI (Open-Meteo) ──
 async function loadAQI(){
   try{
-    const r=await sf('https://air-quality-api.open-meteo.com/v1/air-quality?latitude=8.9936&longitude=-79.5197&current=us_aqi,pm2_5&timezone=America%2FPanama');
+    const r=await sf('https://air-quality-api.open-meteo.com/v1/air-quality?latitude=8.9936&longitude=-79.5197&current=us_aqi&timezone=America%2FPanama');
     const d=await r.json(),aqi=Math.round(d.current.us_aqi);
-    let lb,col,pct,tip;
-    if(aqi<=50){lb='Bueno 😊';col='#34c759';pct=10;tip='Excelente calidad del aire. Ideal para actividades al aire libre.';}
-    else if(aqi<=100){lb='Moderado 😐';col='#ffd60a';pct=38;tip='Calidad aceptable. Personas sensibles deben tomar precaución.';}
-    else{lb='No saludable ⚠️';col='#ff3b30';pct=70;tip='Reduce actividades prolongadas al aire libre.';}
-    document.getElementById('aqiv').textContent=aqi;
-    document.getElementById('aqiv').style.color=col;
-    document.getElementById('aqil').textContent=lb;
-    document.getElementById('aqin').style.left=pct+'%';
-    document.getElementById('aqitip').textContent=tip;
+    let col;
+    if(aqi<=50)col='var(--gr)';
+    else if(aqi<=100)col='var(--gd)';
+    else col='var(--rd)';
+    const el=document.getElementById('aqiv2');
+    if(el){el.textContent=aqi;el.style.color=col;}
   }catch{}
 }
 
-// NASA
+// ── NASA ──
 async function loadNASA(){
   try{
     const r=await sf('https://api.nasa.gov/planetary/apod?api_key=DEMO_KEY');
@@ -479,7 +547,7 @@ async function loadNASA(){
   }catch{document.getElementById('nasatit').textContent='Imagen no disponible hoy';}
 }
 
-// ETFs via Netlify backend
+// ── ETFs via Netlify ──
 async function loadETFs(){
   try{
     const r=await sf('/.netlify/functions/market');
@@ -488,11 +556,10 @@ async function loadETFs(){
     const DS={VOO:['S&P 500','500 mejores EE.UU.'],QQQ:['NASDAQ 100','Big Tech'],SCHD:['Dividendos','Pago trimestral'],VYM:['Alto dividendo','Bajo riesgo'],GLD:['Oro','Refugio seguro']};
     const SG={VOO:'s1',SCHD:'s1',QQQ:'s2',VYM:'s2',GLD:'s3'};
     const ST={s1:'Comprar',s2:'Observar',s3:'Mantener'};
-    const syms=['VOO','QQQ','SCHD'];
-    syms.forEach((sym,i)=>{
+    ['VOO','QQQ','SCHD'].forEach((sym,i)=>{
       const e=d.etfs.find(x=>x.symbol===sym);if(!e)return;
-      const up=e.change>=0,cs=(up?'+':'')+e.change.toFixed(2)+'%';
-      [`k${i+1}p`,`k${i+7}p`].forEach(id=>{const el=document.getElementById(id);if(el)el.textContent='$'+e.price.toFixed(2);});
+      const up=e.change>=0,cs=(up?'+':'')+e.change.toFixed(2)+'%',pr='$'+e.price.toFixed(2);
+      [`k${i+1}p`,`k${i+7}p`].forEach(id=>{const el=document.getElementById(id);if(el)el.textContent=pr;});
       [`k${i+1}c`,`k${i+7}c`].forEach(id=>{const el=document.getElementById(id);if(el){el.textContent=cs;el.className='tch '+(up?'up':'dn');}});
     });
     d.etfs.slice(0,4).forEach((e,i)=>{
@@ -508,28 +575,27 @@ async function loadETFs(){
     const voo=d.etfs.find(e=>e.symbol==='VOO');
     if(voo){
       const c=voo.change;let tx,ac;
-      if(c<=-3){tx=`VOO cayó ${Math.abs(c).toFixed(2)}% — corrección significativa. Para largo plazo, oportunidad de entrada.`;ac='Compra $50 extra de VOO — precio de descuento';}
-      else if(c<=-1){tx=`Corrección moderada (${c.toFixed(2)}%). Fundamentos intactos. Completamente normal.`;ac='Buen momento para tu aporte mensual de $50 en VOO';}
+      if(c<=-3){tx=`VOO cayó ${Math.abs(c).toFixed(2)}% — oportunidad de entrada para largo plazo.`;ac='Compra $50 extra de VOO — precio de descuento real';}
+      else if(c<=-1){tx=`Corrección moderada (${c.toFixed(2)}%). Fundamentos intactos.`;ac='Buen momento para tu aporte mensual de $50 en VOO';}
       else if(c>=2){tx=`Día positivo (+${c.toFixed(2)}%). Tu estrategia ETF está funcionando.`;ac='Mantén el plan — $50 mensual el 1ro de cada mes';}
-      else{tx=`Mercado estable hoy (${c>=0?'+':''}${c.toFixed(2)}%). Ideal para construir tu portafolio.`;ac='Sin cambios — agrega $50 el 1ro del mes';}
+      else{tx=`Mercado estable (${c>=0?'+':''}${c.toFixed(2)}%). Momento ideal para construir portafolio.`;ac='Sin cambios — agrega $50 el 1ro del mes';}
       document.getElementById('aitx').textContent=tx;
       document.getElementById('aiact').textContent='→ '+ac;
     }
   }catch{
-    document.getElementById('etflist').innerHTML='<div style="color:var(--t3);font-size:13px">ETFs disponibles lunes-viernes cuando abra el NYSE (9:30am EST)</div>';
-    document.getElementById('aitx').textContent='Mercado cerrado. Los datos en vivo estarán disponibles el próximo día hábil.';
+    document.getElementById('etflist').innerHTML='<div style="color:var(--t3);font-size:13px">Datos disponibles lunes-viernes 9:30am-4pm EST</div>';
+    document.getElementById('aitx').textContent='Mercado cerrado. Datos en vivo disponibles el próximo día hábil.';
     document.getElementById('aiact').textContent='→ Mantén tu plan: $50 en VOO el 1ro del mes';
   }
 }
 
-// CRYPTO
+// ── CRYPTO (CoinGecko) ──
 async function loadCrypto(){
   try{
     const r=await sf('https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,ethereum,solana,ripple,cardano&vs_currencies=usd&include_24hr_change=true');
     const d=await r.json();
     const coins=[{id:'bitcoin',sym:'BTC',ic:'₿',bg:'#f7931a'},{id:'ethereum',sym:'ETH',ic:'Ξ',bg:'#627eea'},{id:'solana',sym:'SOL',ic:'◎',bg:'#9945ff'},{id:'ripple',sym:'XRP',ic:'✕',bg:'#346aa9'},{id:'cardano',sym:'ADA',ic:'₳',bg:'#0033ad'}];
-    const btc=d.bitcoin,eth=d.ethereum,sol=d.solana;
-    [[btc,4],[eth,5],[sol,6]].forEach(([coin,i])=>{
+    [[d.bitcoin,4],[d.ethereum,5],[d.solana,6]].forEach(([coin,i])=>{
       if(!coin)return;
       const up=coin.usd_24h_change>=0,cs=(up?'+':'')+coin.usd_24h_change.toFixed(1)+'%';
       const price='$'+(coin.usd>=1000?coin.usd.toLocaleString('en-US',{maximumFractionDigits:0}):coin.usd.toFixed(2));
@@ -544,7 +610,7 @@ async function loadCrypto(){
   }catch{document.getElementById('clist').innerHTML='<div style="color:var(--t3);font-size:13px">Sin datos crypto</div>';}
 }
 
-// FOREX
+// ── FOREX (Frankfurter) ──
 async function loadForex(){
   try{
     const r=await sf('https://api.frankfurter.app/latest?from=USD&to=EUR,GBP,JPY,MXN,COP,CAD');
@@ -553,97 +619,132 @@ async function loadForex(){
   }catch{document.getElementById('fxdata').innerHTML='<div style="color:var(--t3);font-size:13px">Sin datos</div>';}
 }
 
-// NEWS
+// ── NEWS ──
 async function loadNews(){
   const KEY='pub_86a7504a1f8a4ac7aeec026143ca84f3';
   try{
     const r=await sf(`https://newsdata.io/api/1/news?apikey=${KEY}&country=pa&language=es&size=5`);
     const d=await r.json();
-    if(d.results?.length){
-      document.getElementById('newspan').innerHTML=d.results.map(i=>`<a class="na" href="${i.link}" target="_blank"><div class="ni2"><div class="nt">${i.title}</div><div class="ns">${i.source_name||'Panamá'} · ${ago(i.pubDate)}</div></div></a>`).join('');
-    }else throw new Error();
+    if(d.results?.length)document.getElementById('newspan').innerHTML=d.results.map(i=>`<a class="na" href="${i.link}" target="_blank"><div class="ni2"><div class="nt">${i.title}</div><div class="ns">${i.source_name||'Panamá'} · ${ago(i.pubDate)}</div></div></a>`).join('');
+    else throw new Error();
   }catch{document.getElementById('newspan').innerHTML='<div style="color:var(--t3);font-size:13px">Noticias no disponibles ahora</div>';}
   try{
     const r=await sf(`https://newsdata.io/api/1/news?apikey=${KEY}&language=en&category=top&size=5`);
     const d=await r.json();
-    if(d.results?.length){
-      document.getElementById('newsglobal').innerHTML=d.results.map(i=>`<a class="na" href="${i.link}" target="_blank"><div class="ni2"><div class="nt">${i.title}</div><div class="ns">${i.source_name||'Global'} · ${ago(i.pubDate)}</div></div></a>`).join('');
-    }
-  }catch{document.getElementById('newsglobal').innerHTML='<div style="color:var(--t3);font-size:13px">Sin noticias globales ahora</div>';}
+    if(d.results?.length)document.getElementById('newsglobal').innerHTML=d.results.map(i=>`<a class="na" href="${i.link}" target="_blank"><div class="ni2"><div class="nt">${i.title}</div><div class="ns">${i.source_name||'Global'} · ${ago(i.pubDate)}</div></div></a>`).join('');
+  }catch{document.getElementById('newsglobal').innerHTML='<div style="color:var(--t3);font-size:13px">Sin noticias</div>';}
 }
 
-// MOVIE
+// ── MOVIE (TMDB) ──
 async function loadMovie(){
   try{
-    const r=await sf(`https://api.themoviedb.org/3/trending/movie/day?api_key=8ad8e063f18ad101bc4e1182deb40803&language=es-ES`);
+    const r=await sf('https://api.themoviedb.org/3/trending/movie/day?api_key=8ad8e063f18ad101bc4e1182deb40803&language=es-ES');
     const d=await r.json();
     const n=pty(),doy=Math.floor((n-new Date(n.getFullYear(),0,0))/86400000);
     const m=d.results[doy%d.results.length];
-    document.getElementById('moviebox').innerHTML=`<div class="mv"><div class="mpo">${m.poster_path?`<img src="https://image.tmdb.org/t/p/w200${m.poster_path}" loading="lazy" alt="">`:'🎬'}</div><div style="flex:1;min-width:0"><div class="mtt">${m.title}</div><div style="display:flex;gap:5px;flex-wrap:wrap;margin-bottom:8px"><span class="pill pa2">⭐ ${m.vote_average.toFixed(1)}</span><span class="pill pb2">${m.release_date?.slice(0,4)||''}</span></div><div class="mds">${(m.overview||'').slice(0,150)}${m.overview?.length>150?'...':''}</div></div></div>`;
+    document.getElementById('moviebox').innerHTML=`<div class="mv"><div class="mpo">${m.poster_path?`<img src="https://image.tmdb.org/t/p/w200${m.poster_path}" loading="lazy" alt="">`:'🎬'}</div><div style="flex:1;min-width:0"><div class="mtt">${m.title}</div><div style="display:flex;gap:5px;flex-wrap:wrap;margin-bottom:8px"><span class="pill pa2">⭐ ${m.vote_average.toFixed(1)}</span><span class="pill pb2">${m.release_date?.slice(0,4)||''}</span></div><div class="mds">${(m.overview||'').slice(0,150)}...</div></div></div>`;
   }catch{document.getElementById('moviebox').innerHTML='<div style="color:var(--t3);font-size:13px">Sin datos</div>';}
 }
 
-// DAILY — Netlify function with real APIs
+// ── SPORTS — TheSportsDB (gratis, sin key) ──
+let sportData={football:[],basketball:[],baseball:[]};
+async function loadSports(){
+  try{
+    // Soccer — top leagues events today
+    const today=new Date().toISOString().slice(0,10);
+    const r=await sf(`https://www.thesportsdb.com/api/v1/json/3/eventsday.php?d=${today}&s=Soccer`);
+    const d=await r.json();
+    sportData.football=(d.events||[]).slice(0,6);
+  }catch{}
+  try{
+    const today=new Date().toISOString().slice(0,10);
+    const r=await sf(`https://www.thesportsdb.com/api/v1/json/3/eventsday.php?d=${today}&s=Basketball`);
+    const d=await r.json();
+    sportData.basketball=(d.events||[]).slice(0,6);
+  }catch{}
+  showSport('football',document.querySelector('.sport-tab.on'));
+}
+function showSport(type,btn){
+  document.querySelectorAll('.sport-tab').forEach(b=>b.classList.remove('on'));
+  btn.classList.add('on');
+  const events=sportData[type];
+  if(!events||events.length===0){
+    document.getElementById('sportContent').innerHTML='<div style="color:var(--t3);font-size:13px;padding:10px 0">Sin partidos hoy para esta liga</div>';
+    return;
+  }
+  document.getElementById('sportContent').innerHTML=events.map(e=>{
+    const live=e.strStatus==='NS'?'Próximo':e.strStatus||'--';
+    const isLive=e.strStatus&&e.strStatus!=='NS'&&e.strStatus!=='FT';
+    const h=e.intHomeScore??'-',a=e.intAwayScore??'-';
+    return`<div class="score-match">
+      <div class="team"><div class="team-name">${e.strHomeTeam||'--'}</div></div>
+      <div style="text-align:center;flex-shrink:0;padding:0 10px">
+        <div style="display:flex;align-items:center;gap:6px">
+          <span class="score-num">${h}</span>
+          <span class="score-sep">—</span>
+          <span class="score-num">${a}</span>
+        </div>
+        <div class="match-status ${isLive?'live-badge':''}" style="color:${isLive?'var(--rd)':e.strStatus==='FT'?'var(--t3)':'var(--bl)'}">${isLive?'● ':''} ${live}</div>
+      </div>
+      <div class="team"><div class="team-name">${e.strAwayTeam||'--'}</div></div>
+    </div>`;
+  }).join('');
+}
+
+// ── DAILY via Netlify Function ──
 async function loadDaily(){
   try{
     const r=await sf('/.netlify/functions/daily');
     const d=await r.json();
 
-    // Quiz from Open Trivia DB
     if(d.quiz){
       let qDone=false;
-      const saved=JSON.parse(localStorage.getItem('iq3')||'{"c":0,"t":0}');
+      const saved=JSON.parse(localStorage.getItem('iq4')||'{"c":0,"t":0}');
       document.getElementById('qscore').textContent=saved.t>0?`Puntaje: ${saved.c}/${saved.t} correctas`:'';
-      document.getElementById('quizbox').innerHTML=`<div class="qq">${d.quiz.question}</div><div class="qo">${d.quiz.options.map((o,i)=>`<button class="qb" onclick="ans(${i},${d.quiz.answer},'${d.quiz.explanation.replace(/'/g,"\\'")}',this)">${o}</button>`).join('')}</div><div class="qexp" id="qexp"></div>`;
+      document.getElementById('quizbox').innerHTML=`<div class="qq">${d.quiz.question}</div><div class="qo">${d.quiz.options.map((o,i)=>`<button class="qb" onclick="ans(${i},${d.quiz.answer},'${d.quiz.explanation.replace(/'/g,"\\'").replace(/"/g,'&quot;')}',this)">${o}</button>`).join('')}</div><div class="qexp" id="qexp"></div>`;
       window.ans=(i,a,e,btn)=>{
         if(qDone)return;qDone=true;
         document.querySelectorAll('.qb').forEach((b,j)=>{b.disabled=true;if(j===a)b.classList.add('ok');else if(j===i)b.classList.add('no');});
         const ex=document.getElementById('qexp');ex.style.display='block';ex.textContent=(i===a?'✅ Correcto! ':'❌ Incorrecto. ')+e;
-        const s=JSON.parse(localStorage.getItem('iq3')||'{"c":0,"t":0}');if(i===a)s.c++;s.t++;localStorage.setItem('iq3',JSON.stringify(s));
+        const s=JSON.parse(localStorage.getItem('iq4')||'{"c":0,"t":0}');if(i===a)s.c++;s.t++;localStorage.setItem('iq4',JSON.stringify(s));
         document.getElementById('qscore').textContent=`Puntaje: ${s.c}/${s.t} correctas`;
       };
     }
 
-    // Word from Dictionary API
     if(d.word){
       const w=d.word;
       document.getElementById('wordbox').innerHTML=`<div class="ww">${w.word}</div><div class="wp">${w.phonetic}</div><div class="wt">${w.partOfSpeech}</div><div class="wd">${w.definition}</div>${w.example?`<div class="we">"${w.example}"</div>`:''}`;
     }
 
-    // History from Wikipedia
-    if(d.history){
+    if(d.history?.events?.length){
       document.getElementById('histbox').innerHTML=`<div class="hdate">${d.history.date}</div>${d.history.events.map(e=>`<div class="hev"><span class="hyr">${e.year}</span><span class="htx">${e.text}</span></div>`).join('')}`;
     }
 
-    // Fact from Useless Facts
-    if(d.fact) document.getElementById('factbox').textContent='"'+d.fact+'"';
+    if(d.fact)document.getElementById('factbox').textContent='"'+d.fact+'"';
 
-    // Quote from Quotable API
     if(d.quote){
       document.getElementById('qtx').textContent='"'+d.quote.text+'"';
       document.getElementById('qau').textContent='— '+d.quote.author;
     }
 
-    // Horoscope from Aztro
     if(d.horoscope){
       const h=d.horoscope;
       document.getElementById('horobox').innerHTML=`<div style="font-size:22px;margin-bottom:10px">⭐⭐⭐⭐</div><div class="horo">${h.description}</div><div class="horog"><div class="horc"><div class="horcl">Color</div><div class="horcv">${h.color||'Verde'}</div></div><div class="horc"><div class="horcl">Número</div><div class="horcv">${h.lucky_number||'7'}</div></div><div class="horc"><div class="horcl">Humor</div><div class="horcv">${h.mood||'Positivo'}</div></div><div class="horc"><div class="horcl">Compatible</div><div class="horcv">${h.compatibility||'Virgo'}</div></div></div>`;
     }
-
-  }catch(e){
+  }catch{
     document.getElementById('quizbox').innerHTML='<div style="color:var(--t3);font-size:13px">Quiz no disponible ahora</div>';
     document.getElementById('wordbox').innerHTML='<div style="color:var(--t3);font-size:13px">Palabra no disponible ahora</div>';
     document.getElementById('histbox').innerHTML='<div style="color:var(--t3);font-size:13px">Historia no disponible ahora</div>';
   }
 
-  // Financial tip — always local, always works
+  // Tip — siempre funciona local
   const TIPS=[
     {n:1,t:'Interés compuesto',b:'$200 + $50/mes al 9% = $11,240 en 10 años. El tiempo es tu mayor ventaja.'},
-    {n:2,t:'Regla del 72',b:'Divide 72 entre tu tasa: al 9% tu dinero se duplica cada 8 años.'},
-    {n:3,t:'ETFs vs acciones',b:'VOO = 500 empresas en 1. Mismos retornos que el mercado, mucho menos riesgo.'},
+    {n:2,t:'Regla del 72',b:'72 ÷ tasa = años para duplicar. Al 9%, tu dinero se duplica cada 8 años.'},
+    {n:3,t:'ETFs vs acciones',b:'VOO = las 500 mejores empresas en 1 compra. Mismo retorno, mucho menos riesgo.'},
     {n:4,t:'Dollar Cost Averaging',b:'$50 fijos cada mes sin importar si sube o baja. La estrategia más probada.'},
-    {n:5,t:'SCHD y dividendos',b:'SCHD paga dividendos cada trimestre. Reinvertidos 10 años crean efecto compuesto.'},
-    {n:6,t:'VIX = señal',b:'VIX >30 = pánico = ETFs baratos. Miedo ajeno es tu oportunidad.'},
+    {n:5,t:'SCHD y dividendos',b:'SCHD paga dividendos cada trimestre. Reinvertidos 10 años = efecto compuesto poderoso.'},
+    {n:6,t:'VIX = señal de compra',b:'VIX >30 = pánico en el mercado = ETFs baratos. El miedo ajeno es tu oportunidad.'},
     {n:7,t:'Panamá y tus impuestos',b:'Sistema territorial: ganancias de ETFs en eToro no tributan en Panamá.'},
   ];
   const n=pty(),doy=Math.floor((n-new Date(n.getFullYear(),0,0))/86400000);
@@ -651,11 +752,12 @@ async function loadDaily(){
   document.getElementById('tipbox').innerHTML=`<div class="tn">${t.n}</div><div class="tt">${t.t}</div><div class="tb">${t.b}</div>`;
 }
 
-// CHART
+// ── CHART ──
 function calc(i,m,r,y){let v=i;const mr=r/100/12;for(let mo=0;mo<y*12;mo++)v=v*(1+mr)+m;return Math.round(v);}
 let ch;
 function buildChart(i,m,r){
-  const lb=[],dt=[],inv=[];for(let y=0;y<=10;y++){lb.push('Año '+y);dt.push(calc(i,m,r,y));inv.push(i+m*12*y);}
+  const lb=[],dt=[],inv=[];
+  for(let y=0;y<=10;y++){lb.push('Año '+y);dt.push(calc(i,m,r,y));inv.push(i+m*12*y);}
   if(ch)ch.destroy();
   ch=new Chart(document.getElementById('pc'),{type:'line',data:{labels:lb,datasets:[
     {data:dt,borderColor:'#34c759',backgroundColor:'rgba(52,199,89,.06)',fill:true,tension:.4,pointRadius:3,pointBackgroundColor:'#34c759',borderWidth:1.5},
@@ -671,25 +773,23 @@ function updateProj(){
 ['sl1','sl2','sl3'].forEach(id=>document.getElementById(id).addEventListener('input',updateProj));
 updateProj();
 
-function ago(d){if(!d)return'';try{const m=Math.floor((Date.now()-new Date(d))/60000);return m<60?`hace ${m}m`:m<1440?`hace ${Math.floor(m/60)}h`:`hace ${Math.floor(m/1440)}d`;}catch{return'';}}
-
-// INIT
+// ── INIT ──
 loadWx();
 loadNASA();
 loadNews();
 loadETFs();
 loadCrypto();
 loadForex();
-loadAQI();
 loadMovie();
+loadSports();
 loadDaily();
 
 setInterval(loadCrypto,60000);
 setInterval(loadETFs,30000);
 setInterval(loadWx,10*60*1000);
-setInterval(loadAQI,10*60*1000);
 setInterval(loadForex,60*60*1000);
 setInterval(loadNews,15*60*1000);
+setInterval(loadSports,5*60*1000);
 </script>
 </body>
 </html>
