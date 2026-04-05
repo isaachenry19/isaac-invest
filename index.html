@@ -17,114 +17,96 @@
 html,body{background:var(--bg);min-height:100vh}
 body{color:var(--t1);font-family:-apple-system,BlinkMacSystemFont,'SF Pro Text','Helvetica Neue',sans-serif;padding-bottom:calc(76px + env(safe-area-inset-bottom,0px));overflow-x:hidden}
 
-/* TOPBAR */
-.top{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(0,0,0,.82);backdrop-filter:saturate(180%) blur(20px);-webkit-backdrop-filter:saturate(180%) blur(20px);border-bottom:.5px solid rgba(255,255,255,.1);padding:calc(env(safe-area-inset-top,14px) + 10px) 16px 10px;display:flex;align-items:center;justify-content:space-between}
-.top-l h1{font-size:17px;font-weight:700;letter-spacing:-.3px}
-.top-l p{font-size:11px;color:var(--t3);margin-top:2px}
-.top-r .clk{font-size:18px;font-weight:600;font-variant-numeric:tabular-nums;letter-spacing:-.2px;text-align:right}
-.top-r .dte{font-size:10px;color:var(--t3);margin-top:2px;text-align:right}
+.top{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(0,0,0,.85);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-bottom:.5px solid rgba(255,255,255,.1);padding:calc(env(safe-area-inset-top,14px) + 10px) 16px 10px;display:flex;align-items:center;justify-content:space-between}
+.top h1{font-size:17px;font-weight:700;letter-spacing:-.3px}
+.top p{font-size:11px;color:var(--t3);margin-top:2px}
+.topr{text-align:right}
+.clk{font-size:18px;font-weight:600;font-variant-numeric:tabular-nums}
+.dte{font-size:10px;color:var(--t3);margin-top:2px}
 
-/* TICKER */
-.tkr{position:fixed;top:calc(env(safe-area-inset-top,14px) + 50px);left:0;right:0;z-index:99;background:rgba(0,0,0,.75);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:.5px solid rgba(255,255,255,.07);overflow:hidden;height:32px;mask-image:linear-gradient(90deg,transparent,black 6%,black 94%,transparent)}
-.tscrl{display:flex;align-items:center;height:32px;animation:scroll 40s linear infinite;white-space:nowrap;will-change:transform}
-@keyframes scroll{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
-.ti{display:inline-flex;align-items:center;gap:5px;padding:0 16px;flex-shrink:0}
+.tkr{position:fixed;top:calc(env(safe-area-inset-top,14px)+50px);left:0;right:0;z-index:99;background:rgba(0,0,0,.78);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:.5px solid rgba(255,255,255,.07);overflow:hidden;height:30px;mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent)}
+.tscrl{display:flex;align-items:center;height:30px;animation:scroll 40s linear infinite;white-space:nowrap}
+@keyframes scroll{to{transform:translateX(-50%)}}
+.ti{display:inline-flex;align-items:center;gap:5px;padding:0 14px;flex-shrink:0}
 .tsm{font-size:10px;font-weight:700;letter-spacing:.05em;color:var(--t3)}
-.tprc{font-size:11px;font-weight:500;color:var(--t1);font-variant-numeric:tabular-nums}
+.tprc{font-size:11px;font-weight:500;font-variant-numeric:tabular-nums}
 .tch{font-size:10px;font-weight:700;font-variant-numeric:tabular-nums}
 .up{color:var(--gr)}.dn{color:var(--rd)}
-.tdot{width:3px;height:3px;border-radius:50%;background:rgba(255,255,255,.15);flex-shrink:0}
+.tdot{color:rgba(255,255,255,.15);font-size:8px;padding:0 2px}
 
-/* NAV */
-.nav{position:fixed;bottom:0;left:0;right:0;z-index:100;background:rgba(0,0,0,.88);backdrop-filter:saturate(180%) blur(20px);-webkit-backdrop-filter:saturate(180%) blur(20px);border-top:.5px solid rgba(255,255,255,.1);display:flex;padding:8px 0 calc(8px + env(safe-area-inset-bottom,0px))}
+.nav{position:fixed;bottom:0;left:0;right:0;z-index:100;background:rgba(0,0,0,.9);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-top:.5px solid rgba(255,255,255,.1);display:flex;padding:8px 0 calc(8px + env(safe-area-inset-bottom,0px))}
 .nb{flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;background:none;border:none;cursor:pointer;padding:4px 0}
 .ni{font-size:22px;line-height:1;transition:transform .15s}
-.nl{font-size:10px;font-weight:500;color:var(--t3);transition:color .15s;letter-spacing:.01em}
-.nb.on .ni{transform:scale(1.1)}
-.nb.on .nl{color:var(--bl)}
+.nl{font-size:10px;font-weight:500;color:var(--t3);transition:color .15s}
+.nb.on .ni{transform:scale(1.1)}.nb.on .nl{color:var(--bl)}
 
-/* PAGES */
-.pg{display:none;padding:calc(env(safe-area-inset-top,14px) + 98px) 14px 20px}
+.pg{display:none;padding:calc(env(safe-area-inset-top,14px)+96px) 14px 20px}
 .pg.on{display:block}
 
-/* CARDS */
 .card{background:var(--c1);border:.5px solid rgba(255,255,255,.08);border-radius:20px;padding:16px;margin-bottom:10px}
 .lbl{font-size:10px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--t3);margin-bottom:10px}
-.big{font-size:36px;font-weight:700;letter-spacing:-.6px;line-height:1;font-variant-numeric:tabular-nums}
+.big{font-size:34px;font-weight:700;letter-spacing:-.6px;line-height:1;font-variant-numeric:tabular-nums}
 .sub{font-size:13px;color:var(--t2);margin-top:5px;line-height:1.5}
 
-/* PILLS */
-.p{display:inline-flex;align-items:center;padding:3px 9px;border-radius:100px;font-size:11px;font-weight:700;margin-top:6px}
+.pill{display:inline-flex;align-items:center;padding:3px 9px;border-radius:100px;font-size:11px;font-weight:700;margin-top:6px}
 .pg2{background:rgba(52,199,89,.12);color:var(--gr)}
 .pr2{background:rgba(255,59,48,.12);color:var(--rd)}
 .pa2{background:rgba(255,214,10,.12);color:var(--gd)}
 .pb2{background:rgba(0,122,255,.12);color:var(--bl)}
+.pp2{background:rgba(175,82,222,.12);color:var(--pr)}
 
-/* GRIDS */
 .g2{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px}
 .g3{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
 
-/* ROWS */
 .row{display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:.5px solid rgba(255,255,255,.06)}
 .row:last-child{border-bottom:none}
 .rl{font-size:13px;color:var(--t2)}
-.rv{font-size:13px;font-weight:600;font-variant-numeric:tabular-nums}
+.rv{font-size:13px;font-weight:600}
 
-/* WEATHER */
 .wx{display:flex;align-items:flex-end;gap:14px;margin-bottom:14px}
-.wxic{font-size:56px;line-height:1}
-.wxtmp{font-size:48px;font-weight:200;letter-spacing:-2px;line-height:1}
-.wxdsc{font-size:14px;color:var(--t2);margin-top:4px}
-.wxfl{font-size:12px;color:var(--t3);margin-top:2px}
-.wxdt{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-top:12px}
+.wxic{font-size:52px;line-height:1}
+.wxtmp{font-size:46px;font-weight:200;letter-spacing:-2px}
+.wxd{font-size:14px;color:var(--t2);margin-top:4px}
+.wxf{font-size:12px;color:var(--t3);margin-top:2px}
+.wxg{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-top:12px}
 .wxc{background:var(--t4);border-radius:12px;padding:10px 8px;text-align:center}
 .wxcv{font-size:15px;font-weight:600}
 .wxcl{font-size:10px;color:var(--t3);margin-top:2px}
 
-/* STREAK */
-.str{display:flex;align-items:center;gap:16px}
-.strn{font-size:56px;font-weight:700;letter-spacing:-2px;color:var(--or);line-height:1}
-.strsub{font-size:13px;color:var(--t2);margin-top:4px}
+.strn{font-size:52px;font-weight:700;letter-spacing:-2px;color:var(--or);line-height:1}
 .strbar{display:flex;gap:4px;margin-top:12px}
 .srd{flex:1;height:4px;border-radius:2px;background:var(--t4)}
-.srd.ok{background:var(--or)}
-.srd.now{background:var(--gr)}
+.srd.ok{background:var(--or)}.srd.now{background:var(--gr)}
 
-/* COUNTDOWN */
 .cdg{display:grid;grid-template-columns:repeat(4,1fr);gap:6px}
 .cdc{background:var(--c2);border-radius:14px;padding:12px 8px;text-align:center}
 .cdn{font-size:24px;font-weight:700;letter-spacing:-.5px;font-variant-numeric:tabular-nums}
 .cdl{font-size:9px;color:var(--t3);text-transform:uppercase;letter-spacing:.07em;margin-top:3px}
 
-/* QUIZ */
-.qq{font-size:15px;font-weight:500;line-height:1.55;margin-bottom:14px;color:var(--t1)}
+.qq{font-size:15px;font-weight:500;line-height:1.55;margin-bottom:14px}
 .qo{display:flex;flex-direction:column;gap:8px}
-.qb{background:var(--c2);border:1.5px solid var(--c3);border-radius:14px;padding:12px 14px;font-size:13px;color:var(--t1);cursor:pointer;text-align:left;transition:border-color .15s,background .15s}
+.qb{background:var(--c2);border:1.5px solid var(--c3);border-radius:14px;padding:12px 14px;font-size:13px;color:var(--t1);cursor:pointer;text-align:left;transition:all .15s;font-family:inherit}
 .qb:active{transform:scale(.98)}
 .qb.ok{border-color:var(--gr);background:rgba(52,199,89,.08);color:var(--gr)}
 .qb.no{border-color:var(--rd);background:rgba(255,59,48,.08);color:var(--rd)}
 .qexp{font-size:13px;color:var(--t2);line-height:1.6;margin-top:10px;display:none;padding:12px;background:var(--t4);border-radius:12px}
 
-/* WORD */
-.ww{font-size:30px;font-weight:700;letter-spacing:-.3px}
+.ww{font-size:28px;font-weight:700;letter-spacing:-.3px}
 .wp{font-size:13px;color:var(--bl);font-style:italic;margin:5px 0 8px}
 .wt{font-size:10px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--pr);margin-bottom:7px}
 .wd{font-size:14px;color:var(--t2);line-height:1.6;margin-bottom:8px}
-.we{font-size:13px;color:var(--t3);font-style:italic;line-height:1.5}
+.we{font-size:13px;color:var(--t3);font-style:italic}
 
-/* HISTORY */
-.hd{font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--bl);margin-bottom:10px}
-.he{padding:10px 0;border-bottom:.5px solid rgba(255,255,255,.06);display:flex;gap:8px;align-items:flex-start}
-.he:last-child{border-bottom:none}
-.hy{font-size:13px;font-weight:800;color:var(--gd);flex-shrink:0;min-width:40px}
-.ht{font-size:13px;color:var(--t1);line-height:1.5}
+.hdate{font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--bl);margin-bottom:10px}
+.hev{padding:10px 0;border-bottom:.5px solid rgba(255,255,255,.06);display:flex;gap:8px}
+.hev:last-child{border-bottom:none}
+.hyr{font-size:13px;font-weight:800;color:var(--gd);flex-shrink:0;min-width:42px}
+.htx{font-size:13px;color:var(--t1);line-height:1.5}
 
-/* TIP */
 .tn{width:28px;height:28px;border-radius:8px;background:rgba(0,122,255,.15);color:var(--bl);font-size:12px;font-weight:700;display:flex;align-items:center;justify-content:center;margin-bottom:10px}
-.tt{font-size:16px;font-weight:600;margin-bottom:8px;letter-spacing:-.2px}
+.tt{font-size:16px;font-weight:600;margin-bottom:8px}
 .tb{font-size:14px;color:var(--t2);line-height:1.65}
 
-/* CRYPTO */
 .cr{display:flex;align-items:center;justify-content:space-between;padding:10px 0;border-bottom:.5px solid rgba(255,255,255,.06)}
 .cr:last-child{border-bottom:none}
 .crl{display:flex;align-items:center;gap:10px}
@@ -134,12 +116,11 @@ body{color:var(--t1);font-family:-apple-system,BlinkMacSystemFont,'SF Pro Text',
 .crp{font-size:14px;font-weight:600;font-variant-numeric:tabular-nums}
 .crc{font-size:11px;font-weight:700;font-variant-numeric:tabular-nums;margin-top:1px}
 
-/* ETF */
 .ef{display:flex;align-items:center;justify-content:space-between;padding:11px 0;border-bottom:.5px solid rgba(255,255,255,.06)}
 .ef:last-child{border-bottom:none}
 .efl{display:flex;align-items:center;gap:10px}
-.efic{width:38px;height:38px;border-radius:11px;background:var(--c2);border:.5px solid rgba(255,255,255,.08);display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:700;color:var(--t2);flex-shrink:0;letter-spacing:.02em}
-.efn{font-size:13px;font-weight:500;color:var(--t1)}
+.efic{width:38px;height:38px;border-radius:11px;background:var(--c2);border:.5px solid rgba(255,255,255,.08);display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:700;color:var(--t2);flex-shrink:0}
+.efn{font-size:13px;font-weight:500}
 .efd{font-size:11px;color:var(--t3);margin-top:1px}
 .efr{text-align:right}
 .efp{font-size:14px;font-weight:600;font-variant-numeric:tabular-nums}
@@ -149,24 +130,20 @@ body{color:var(--t1);font-family:-apple-system,BlinkMacSystemFont,'SF Pro Text',
 .s2{color:var(--gd);background:rgba(255,214,10,.08);border:.5px solid rgba(255,214,10,.2)}
 .s3{color:var(--t2);background:var(--c2);border:.5px solid rgba(255,255,255,.08)}
 
-/* FOREX */
 .fxg{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-top:8px}
 .fxi{background:var(--t4);border-radius:12px;padding:10px 12px}
 .fxp{font-size:10px;font-weight:700;letter-spacing:.06em;color:var(--t3);text-transform:uppercase}
 .fxv{font-size:18px;font-weight:700;margin-top:3px;font-variant-numeric:tabular-nums}
 
-/* AQI */
 .aqib{height:6px;border-radius:3px;background:linear-gradient(90deg,var(--gr),var(--gd),var(--or),var(--rd));margin:10px 0 5px;position:relative}
-.aqin{position:absolute;top:-4px;width:14px;height:14px;border-radius:50%;background:#fff;border:2px solid var(--bg);transform:translateX(-50%);transition:left .6s ease}
+.aqin{position:absolute;top:-4px;width:14px;height:14px;border-radius:50%;background:#fff;border:2px solid #000;transform:translateX(-50%);transition:left .6s}
 
-/* AI BOX */
 .ai{background:var(--c1);border:.5px solid rgba(0,122,255,.2);border-radius:20px;padding:18px;margin-bottom:10px;position:relative;overflow:hidden}
 .ai::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--bl),var(--pr),transparent)}
-.aib{display:inline-flex;align-items:center;gap:6px;font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--bl);background:rgba(0,122,255,.1);border:.5px solid rgba(0,122,255,.2);padding:3px 10px;border-radius:6px;margin-bottom:12px}
+.aibdg{display:inline-flex;align-items:center;gap:6px;font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--bl);background:rgba(0,122,255,.1);border:.5px solid rgba(0,122,255,.2);padding:3px 10px;border-radius:6px;margin-bottom:12px}
 .aitx{font-size:14px;color:var(--t2);line-height:1.7;margin-bottom:12px}
 .aiact{font-size:13px;font-weight:600;color:var(--gr);background:rgba(52,199,89,.07);border:.5px solid rgba(52,199,89,.15);border-radius:12px;padding:11px 14px}
 
-/* PROJ */
 .prow{display:flex;align-items:baseline;justify-content:space-between;padding:10px 0;border-bottom:.5px solid rgba(255,255,255,.06)}
 .prow:last-child{border-bottom:none}
 .pyr{font-size:12px;color:var(--t2)}
@@ -178,32 +155,27 @@ body{color:var(--t1);font-family:-apple-system,BlinkMacSystemFont,'SF Pro Text',
 .sv{font-size:11px;font-weight:700;color:var(--bl);min-width:36px;text-align:right;font-variant-numeric:tabular-nums}
 .cwrap{position:relative;height:160px;margin-top:12px}
 
-/* NEWS */
-.ni{padding:11px 0;border-bottom:.5px solid rgba(255,255,255,.06)}
-.ni:last-child{border-bottom:none}
+.ni2{padding:11px 0;border-bottom:.5px solid rgba(255,255,255,.06)}
+.ni2:last-child{border-bottom:none}
 .na{text-decoration:none;color:inherit;display:block}
 .na:active .nt{color:var(--bl)}
-.nt{font-size:13px;color:var(--t1);line-height:1.45;font-weight:400}
+.nt{font-size:13px;color:var(--t1);line-height:1.45}
 .ns{font-size:11px;color:var(--t3);margin-top:3px}
 
-/* MOVIE */
 .mv{display:flex;gap:14px}
 .mpo{width:72px;height:108px;border-radius:12px;background:var(--c2);flex-shrink:0;overflow:hidden}
 .mpo img{width:100%;height:100%;object-fit:cover}
-.mtt{font-size:15px;font-weight:600;margin-bottom:7px;letter-spacing:-.2px}
+.mtt{font-size:15px;font-weight:600;margin-bottom:7px}
 .mds{font-size:12px;color:var(--t3);line-height:1.5}
 
-/* NASA */
 .nasaimg{width:100%;border-radius:14px;aspect-ratio:16/9;object-fit:cover;margin-bottom:12px;background:var(--c2);display:none}
 
-/* HOROSCOPE */
 .horo{font-size:14px;color:var(--t2);line-height:1.65;margin-bottom:14px}
 .horog{display:grid;grid-template-columns:repeat(2,1fr);gap:6px}
 .horc{background:var(--t4);border-radius:12px;padding:10px}
 .horcl{font-size:9px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--t3)}
 .horcv{font-size:13px;font-weight:500;margin-top:3px}
 
-/* PLAN */
 .plan-row{display:flex;align-items:center;gap:12px;padding:10px 0;border-bottom:.5px solid rgba(255,255,255,.06)}
 .plan-row:last-child{border-bottom:none}
 .plan-ic{width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;flex-shrink:0}
@@ -213,145 +185,116 @@ body{color:var(--t1);font-family:-apple-system,BlinkMacSystemFont,'SF Pro Text',
 .plan-t{font-size:13px;font-weight:500}
 .plan-s{font-size:11px;color:var(--t3);margin-top:1px}
 
-/* SECTION BADGE */
-.sbdg{display:inline-flex;align-items:center;gap:5px;font-size:10px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--t3);margin-bottom:14px}
-
 ::-webkit-scrollbar{display:none}
-@media(max-width:380px){.g2{grid-template-columns:1fr}.big{font-size:28px}}
+@media(max-width:380px){.g2{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
 
-<!-- TOPBAR -->
 <div class="top">
-  <div class="top-l">
+  <div>
     <h1 id="greet">Isaac</h1>
     <p id="dstr">cargando...</p>
   </div>
-  <div class="top-r">
+  <div class="topr">
     <div class="clk" id="clk">--:--</div>
     <div class="dte">Panamá 🇵🇦</div>
   </div>
 </div>
 
-<!-- TICKER -->
 <div class="tkr">
   <div class="tscrl" id="tscrl">
-    <div class="ti"><span class="tsm">VOO</span><span class="tprc" id="k1p">$---</span><span class="tch" id="k1c">--%</span></div>
-    <div class="tdot"></div>
-    <div class="ti"><span class="tsm">QQQ</span><span class="tprc" id="k2p">$---</span><span class="tch" id="k2c">--%</span></div>
-    <div class="tdot"></div>
-    <div class="ti"><span class="tsm">SCHD</span><span class="tprc" id="k3p">$---</span><span class="tch" id="k3c">--%</span></div>
-    <div class="tdot"></div>
-    <div class="ti"><span class="tsm">BTC</span><span class="tprc" id="k4p">$---</span><span class="tch" id="k4c">--%</span></div>
-    <div class="tdot"></div>
-    <div class="ti"><span class="tsm">ETH</span><span class="tprc" id="k5p">$---</span><span class="tch" id="k5c">--%</span></div>
-    <div class="tdot"></div>
-    <div class="ti"><span class="tsm">SOL</span><span class="tprc" id="k6p">$---</span><span class="tch" id="k6c">--%</span></div>
-    <!-- duplicate for seamless loop -->
-    <div class="tdot"></div>
-    <div class="ti"><span class="tsm">VOO</span><span class="tprc" id="k7p">$---</span><span class="tch" id="k7c">--%</span></div>
-    <div class="tdot"></div>
-    <div class="ti"><span class="tsm">QQQ</span><span class="tprc" id="k8p">$---</span><span class="tch" id="k8c">--%</span></div>
-    <div class="tdot"></div>
-    <div class="ti"><span class="tsm">SCHD</span><span class="tprc" id="k9p">$---</span><span class="tch" id="k9c">--%</span></div>
-    <div class="tdot"></div>
-    <div class="ti"><span class="tsm">BTC</span><span class="tprc" id="k10p">$---</span><span class="tch" id="k10c">--%</span></div>
-    <div class="tdot"></div>
-    <div class="ti"><span class="tsm">ETH</span><span class="tprc" id="k11p">$---</span><span class="tch" id="k11c">--%</span></div>
-    <div class="tdot"></div>
-    <div class="ti"><span class="tsm">SOL</span><span class="tprc" id="k12p">$---</span><span class="tch" id="k12c">--%</span></div>
+    <div class="ti"><span class="tsm">VOO</span><span class="tprc" id="k1p">$---</span><span class="tch" id="k1c"></span></div><span class="tdot">·</span>
+    <div class="ti"><span class="tsm">QQQ</span><span class="tprc" id="k2p">$---</span><span class="tch" id="k2c"></span></div><span class="tdot">·</span>
+    <div class="ti"><span class="tsm">SCHD</span><span class="tprc" id="k3p">$---</span><span class="tch" id="k3c"></span></div><span class="tdot">·</span>
+    <div class="ti"><span class="tsm">BTC</span><span class="tprc" id="k4p">$---</span><span class="tch" id="k4c"></span></div><span class="tdot">·</span>
+    <div class="ti"><span class="tsm">ETH</span><span class="tprc" id="k5p">$---</span><span class="tch" id="k5c"></span></div><span class="tdot">·</span>
+    <div class="ti"><span class="tsm">SOL</span><span class="tprc" id="k6p">$---</span><span class="tch" id="k6c"></span></div><span class="tdot">·</span>
+    <div class="ti"><span class="tsm">VOO</span><span class="tprc" id="k7p">$---</span><span class="tch" id="k7c"></span></div><span class="tdot">·</span>
+    <div class="ti"><span class="tsm">QQQ</span><span class="tprc" id="k8p">$---</span><span class="tch" id="k8c"></span></div><span class="tdot">·</span>
+    <div class="ti"><span class="tsm">SCHD</span><span class="tprc" id="k9p">$---</span><span class="tch" id="k9c"></span></div><span class="tdot">·</span>
+    <div class="ti"><span class="tsm">BTC</span><span class="tprc" id="k10p">$---</span><span class="tch" id="k10c"></span></div><span class="tdot">·</span>
+    <div class="ti"><span class="tsm">ETH</span><span class="tprc" id="k11p">$---</span><span class="tch" id="k11c"></span></div><span class="tdot">·</span>
+    <div class="ti"><span class="tsm">SOL</span><span class="tprc" id="k12p">$---</span><span class="tch" id="k12c"></span></div>
   </div>
 </div>
 
-<!-- ====== HOME ====== -->
+<!-- HOME -->
 <div class="pg on" id="pg-home">
-
   <div class="g2">
     <div class="card">
-      <div class="lbl">🔥 Racha</div>
-      <div class="str">
-        <div>
-          <div class="strn" id="strn">1</div>
-          <div class="strsub" id="strsub">Día 1</div>
-        </div>
-      </div>
+      <div class="lbl">🔥 Racha diaria</div>
+      <div class="strn" id="strn">1</div>
+      <div class="sub" id="strsub">Día 1 ⭐</div>
       <div class="strbar" id="strbar"></div>
     </div>
     <div class="card">
       <div class="lbl">⏳ Próximo evento</div>
-      <div style="font-size:11px;color:var(--t2);margin-bottom:10px;font-weight:500" id="cdnm">-</div>
+      <div style="font-size:11px;color:var(--t2);font-weight:500;margin-bottom:10px" id="cdnm">-</div>
       <div class="cdg">
         <div class="cdc"><div class="cdn" id="cdd">--</div><div class="cdl">Días</div></div>
         <div class="cdc"><div class="cdn" id="cdh">--</div><div class="cdl">Hrs</div></div>
-        <div class="cdc"><div class="cdn" id="cdm">--</div><div class="cdl">Min</div></div>
+        <div class="cdc"><div class="cdn" id="cdm2">--</div><div class="cdl">Min</div></div>
         <div class="cdc"><div class="cdn" id="cds">--</div><div class="cdl">Seg</div></div>
       </div>
     </div>
   </div>
-
   <div class="card">
     <div class="lbl">🌤 Clima — Panamá City</div>
     <div class="wx">
       <div class="wxic" id="wxic">🌡</div>
-      <div>
-        <div class="wxtmp" id="wxtmp">--°</div>
-        <div class="wxdsc" id="wxdsc">cargando...</div>
-        <div class="wxfl" id="wxfl"></div>
-      </div>
+      <div><div class="wxtmp" id="wxtmp">--°</div><div class="wxd" id="wxd">cargando...</div><div class="wxf" id="wxf"></div></div>
     </div>
-    <div class="wxdt" id="wxdt">
+    <div class="wxg" id="wxg">
       <div class="wxc"><div class="wxcv">--%</div><div class="wxcl">Humedad</div></div>
       <div class="wxc"><div class="wxcv">-- km/h</div><div class="wxcl">Viento</div></div>
       <div class="wxc"><div class="wxcv">--</div><div class="wxcl">UV</div></div>
     </div>
   </div>
-
   <div class="card">
     <div class="lbl">🔭 NASA — Cosmos hoy</div>
-    <img id="nasaimg" class="nasaimg" alt="NASA APOD">
-    <div style="font-size:15px;font-weight:600;margin-bottom:6px" id="nasatit"><span style="color:var(--t3);font-size:13px;font-style:italic">Cargando imagen del universo...</span></div>
+    <img id="nasaimg" class="nasaimg" alt="NASA">
+    <div style="font-size:15px;font-weight:600;margin-bottom:6px" id="nasatit"><span style="color:var(--t3);font-size:13px">Cargando imagen del universo...</span></div>
     <div style="font-size:13px;color:var(--t2);line-height:1.6" id="nasadesc"></div>
   </div>
-
   <div class="card">
     <div class="lbl">🇵🇦 Panamá hoy</div>
-    <div id="newspan"><div style="color:var(--t3);font-size:13px;font-style:italic">Cargando noticias...</div></div>
+    <div id="newspan"><span style="color:var(--t3);font-size:13px">Cargando noticias...</span></div>
   </div>
-
 </div>
 
-<!-- ====== INVEST ====== -->
+<!-- INVEST -->
 <div class="pg" id="pg-invest">
-
   <div class="ai">
-    <div class="aib">Análisis automático</div>
+    <div class="aibdg">Análisis automático</div>
     <div class="aitx" id="aitx">Cargando datos del mercado...</div>
     <div class="aiact" id="aiact">→ Obteniendo recomendación...</div>
   </div>
-
   <div class="g2">
-    <div class="card"><div class="lbl">VOO</div><div class="big" id="mv1">---</div><div class="sub" id="mc1" style="margin-top:6px">--</div></div>
-    <div class="card"><div class="lbl">QQQ</div><div class="big" id="mv2">---</div><div class="sub" id="mc2" style="margin-top:6px">--</div></div>
-    <div class="card"><div class="lbl">SCHD</div><div class="big" id="mv3">---</div><div class="sub" id="mc3" style="margin-top:6px">--</div></div>
-    <div class="card"><div class="lbl">VIX</div><div class="big" id="mv4">---</div><div class="sub" id="mc4" style="margin-top:6px">--</div></div>
+    <div class="card"><div class="lbl">VOO — S&P 500</div><div class="big" id="mv1">---</div><div class="sub" id="mc1">--</div></div>
+    <div class="card"><div class="lbl">QQQ — NASDAQ</div><div class="big" id="mv2">---</div><div class="sub" id="mc2">--</div></div>
+    <div class="card"><div class="lbl">SCHD — Dividendos</div><div class="big" id="mv3">---</div><div class="sub" id="mc3">--</div></div>
+    <div class="card"><div class="lbl">VIX — Volatilidad</div><div class="big" id="mv4">---</div><div class="sub" id="mc4">--</div></div>
   </div>
-
   <div class="card">
     <div class="lbl">Tus ETFs — señales en vivo</div>
-    <div id="etflist"><div style="color:var(--t3);font-size:13px;font-style:italic">Cargando precios...</div></div>
+    <div id="etflist"><span style="color:var(--t3);font-size:13px">Cargando precios...</span></div>
   </div>
-
   <div class="card">
-    <div class="lbl">₿ Crypto en vivo</div>
-    <div id="clist"><div style="color:var(--t3);font-size:13px;font-style:italic">Cargando...</div></div>
+    <div class="lbl">₿ Crypto — actualización en vivo</div>
+    <div id="clist"><span style="color:var(--t3);font-size:13px">Cargando...</span></div>
   </div>
-
   <div class="card">
     <div class="lbl">💱 Tipos de cambio</div>
-    <div class="fxg" id="fxdata"><div style="color:var(--t3);font-size:13px;font-style:italic">Cargando...</div></div>
+    <div class="fxg" id="fxdata"><span style="color:var(--t3);font-size:13px">Cargando...</span></div>
   </div>
-
+  <div class="card">
+    <div class="lbl">💨 Calidad del aire — Panamá</div>
+    <div style="display:flex;align-items:baseline;gap:8px"><div class="big" id="aqiv">--</div><div style="font-size:13px;color:var(--t2)" id="aqil">AQI</div></div>
+    <div class="aqib"><div class="aqin" id="aqin" style="left:10%"></div></div>
+    <div style="display:flex;justify-content:space-between;font-size:9px;color:var(--t3)"><span>Bueno</span><span>Moderado</span><span>Malo</span></div>
+    <div style="font-size:12px;color:var(--t2);margin-top:8px" id="aqitip"></div>
+  </div>
   <div class="card">
     <div class="lbl">📈 Proyección de crecimiento</div>
     <div class="sr"><label>Capital inicial</label><input type="range" min="50" max="1000" step="50" value="200" id="sl1"><span class="sv" id="sv1">$200</span></div>
@@ -365,84 +308,62 @@ body{color:var(--t1);font-family:-apple-system,BlinkMacSystemFont,'SF Pro Text',
     </div>
     <div class="cwrap"><canvas id="pc"></canvas></div>
   </div>
-
-  <div class="card">
-    <div class="lbl">💨 Calidad del aire</div>
-    <div style="display:flex;align-items:baseline;gap:8px"><div class="big" id="aqiv">--</div><div style="font-size:13px;color:var(--t2)" id="aqil">AQI</div></div>
-    <div class="aqib"><div class="aqin" id="aqin" style="left:10%"></div></div>
-    <div style="display:flex;justify-content:space-between;font-size:9px;color:var(--t3)"><span>Bueno</span><span>Moderado</span><span>Malo</span></div>
-    <div style="font-size:12px;color:var(--t2);margin-top:8px" id="aqitip"></div>
-  </div>
-
   <div class="card">
     <div class="lbl">📋 Tu plan de acción</div>
-    <div class="plan-row"><div class="plan-ic pc-g">✓</div><div><div class="plan-t">Cuenta eToro creada</div><div class="plan-s">Pasaporte subido</div></div></div>
+    <div class="plan-row"><div class="plan-ic pc-g">✓</div><div><div class="plan-t">Cuenta eToro creada</div><div class="plan-s">Pasaporte subido ✓</div></div></div>
     <div class="plan-row"><div class="plan-ic pc-a">2</div><div><div class="plan-t">Esperar aprobación</div><div class="plan-s">Lunes o martes</div></div></div>
     <div class="plan-row"><div class="plan-ic pc-x">3</div><div><div class="plan-t">Depositar $200 con BAC</div><div class="plan-s">Cuando llegue el email</div></div></div>
     <div class="plan-row"><div class="plan-ic pc-x">4</div><div><div class="plan-t">Comprar VOO + SCHD</div><div class="plan-s">Lunes 10:30am Panamá</div></div></div>
     <div class="plan-row"><div class="plan-ic pc-x">5</div><div><div class="plan-t">$50 cada mes en VOO</div><div class="plan-s">Día 1 de cada mes</div></div></div>
   </div>
-
 </div>
 
-<!-- ====== LEARN ====== -->
+<!-- LEARN -->
 <div class="pg" id="pg-learn">
-
   <div class="card">
-    <div class="lbl">🧩 Quiz del día</div>
-    <div id="quizbox"></div>
+    <div class="lbl">🧩 Quiz del día — API real</div>
+    <div id="quizbox"><span style="color:var(--t3);font-size:13px">Cargando pregunta real...</span></div>
     <div style="font-size:11px;color:var(--t3);margin-top:8px" id="qscore"></div>
   </div>
-
   <div class="card">
-    <div class="lbl">🔤 Palabra del día — inglés</div>
-    <div id="wordbox"></div>
+    <div class="lbl">🔤 Palabra del día — Dictionary API</div>
+    <div id="wordbox"><span style="color:var(--t3);font-size:13px">Cargando...</span></div>
   </div>
-
   <div class="card">
-    <div class="lbl">📜 Hoy en la historia</div>
-    <div id="histbox"></div>
+    <div class="lbl">📜 Hoy en la historia — Wikipedia API</div>
+    <div id="histbox"><span style="color:var(--t3);font-size:13px">Cargando...</span></div>
   </div>
-
+  <div class="card">
+    <div class="lbl">🧠 Dato curioso — Useless Facts API</div>
+    <div style="font-size:14px;color:var(--t2);line-height:1.7;font-style:italic" id="factbox"><span style="color:var(--t3);font-size:13px">Cargando...</span></div>
+  </div>
   <div class="card">
     <div class="lbl">💡 Concepto financiero del día</div>
     <div id="tipbox"></div>
   </div>
-
-  <div class="card">
-    <div class="lbl">🧠 Dato curioso</div>
-    <div style="font-size:14px;color:var(--t2);line-height:1.7;font-style:italic" id="factbox"></div>
-  </div>
-
 </div>
 
-<!-- ====== MORE ====== -->
+<!-- MORE -->
 <div class="pg" id="pg-more">
-
   <div class="card">
-    <div class="lbl">♉ Tauro — hoy</div>
-    <div id="horobox"></div>
+    <div class="lbl">♉ Tauro — Aztro API</div>
+    <div id="horobox"><span style="color:var(--t3);font-size:13px">Cargando...</span></div>
   </div>
-
   <div class="card">
-    <div class="lbl">🎬 Película del día</div>
-    <div id="moviebox"><div style="color:var(--t3);font-size:13px;font-style:italic">Cargando...</div></div>
+    <div class="lbl">🎬 Película del día — TMDB API</div>
+    <div id="moviebox"><span style="color:var(--t3);font-size:13px">Cargando...</span></div>
   </div>
-
   <div class="card">
     <div class="lbl">🌍 Noticias globales</div>
-    <div id="newsglobal"><div style="color:var(--t3);font-size:13px;font-style:italic">Cargando...</div></div>
+    <div id="newsglobal"><span style="color:var(--t3);font-size:13px">Cargando...</span></div>
   </div>
-
   <div class="card">
-    <div class="lbl">💬 Frase del día</div>
-    <div style="font-size:16px;font-style:italic;line-height:1.65;color:var(--t1)" id="qtx"></div>
+    <div class="lbl">💬 Frase del día — Quotable API</div>
+    <div style="font-size:16px;font-style:italic;line-height:1.65" id="qtx"><span style="color:var(--t3);font-size:13px">Cargando...</span></div>
     <div style="font-size:12px;color:var(--t3);margin-top:10px" id="qau"></div>
   </div>
-
 </div>
 
-<!-- NAV -->
 <nav class="nav">
   <button class="nb on" onclick="go('home',this)"><span class="ni">🏠</span><span class="nl">Inicio</span></button>
   <button class="nb" onclick="go('invest',this)"><span class="ni">📈</span><span class="nl">Invertir</span></button>
@@ -452,7 +373,6 @@ body{color:var(--t1);font-family:-apple-system,BlinkMacSystemFont,'SF Pro Text',
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
 <script>
-// ── NAV ──
 function go(id,btn){
   document.querySelectorAll('.pg').forEach(p=>p.classList.remove('on'));
   document.querySelectorAll('.nb').forEach(b=>b.classList.remove('on'));
@@ -461,12 +381,11 @@ function go(id,btn){
   window.scrollTo({top:0,behavior:'instant'});
 }
 
-// ── TIME ──
 function pty(){return new Date(new Date().toLocaleString('en-US',{timeZone:'America/Panama'}))}
 const DAYS=['Domingo','Lunes','Martes','Miércoles','Jueves','Viernes','Sábado'];
 const MONTHS=['enero','febrero','marzo','abril','mayo','junio','julio','agosto','septiembre','octubre','noviembre','diciembre'];
 
-// ── COUNTDOWN ──
+// COUNTDOWN — declared first so tick() can use it
 const EVTS=[
   {n:'Fin de semana',f:d=>{const t=new Date(d),diff=(6-t.getDay()+7)%7||7;t.setDate(t.getDate()+diff);t.setHours(0,0,0,0);return t;}},
   {n:'Fin de mes',f:d=>new Date(d.getFullYear(),d.getMonth()+1,1)},
@@ -481,7 +400,7 @@ function countdown(now){
   const s=Math.floor(ms/1000);
   document.getElementById('cdd').textContent=Math.floor(s/86400);
   document.getElementById('cdh').textContent=String(Math.floor((s%86400)/3600)).padStart(2,'0');
-  document.getElementById('cdm').textContent=String(Math.floor((s%3600)/60)).padStart(2,'0');
+  document.getElementById('cdm2').textContent=String(Math.floor((s%3600)/60)).padStart(2,'0');
   document.getElementById('cds').textContent=String(s%60).padStart(2,'0');
 }
 
@@ -495,52 +414,52 @@ function tick(){
 }
 setInterval(tick,1000);tick();
 
-// ── STREAK ──
+// STREAK
 (function(){
   const today=new Date().toDateString(),prev=new Date(Date.now()-86400000).toDateString();
-  let d=JSON.parse(localStorage.getItem('is2')||'{"n":0,"last":"","h":[]}');
-  if(d.last!==today){d.n=(d.last===prev)?d.n+1:1;d.last=today;d.h=[...d.h.slice(-6),1];localStorage.setItem('is2',JSON.stringify(d));}
+  let d=JSON.parse(localStorage.getItem('is3')||'{"n":0,"last":"","h":[]}');
+  if(d.last!==today){d.n=(d.last===prev)?d.n+1:1;d.last=today;d.h=[...d.h.slice(-6),1];localStorage.setItem('is3',JSON.stringify(d));}
   document.getElementById('strn').textContent=d.n;
   document.getElementById('strsub').textContent='Día '+d.n+(d.n>=7?' 🏆':d.n>=3?' 🔥':' ⭐');
   const bar=document.getElementById('strbar');
   for(let i=0;i<7;i++){const el=document.createElement('div');el.className='srd'+(i<d.h.length?' ok':'')+(i===6?' now':'');bar.appendChild(el);}
 })();
 
-// ── SAFE FETCH ── wraps fetch with timeout + error handling
-async function sf(url,opts={},timeout=8000){
+// SAFE FETCH with timeout
+async function sf(url,opts={},ms=8000){
   const ctrl=new AbortController();
-  const tid=setTimeout(()=>ctrl.abort(),timeout);
+  const tid=setTimeout(()=>ctrl.abort(),ms);
   try{const r=await fetch(url,{...opts,signal:ctrl.signal});clearTimeout(tid);if(!r.ok)throw new Error(r.status);return r;}
   catch(e){clearTimeout(tid);throw e;}
 }
 
-// ── WEATHER — Open-Meteo (no CORS, no key) ──
+// WEATHER
 async function loadWx(){
   try{
     const r=await sf('https://api.open-meteo.com/v1/forecast?latitude=8.9936&longitude=-79.5197&current=temperature_2m,apparent_temperature,relative_humidity_2m,weather_code,wind_speed_10m,uv_index&timezone=America%2FPanama');
     const d=await r.json(),c=d.current;
-    const IC={0:'☀️',1:'🌤',2:'⛅',3:'☁️',45:'🌫',48:'🌫',51:'🌦',53:'🌦',55:'🌧',61:'🌧',63:'🌧',65:'🌧',80:'🌦',81:'🌧',82:'⛈',95:'⛈'};
+    const IC={0:'☀️',1:'🌤',2:'⛅',3:'☁️',45:'🌫',51:'🌦',61:'🌧',63:'🌧',65:'🌧',80:'🌦',82:'⛈',95:'⛈'};
     const DC={0:'Despejado',1:'Mayormente despejado',2:'Parcialmente nublado',3:'Nublado',45:'Niebla',51:'Llovizna',61:'Lluvia ligera',63:'Lluvia moderada',65:'Lluvia fuerte',80:'Chubascos',82:'Chubascos fuertes',95:'Tormenta'};
     document.getElementById('wxic').textContent=IC[c.weather_code]||'🌡';
     document.getElementById('wxtmp').textContent=Math.round(c.temperature_2m)+'°';
-    document.getElementById('wxdsc').textContent=DC[c.weather_code]||'Variable';
-    document.getElementById('wxfl').textContent='Sensación '+Math.round(c.apparent_temperature)+'°C';
-    document.getElementById('wxdt').innerHTML=`
+    document.getElementById('wxd').textContent=DC[c.weather_code]||'Variable';
+    document.getElementById('wxf').textContent='Sensación '+Math.round(c.apparent_temperature)+'°C';
+    document.getElementById('wxg').innerHTML=`
       <div class="wxc"><div class="wxcv">${c.relative_humidity_2m}%</div><div class="wxcl">Humedad</div></div>
       <div class="wxc"><div class="wxcv">${Math.round(c.wind_speed_10m)} km/h</div><div class="wxcl">Viento</div></div>
       <div class="wxc"><div class="wxcv">${c.uv_index??'--'}</div><div class="wxcl">UV</div></div>`;
   }catch{}
 }
 
-// ── AQI — Open-Meteo (no CORS, no key) ──
+// AQI
 async function loadAQI(){
   try{
     const r=await sf('https://air-quality-api.open-meteo.com/v1/air-quality?latitude=8.9936&longitude=-79.5197&current=us_aqi,pm2_5&timezone=America%2FPanama');
     const d=await r.json(),aqi=Math.round(d.current.us_aqi);
     let lb,col,pct,tip;
-    if(aqi<=50){lb='Bueno 😊';col=getComputedStyle(document.documentElement).getPropertyValue('--gr').trim()||'#34c759';pct=10;tip='Excelente calidad del aire. Perfecto para actividades al aire libre.';}
-    else if(aqi<=100){lb='Moderado 😐';col='#ffd60a';pct=38;tip='Calidad aceptable. Personas sensibles, tomar precaución.';}
-    else{lb='No saludable ⚠️';col='#ff3b30';pct=70;tip='Reduce actividades al aire libre prolongadas.';}
+    if(aqi<=50){lb='Bueno 😊';col='#34c759';pct=10;tip='Excelente calidad del aire. Ideal para actividades al aire libre.';}
+    else if(aqi<=100){lb='Moderado 😐';col='#ffd60a';pct=38;tip='Calidad aceptable. Personas sensibles deben tomar precaución.';}
+    else{lb='No saludable ⚠️';col='#ff3b30';pct=70;tip='Reduce actividades prolongadas al aire libre.';}
     document.getElementById('aqiv').textContent=aqi;
     document.getElementById('aqiv').style.color=col;
     document.getElementById('aqil').textContent=lb;
@@ -549,7 +468,7 @@ async function loadAQI(){
   }catch{}
 }
 
-// ── NASA APOD ──
+// NASA
 async function loadNASA(){
   try{
     const r=await sf('https://api.nasa.gov/planetary/apod?api_key=DEMO_KEY');
@@ -560,234 +479,179 @@ async function loadNASA(){
   }catch{document.getElementById('nasatit').textContent='Imagen no disponible hoy';}
 }
 
-// ── ETFs — via Netlify Function ──
+// ETFs via Netlify backend
 async function loadETFs(){
   try{
     const r=await sf('/.netlify/functions/market');
     const d=await r.json();
-    if(!d.etfs||!d.etfs.length)throw new Error('no data');
+    if(!d.etfs?.length)throw new Error();
     const DS={VOO:['S&P 500','500 mejores EE.UU.'],QQQ:['NASDAQ 100','Big Tech'],SCHD:['Dividendos','Pago trimestral'],VYM:['Alto dividendo','Bajo riesgo'],GLD:['Oro','Refugio seguro']};
     const SG={VOO:'s1',SCHD:'s1',QQQ:'s2',VYM:'s2',GLD:'s3'};
     const ST={s1:'Comprar',s2:'Observar',s3:'Mantener'};
-    // update ticker
     const syms=['VOO','QQQ','SCHD'];
     syms.forEach((sym,i)=>{
       const e=d.etfs.find(x=>x.symbol===sym);if(!e)return;
       const up=e.change>=0,cs=(up?'+':'')+e.change.toFixed(2)+'%';
-      [[`k${i+1}p`,`k${i+1}c`],[`k${i+7}p`,`k${i+7}c`]].forEach(([pid,cid])=>{
-        const pe=document.getElementById(pid),ce=document.getElementById(cid);
-        if(pe)pe.textContent='$'+e.price.toFixed(2);
-        if(ce){ce.textContent=cs;ce.className='tch '+(up?'up':'dn');}
-      });
+      [`k${i+1}p`,`k${i+7}p`].forEach(id=>{const el=document.getElementById(id);if(el)el.textContent='$'+e.price.toFixed(2);});
+      [`k${i+1}c`,`k${i+7}c`].forEach(id=>{const el=document.getElementById(id);if(el){el.textContent=cs;el.className='tch '+(up?'up':'dn');}});
     });
-    // update metric cards
     d.etfs.slice(0,4).forEach((e,i)=>{
       const up=e.change>=0;
       const mv=document.getElementById('mv'+(i+1)),mc=document.getElementById('mc'+(i+1));
       if(mv)mv.textContent='$'+e.price.toFixed(2);
       if(mc){mc.textContent=(up?'↑ +':'↓ ')+Math.abs(e.change).toFixed(2)+'%';mc.style.color=up?'var(--gr)':'var(--rd)';}
     });
-    // ETF list
     document.getElementById('etflist').innerHTML=d.etfs.map(e=>{
       const up=e.change>=0,ds=DS[e.symbol]||[e.symbol,''],sg=SG[e.symbol]||'s3';
       return`<div class="ef"><div class="efl"><div class="efic">${e.symbol}</div><div><div class="efn">${ds[0]}</div><div class="efd">${ds[1]}</div></div></div><div class="efr"><div class="efp">$${e.price.toFixed(2)}</div><div class="efc" style="color:${up?'var(--gr)':'var(--rd)'}">${up?'↑ +':'↓ '}${Math.abs(e.change).toFixed(2)}%</div><div class="sig ${sg}">${ST[sg]}</div></div></div>`;
     }).join('');
-    // AI
     const voo=d.etfs.find(e=>e.symbol==='VOO');
     if(voo){
       const c=voo.change;let tx,ac;
-      if(c<=-3){tx=`VOO cayó ${Math.abs(c).toFixed(2)}% hoy — corrección significativa. Para inversores de largo plazo esta es una oportunidad de entrada.`;ac='Compra $50 extra de VOO — precio de descuento real';}
-      else if(c<=-1){tx=`Corrección moderada (${c.toFixed(2)}%). Los fundamentos siguen intactos. Completamente normal.`;ac='Buen momento para tu aporte mensual de $50 en VOO';}
-      else if(c>=2){tx=`Día positivo (+${c.toFixed(2)}%). Tu estrategia ETF está funcionando perfectamente.`;ac='Mantén el plan — tu $50 mensual sigue siendo lo correcto';}
-      else{tx=`Mercado estable hoy (${c>=0?'+':''}${c.toFixed(2)}%). Momento ideal para construir tu portafolio.`;ac='Sin cambios — agrega $50 el 1ro del mes como siempre';}
+      if(c<=-3){tx=`VOO cayó ${Math.abs(c).toFixed(2)}% — corrección significativa. Para largo plazo, oportunidad de entrada.`;ac='Compra $50 extra de VOO — precio de descuento';}
+      else if(c<=-1){tx=`Corrección moderada (${c.toFixed(2)}%). Fundamentos intactos. Completamente normal.`;ac='Buen momento para tu aporte mensual de $50 en VOO';}
+      else if(c>=2){tx=`Día positivo (+${c.toFixed(2)}%). Tu estrategia ETF está funcionando.`;ac='Mantén el plan — $50 mensual el 1ro de cada mes';}
+      else{tx=`Mercado estable hoy (${c>=0?'+':''}${c.toFixed(2)}%). Ideal para construir tu portafolio.`;ac='Sin cambios — agrega $50 el 1ro del mes';}
       document.getElementById('aitx').textContent=tx;
       document.getElementById('aiact').textContent='→ '+ac;
     }
   }catch{
-    document.getElementById('etflist').innerHTML='<div style="color:var(--t3);font-size:13px">Los precios cargan cuando el mercado abre (lunes 9:30am EST)</div>';
-    document.getElementById('aitx').textContent='Mercado cerrado. Los datos en vivo estarán disponibles el lunes cuando abra el NYSE.';
+    document.getElementById('etflist').innerHTML='<div style="color:var(--t3);font-size:13px">ETFs disponibles lunes-viernes cuando abra el NYSE (9:30am EST)</div>';
+    document.getElementById('aitx').textContent='Mercado cerrado. Los datos en vivo estarán disponibles el próximo día hábil.';
     document.getElementById('aiact').textContent='→ Mantén tu plan: $50 en VOO el 1ro del mes';
   }
 }
 
-// ── CRYPTO — CoinGecko (sin CORS desde HTTPS) ──
+// CRYPTO
 async function loadCrypto(){
   try{
     const r=await sf('https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,ethereum,solana,ripple,cardano&vs_currencies=usd&include_24hr_change=true');
     const d=await r.json();
     const coins=[{id:'bitcoin',sym:'BTC',ic:'₿',bg:'#f7931a'},{id:'ethereum',sym:'ETH',ic:'Ξ',bg:'#627eea'},{id:'solana',sym:'SOL',ic:'◎',bg:'#9945ff'},{id:'ripple',sym:'XRP',ic:'✕',bg:'#346aa9'},{id:'cardano',sym:'ADA',ic:'₳',bg:'#0033ad'}];
-    // update ticker
     const btc=d.bitcoin,eth=d.ethereum,sol=d.solana;
-    [[btc,'k4p','k4c','k10p','k10c'],[eth,'k5p','k5c','k11p','k11c'],[sol,'k6p','k6c','k12p','k12c']].forEach(([coin,p1,c1,p2,c2])=>{
+    [[btc,4],[eth,5],[sol,6]].forEach(([coin,i])=>{
       if(!coin)return;
       const up=coin.usd_24h_change>=0,cs=(up?'+':'')+coin.usd_24h_change.toFixed(1)+'%';
-      [[p1,c1],[p2,c2]].forEach(([pid,cid])=>{
-        const pe=document.getElementById(pid),ce=document.getElementById(cid);
-        if(pe)pe.textContent='$'+(coin.usd>=1000?coin.usd.toLocaleString('en-US',{maximumFractionDigits:0}):coin.usd.toFixed(2));
-        if(ce){ce.textContent=cs;ce.className='tch '+(up?'up':'dn');}
-      });
+      const price='$'+(coin.usd>=1000?coin.usd.toLocaleString('en-US',{maximumFractionDigits:0}):coin.usd.toFixed(2));
+      [`k${i}p`,`k${i+6}p`].forEach(id=>{const el=document.getElementById(id);if(el)el.textContent=price;});
+      [`k${i}c`,`k${i+6}c`].forEach(id=>{const el=document.getElementById(id);if(el){el.textContent=cs;el.className='tch '+(up?'up':'dn');}});
     });
     document.getElementById('clist').innerHTML=coins.map(c=>{
       const p=d[c.id];if(!p)return'';
       const ch=(p.usd_24h_change||0).toFixed(2),up=parseFloat(ch)>=0;
       return`<div class="cr"><div class="crl"><div class="cric" style="background:${c.bg}18;color:${c.bg}">${c.ic}</div><div><div class="crn">${c.sym}</div><div class="crs">${c.id.charAt(0).toUpperCase()+c.id.slice(1)}</div></div></div><div style="text-align:right"><div class="crp">$${p.usd>=1000?p.usd.toLocaleString('en-US',{maximumFractionDigits:0}):p.usd.toFixed(2)}</div><div class="crc" style="color:${up?'var(--gr)':'var(--rd)'}">${up?'↑ +':'↓ '}${Math.abs(ch)}%</div></div></div>`;
     }).join('');
-  }catch{document.getElementById('clist').innerHTML='<div style="color:var(--t3);font-size:13px">Sin datos crypto ahora</div>';}
+  }catch{document.getElementById('clist').innerHTML='<div style="color:var(--t3);font-size:13px">Sin datos crypto</div>';}
 }
 
-// ── FOREX — Frankfurter (sin CORS, gratis) ──
+// FOREX
 async function loadForex(){
   try{
     const r=await sf('https://api.frankfurter.app/latest?from=USD&to=EUR,GBP,JPY,MXN,COP,CAD');
     const d=await r.json();
     document.getElementById('fxdata').innerHTML=[['EUR','€'],['GBP','£'],['JPY','¥'],['MXN','MX$'],['COP','COP'],['CAD','C$']].map(([k,s])=>`<div class="fxi"><div class="fxp">USD → ${k}</div><div class="fxv">${s}${d.rates[k]?.toFixed(k==='JPY'||k==='COP'?0:2)||'--'}</div></div>`).join('');
-  }catch{document.getElementById('fxdata').innerHTML='<div style="color:var(--t3);font-size:13px">Sin datos de cambio ahora</div>';}
+  }catch{document.getElementById('fxdata').innerHTML='<div style="color:var(--t3);font-size:13px">Sin datos</div>';}
 }
 
-// ── NEWS — NewsData (200/día gratis) ──
+// NEWS
 async function loadNews(){
   const KEY='pub_86a7504a1f8a4ac7aeec026143ca84f3';
   try{
     const r=await sf(`https://newsdata.io/api/1/news?apikey=${KEY}&country=pa&language=es&size=5`);
     const d=await r.json();
     if(d.results?.length){
-      document.getElementById('newspan').innerHTML=d.results.map(i=>`<a class="na" href="${i.link}" target="_blank"><div class="ni"><div class="nt">${i.title}</div><div class="ns">${i.source_name||'Panamá'} · ${ago(i.pubDate)}</div></div></a>`).join('');
+      document.getElementById('newspan').innerHTML=d.results.map(i=>`<a class="na" href="${i.link}" target="_blank"><div class="ni2"><div class="nt">${i.title}</div><div class="ns">${i.source_name||'Panamá'} · ${ago(i.pubDate)}</div></div></a>`).join('');
     }else throw new Error();
-  }catch{document.getElementById('newspan').innerHTML='<div style="color:var(--t3);font-size:13px">Noticias no disponibles en este momento</div>';}
+  }catch{document.getElementById('newspan').innerHTML='<div style="color:var(--t3);font-size:13px">Noticias no disponibles ahora</div>';}
   try{
     const r=await sf(`https://newsdata.io/api/1/news?apikey=${KEY}&language=en&category=top&size=5`);
     const d=await r.json();
     if(d.results?.length){
-      document.getElementById('newsglobal').innerHTML=d.results.map(i=>`<a class="na" href="${i.link}" target="_blank"><div class="ni"><div class="nt">${i.title}</div><div class="ns">${i.source_name||'Global'} · ${ago(i.pubDate)}</div></div></a>`).join('');
+      document.getElementById('newsglobal').innerHTML=d.results.map(i=>`<a class="na" href="${i.link}" target="_blank"><div class="ni2"><div class="nt">${i.title}</div><div class="ns">${i.source_name||'Global'} · ${ago(i.pubDate)}</div></div></a>`).join('');
     }
-  }catch{document.getElementById('newsglobal').innerHTML='<div style="color:var(--t3);font-size:13px">Noticias globales no disponibles</div>';}
+  }catch{document.getElementById('newsglobal').innerHTML='<div style="color:var(--t3);font-size:13px">Sin noticias globales ahora</div>';}
 }
 
-// ── MOVIE — TMDB ──
+// MOVIE
 async function loadMovie(){
   try{
     const r=await sf(`https://api.themoviedb.org/3/trending/movie/day?api_key=8ad8e063f18ad101bc4e1182deb40803&language=es-ES`);
     const d=await r.json();
     const n=pty(),doy=Math.floor((n-new Date(n.getFullYear(),0,0))/86400000);
     const m=d.results[doy%d.results.length];
-    document.getElementById('moviebox').innerHTML=`<div class="mv"><div class="mpo">${m.poster_path?`<img src="https://image.tmdb.org/t/p/w200${m.poster_path}" loading="lazy" alt="">`:'🎬'}</div><div style="flex:1;min-width:0"><div class="mtt">${m.title}</div><div style="display:flex;gap:5px;flex-wrap:wrap;margin-bottom:8px"><span class="p pa2">⭐ ${m.vote_average.toFixed(1)}</span><span class="p pb2">${m.release_date?.slice(0,4)||''}</span></div><div class="mds">${(m.overview||'').slice(0,150)}${m.overview?.length>150?'...':''}</div></div></div>`;
+    document.getElementById('moviebox').innerHTML=`<div class="mv"><div class="mpo">${m.poster_path?`<img src="https://image.tmdb.org/t/p/w200${m.poster_path}" loading="lazy" alt="">`:'🎬'}</div><div style="flex:1;min-width:0"><div class="mtt">${m.title}</div><div style="display:flex;gap:5px;flex-wrap:wrap;margin-bottom:8px"><span class="pill pa2">⭐ ${m.vote_average.toFixed(1)}</span><span class="pill pb2">${m.release_date?.slice(0,4)||''}</span></div><div class="mds">${(m.overview||'').slice(0,150)}${m.overview?.length>150?'...':''}</div></div></div>`;
   }catch{document.getElementById('moviebox').innerHTML='<div style="color:var(--t3);font-size:13px">Sin datos</div>';}
 }
 
-// ── HOROSCOPE — Aztro (POST) ──
-async function loadHoro(){
+// DAILY — Netlify function with real APIs
+async function loadDaily(){
   try{
-    const r=await sf('https://aztro.sameerkumar.website/?sign=taurus&day=today',{method:'POST'});
+    const r=await sf('/.netlify/functions/daily');
     const d=await r.json();
-    document.getElementById('horobox').innerHTML=`
-      <div style="font-size:22px;margin-bottom:10px">⭐⭐⭐⭐</div>
-      <div class="horo">${d.description||'Día favorable para decisiones financieras. Tu intuición está afilada.'}</div>
-      <div class="horog">
-        <div class="horc"><div class="horcl">Color</div><div class="horcv">${d.color||'Verde'}</div></div>
-        <div class="horc"><div class="horcl">Número</div><div class="horcv">${d.lucky_number||'7'}</div></div>
-        <div class="horc"><div class="horcl">Humor</div><div class="horcv">${d.mood||'Positivo'}</div></div>
-        <div class="horc"><div class="horcl">Compatible</div><div class="horcv">${d.compatibility||'Virgo'}</div></div>
-      </div>`;
-  }catch{
-    document.getElementById('horobox').innerHTML='<div style="font-size:22px;margin-bottom:10px">⭐⭐⭐⭐</div><div class="horo">Venus favorece tus finanzas hoy. Confía en tu intuición para las decisiones importantes.</div>';
+
+    // Quiz from Open Trivia DB
+    if(d.quiz){
+      let qDone=false;
+      const saved=JSON.parse(localStorage.getItem('iq3')||'{"c":0,"t":0}');
+      document.getElementById('qscore').textContent=saved.t>0?`Puntaje: ${saved.c}/${saved.t} correctas`:'';
+      document.getElementById('quizbox').innerHTML=`<div class="qq">${d.quiz.question}</div><div class="qo">${d.quiz.options.map((o,i)=>`<button class="qb" onclick="ans(${i},${d.quiz.answer},'${d.quiz.explanation.replace(/'/g,"\\'")}',this)">${o}</button>`).join('')}</div><div class="qexp" id="qexp"></div>`;
+      window.ans=(i,a,e,btn)=>{
+        if(qDone)return;qDone=true;
+        document.querySelectorAll('.qb').forEach((b,j)=>{b.disabled=true;if(j===a)b.classList.add('ok');else if(j===i)b.classList.add('no');});
+        const ex=document.getElementById('qexp');ex.style.display='block';ex.textContent=(i===a?'✅ Correcto! ':'❌ Incorrecto. ')+e;
+        const s=JSON.parse(localStorage.getItem('iq3')||'{"c":0,"t":0}');if(i===a)s.c++;s.t++;localStorage.setItem('iq3',JSON.stringify(s));
+        document.getElementById('qscore').textContent=`Puntaje: ${s.c}/${s.t} correctas`;
+      };
+    }
+
+    // Word from Dictionary API
+    if(d.word){
+      const w=d.word;
+      document.getElementById('wordbox').innerHTML=`<div class="ww">${w.word}</div><div class="wp">${w.phonetic}</div><div class="wt">${w.partOfSpeech}</div><div class="wd">${w.definition}</div>${w.example?`<div class="we">"${w.example}"</div>`:''}`;
+    }
+
+    // History from Wikipedia
+    if(d.history){
+      document.getElementById('histbox').innerHTML=`<div class="hdate">${d.history.date}</div>${d.history.events.map(e=>`<div class="hev"><span class="hyr">${e.year}</span><span class="htx">${e.text}</span></div>`).join('')}`;
+    }
+
+    // Fact from Useless Facts
+    if(d.fact) document.getElementById('factbox').textContent='"'+d.fact+'"';
+
+    // Quote from Quotable API
+    if(d.quote){
+      document.getElementById('qtx').textContent='"'+d.quote.text+'"';
+      document.getElementById('qau').textContent='— '+d.quote.author;
+    }
+
+    // Horoscope from Aztro
+    if(d.horoscope){
+      const h=d.horoscope;
+      document.getElementById('horobox').innerHTML=`<div style="font-size:22px;margin-bottom:10px">⭐⭐⭐⭐</div><div class="horo">${h.description}</div><div class="horog"><div class="horc"><div class="horcl">Color</div><div class="horcv">${h.color||'Verde'}</div></div><div class="horc"><div class="horcl">Número</div><div class="horcv">${h.lucky_number||'7'}</div></div><div class="horc"><div class="horcl">Humor</div><div class="horcv">${h.mood||'Positivo'}</div></div><div class="horc"><div class="horcl">Compatible</div><div class="horcv">${h.compatibility||'Virgo'}</div></div></div>`;
+    }
+
+  }catch(e){
+    document.getElementById('quizbox').innerHTML='<div style="color:var(--t3);font-size:13px">Quiz no disponible ahora</div>';
+    document.getElementById('wordbox').innerHTML='<div style="color:var(--t3);font-size:13px">Palabra no disponible ahora</div>';
+    document.getElementById('histbox').innerHTML='<div style="color:var(--t3);font-size:13px">Historia no disponible ahora</div>';
   }
-}
 
-// ── LOCAL CONTENT (nunca falla) ──
-const QUIZ=[
-  {q:'¿Qué es un ETF?',o:['Un banco','Fondo que cotiza en bolsa','Una crypto','Un bono'],a:1,e:'ETF = Exchange Traded Fund. VOO tiene las 500 mejores empresas de EE.UU. en un solo instrumento.'},
-  {q:'¿Qué es el interés compuesto?',o:['Interés solo sobre capital','Interés sobre capital + intereses acumulados','Un préstamo','Una comisión'],a:1,e:'Interés sobre interés. $200 al 9% en 10 años se convierte en $473 sin hacer nada adicional.'},
-  {q:'¿Cuándo es mejor comprar ETFs?',o:['Cuando sube','Siempre igual','Cuando baja — están más baratos','Solo los lunes'],a:2,e:'Las caídas son oportunidades. Comprar VOO cuando baja 3% es comprar algo en oferta.'},
-  {q:'¿Qué es el VIX?',o:['Una crypto','Índice de volatilidad del mercado','Un ETF tech','El precio del dólar'],a:1,e:'El VIX mide el "miedo" del mercado. VIX alto = pánico = oportunidad de compra para largo plazo.'},
-  {q:'¿Qué es la regla del 72?',o:['Un impuesto','Años para duplicar = 72/tasa','El mínimo para invertir','Una ley'],a:1,e:'Al 9% anual, tu dinero se duplica en 8 años (72÷9=8). Al 12%, en solo 6 años.'},
-  {q:'¿Cuándo se inauguró el Canal de Panamá?',o:['1904','1914','1924','1934'],a:1,e:'15 de agosto de 1914. Conectó el Atlántico con el Pacífico y transformó el comercio mundial.'},
-  {q:'¿Qué significa SCHD?',o:['Una crypto','ETF de dividendos de Schwab','Un banco','Una acción'],a:1,e:'SCHD paga dividendos cada trimestre. Perfecto para generar ingresos pasivos a largo plazo.'},
-];
-const WORDS=[
-  {w:'Compound',p:'/ˈkɒmpaʊnd/',t:'adjective',d:'In finance: interest that grows on itself over time.',e:'"Compound interest turned $200 into $473 in 10 years."'},
-  {w:'Diversify',p:'/daɪˈvɜːrsɪfaɪ/',t:'verb',d:'To spread investments across different assets to reduce risk.',e:'"You should diversify your portfolio instead of betting on one stock."'},
-  {w:'Resilient',p:'/rɪˈzɪliənt/',t:'adjective',d:'Able to recover quickly from difficulties.',e:'"The Panama economy has proven resilient despite global challenges."'},
-  {w:'Leverage',p:'/ˈlevərɪdʒ/',t:'noun',d:'Using borrowed money to multiply returns — and risks.',e:'"He used leverage to increase gains, but it also increased the risk."'},
-  {w:'Volatility',p:'/ˌvɒləˈtɪlɪti/',t:'noun',d:'The degree of variation in a financial instrument over time.',e:'"High volatility means prices can swing dramatically in a single day."'},
-  {w:'Portfolio',p:'/pɔːrtˈfoʊliˌoʊ/',t:'noun',d:'A collection of financial investments: stocks, bonds, and ETFs.',e:'"His portfolio grew 15% last year thanks to consistent monthly investing."'},
-  {w:'Dividend',p:'/ˈdɪvɪdɛnd/',t:'noun',d:'Regular payment from a company\'s profits to its shareholders.',e:'"SCHD pays reliable dividends every quarter to its investors."'},
-];
-const HIST=[
-  [{y:1914,e:'Se inaugura el Canal de Panamá.'},{y:1969,e:'Neil Armstrong pisa la Luna.'},{y:2007,e:'Steve Jobs presenta el primer iPhone.'}],
-  [{y:1903,e:'Panamá se independiza de Colombia.'},{y:1998,e:'Google es fundado en California.'},{y:2009,e:'Se crea Bitcoin.'}],
-  [{y:1912,e:'El Titanic parte en su viaje inaugural.'},{y:1976,e:'Apple Computer es fundada.'},{y:2004,e:'Facebook se lanza desde Harvard.'}],
-  [{y:1928,e:'Fleming descubre la penicilina.'},{y:1991,e:'Linux es anunciado al mundo.'},{y:2020,e:'Comienza la pandemia de COVID-19.'}],
-  [{y:1903,e:'Los hermanos Wright logran el primer vuelo.'},{y:1955,e:'McDonald\'s abre su primer restaurante franquiciado.'},{y:2010,e:'Apple lanza el iPad.'}],
-  [{y:1945,e:'Termina la Segunda Guerra Mundial.'},{y:1971,e:'Intel lanza el primer microprocesador.'},{y:2016,e:'Pokémon GO se convierte en fenómeno mundial.'}],
-  [{y:1962,e:'JFK anuncia el programa Apollo.'},{y:1989,e:'Cae el Muro de Berlín.'},{y:2022,e:'ChatGPT lanza al público y cambia el mundo.'}],
-];
-const TIPS=[
-  {n:1,t:'Interés compuesto',b:'$200 + $50/mes al 9% = $11,240 en 10 años. El tiempo es tu mayor ventaja. Empieza hoy, no mañana.'},
-  {n:2,t:'La regla del 72',b:'Divide 72 entre tu tasa de retorno para saber en cuántos años se duplica tu dinero. Al 9%, se duplica cada 8 años.'},
-  {n:3,t:'ETFs vs acciones individuales',b:'Comprar Apple = apostarle a 1 empresa. Comprar VOO = apostarle a las 500 mejores. Mismos retornos, mucho menos riesgo.'},
-  {n:4,t:'Dollar Cost Averaging',b:'Invertir $50 fijos cada mes, sin importar si sube o baja, es la estrategia más probada. Reduces el riesgo de comprar en el peor momento.'},
-  {n:5,t:'Los dividendos de SCHD',b:'SCHD paga dividendos cada trimestre. Con $200 recibirás poco ahora, pero reinvertidos 10 años crean efecto compuesto poderoso.'},
-  {n:6,t:'VIX = señal de compra',b:'Cuando el VIX supera 30, el mercado tiene pánico y los ETFs están baratos. Miedo ajeno = oportunidad tuya.'},
-  {n:7,t:'Impuestos en Panamá',b:'Sistema territorial: no pagas impuestos sobre ingresos generados fuera del país. Tus ganancias en eToro no tributan en Panamá.'},
-];
-const FACTS=[
-  '"Los pulpos tienen 3 corazones, 9 cerebros y sangre azul."',
-  '"La Torre Eiffel crece 15 cm en verano por dilatación térmica del metal."',
-  '"El cerebro humano tiene más conexiones que estrellas hay en la Vía Láctea."',
-  '"Una abeja debe visitar 2 millones de flores para producir 450g de miel."',
-  '"El Sol representa el 99.86% de toda la masa del sistema solar."',
-  '"Los bananos son levemente radiactivos por su contenido de potasio-40."',
-  '"Un rayo golpea la Tierra unas 100 veces por segundo."',
-];
-const QUOTES=[
-  {q:'La única manera de hacer un gran trabajo es amar lo que haces.',a:'Steve Jobs'},
-  {q:'La inversión más importante que puedes hacer es en ti mismo.',a:'Warren Buffett'},
-  {q:'El mercado transfiere dinero del impaciente al paciente.',a:'Warren Buffett'},
-  {q:'No importa lo lento que vayas, siempre que no te detengas.',a:'Confucio'},
-  {q:'Quien controla sus finanzas, controla su libertad.',a:'Anónimo'},
-  {q:'El éxito no es definitivo, el fracaso no es fatal.',a:'Winston Churchill'},
-  {q:'Comienza donde estás. Usa lo que tienes. Haz lo que puedas.',a:'Arthur Ashe'},
-];
-
-function doy(){const n=pty();return Math.floor((n-new Date(n.getFullYear(),0,0))/86400000);}
-
-let qDone=false;
-function loadQuiz(){
-  const q=QUIZ[doy()%QUIZ.length];
-  const saved=JSON.parse(localStorage.getItem('iq2')||'{"c":0,"t":0}');
-  document.getElementById('qscore').textContent=saved.t>0?`Puntaje acumulado: ${saved.c}/${saved.t} correctas`:'';
-  document.getElementById('quizbox').innerHTML=`<div class="qq">${q.q}</div><div class="qo">${q.o.map((o,i)=>`<button class="qb" onclick="ans(${i},${q.a},'${q.e.replace(/'/g,"\\'")}',this)">${o}</button>`).join('')}</div><div class="qexp" id="qexp"></div>`;
-}
-function ans(i,a,e,btn){
-  if(qDone)return;qDone=true;
-  document.querySelectorAll('.qb').forEach((b,j)=>{b.disabled=true;if(j===a)b.classList.add('ok');else if(j===i)b.classList.add('no');});
-  const ex=document.getElementById('qexp');ex.style.display='block';ex.textContent=(i===a?'✅ Correcto! ':'❌ Incorrecto. ')+e;
-  const s=JSON.parse(localStorage.getItem('iq2')||'{"c":0,"t":0}');if(i===a)s.c++;s.t++;localStorage.setItem('iq2',JSON.stringify(s));
-  document.getElementById('qscore').textContent=`Puntaje acumulado: ${s.c}/${s.t} correctas`;
-}
-
-function loadLocal(){
-  const n=pty(),dy=doy();
-  // word
-  const w=WORDS[dy%WORDS.length];
-  document.getElementById('wordbox').innerHTML=`<div class="ww">${w.w}</div><div class="wp">${w.p}</div><div class="wt">${w.t}</div><div class="wd">${w.d}</div><div class="we">${w.e}</div>`;
-  // history
-  const evs=HIST[dy%HIST.length];
-  document.getElementById('histbox').innerHTML=`<div class="hd">${n.getDate()} de ${MONTHS[n.getMonth()]}</div>${evs.map(e=>`<div class="he"><span class="hy">${e.y}</span><span class="ht">${e.e}</span></div>`).join('')}`;
-  // tip
-  const t=TIPS[dy%TIPS.length];
+  // Financial tip — always local, always works
+  const TIPS=[
+    {n:1,t:'Interés compuesto',b:'$200 + $50/mes al 9% = $11,240 en 10 años. El tiempo es tu mayor ventaja.'},
+    {n:2,t:'Regla del 72',b:'Divide 72 entre tu tasa: al 9% tu dinero se duplica cada 8 años.'},
+    {n:3,t:'ETFs vs acciones',b:'VOO = 500 empresas en 1. Mismos retornos que el mercado, mucho menos riesgo.'},
+    {n:4,t:'Dollar Cost Averaging',b:'$50 fijos cada mes sin importar si sube o baja. La estrategia más probada.'},
+    {n:5,t:'SCHD y dividendos',b:'SCHD paga dividendos cada trimestre. Reinvertidos 10 años crean efecto compuesto.'},
+    {n:6,t:'VIX = señal',b:'VIX >30 = pánico = ETFs baratos. Miedo ajeno es tu oportunidad.'},
+    {n:7,t:'Panamá y tus impuestos',b:'Sistema territorial: ganancias de ETFs en eToro no tributan en Panamá.'},
+  ];
+  const n=pty(),doy=Math.floor((n-new Date(n.getFullYear(),0,0))/86400000);
+  const t=TIPS[doy%TIPS.length];
   document.getElementById('tipbox').innerHTML=`<div class="tn">${t.n}</div><div class="tt">${t.t}</div><div class="tb">${t.b}</div>`;
-  // fact
-  document.getElementById('factbox').textContent=FACTS[dy%FACTS.length];
-  // quote
-  const q=QUOTES[dy%QUOTES.length];
-  document.getElementById('qtx').textContent='"'+q.q+'"';
-  document.getElementById('qau').textContent='— '+q.a;
-  // horo fallback
-  document.getElementById('horobox').innerHTML='<div style="font-size:22px;margin-bottom:10px">⭐⭐⭐⭐</div><div class="horo">Venus favorece tus finanzas hoy. Es buen día para revisar tu portafolio y confiar en tu intuición.</div><div class="horog"><div class="horc"><div class="horcl">Color</div><div class="horcv">Verde</div></div><div class="horc"><div class="horcl">Número</div><div class="horcv">7</div></div></div>';
 }
 
-// ── CHART ──
+// CHART
 function calc(i,m,r,y){let v=i;const mr=r/100/12;for(let mo=0;mo<y*12;mo++)v=v*(1+mr)+m;return Math.round(v);}
 let ch;
 function buildChart(i,m,r){
@@ -807,14 +671,9 @@ function updateProj(){
 ['sl1','sl2','sl3'].forEach(id=>document.getElementById(id).addEventListener('input',updateProj));
 updateProj();
 
-// ── UTILS ──
 function ago(d){if(!d)return'';try{const m=Math.floor((Date.now()-new Date(d))/60000);return m<60?`hace ${m}m`:m<1440?`hace ${Math.floor(m/60)}h`:`hace ${Math.floor(m/1440)}d`;}catch{return'';}}
 
-// ── INIT — load local first (instant), then APIs ──
-loadLocal();
-loadQuiz();
-
-// APIs — non-blocking, silent fail
+// INIT
 loadWx();
 loadNASA();
 loadNews();
@@ -823,9 +682,8 @@ loadCrypto();
 loadForex();
 loadAQI();
 loadMovie();
-loadHoro();
+loadDaily();
 
-// Auto refresh
 setInterval(loadCrypto,60000);
 setInterval(loadETFs,30000);
 setInterval(loadWx,10*60*1000);
