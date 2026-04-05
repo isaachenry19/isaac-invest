@@ -11,621 +11,840 @@
 *{box-sizing:border-box;margin:0;padding:0;-webkit-font-smoothing:antialiased;-webkit-tap-highlight-color:transparent}
 :root{
   --bg:#000;--c1:#111;--c2:#1c1c1e;--c3:#2c2c2e;
-  --t1:#fff;--t2:rgba(235,235,245,.6);--t3:rgba(235,235,245,.3);--t4:rgba(255,255,255,.08);
+  --t1:#fff;--t2:rgba(235,235,245,.6);--t3:rgba(235,235,245,.3);--t4:rgba(255,255,255,.07);
   --gr:#30d158;--bl:#0a84ff;--rd:#ff453a;--gd:#ffd60a;--pr:#bf5af2;--or:#ff9f0a;--tl:#5ac8fa;
 }
-html,body{height:100%;background:var(--bg)}
-body{color:var(--t1);font-family:-apple-system,BlinkMacSystemFont,'SF Pro Display','SF Pro Text','Helvetica Neue',sans-serif;overflow-x:hidden;padding-bottom:calc(70px + env(safe-area-inset-bottom))}
-.topbar{position:fixed;top:0;left:0;right:0;z-index:99;padding:calc(env(safe-area-inset-top) + 12px) 18px 12px;background:rgba(0,0,0,.82);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);border-bottom:.5px solid rgba(255,255,255,.08);display:flex;justify-content:space-between;align-items:center}
-.tl h1{font-size:17px;font-weight:700;letter-spacing:-.3px}
-.tl p{font-size:11px;color:var(--t3);margin-top:1px}
-.tr{text-align:right}
-.tr .clk{font-size:17px;font-weight:600;font-variant-numeric:tabular-nums;letter-spacing:-.3px}
-.tr .tz{font-size:10px;color:var(--t3);margin-top:1px}
-.page{display:none;padding:calc(env(safe-area-inset-top) + 72px) 14px 16px}
+html,body{background:var(--bg);overflow-x:hidden}
+body{color:var(--t1);font-family:-apple-system,BlinkMacSystemFont,'SF Pro Display','Helvetica Neue',sans-serif;padding-bottom:calc(70px + env(safe-area-inset-bottom))}
+
+/* NAV */
+.nav{position:fixed;bottom:0;left:0;right:0;z-index:200;background:rgba(18,18,18,.92);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);border-top:.5px solid rgba(255,255,255,.1);display:flex;justify-content:space-around;padding:8px 0 calc(8px + env(safe-area-inset-bottom))}
+.nb{display:flex;flex-direction:column;align-items:center;gap:2px;background:none;border:none;cursor:pointer;padding:4px 20px}
+.nb .i{font-size:22px;transition:transform .15s}
+.nb .l{font-size:10px;font-weight:500;color:var(--t3);transition:color .15s}
+.nb.on .l{color:var(--bl)}
+.nb.on .i{transform:scale(1.1)}
+
+/* TOPBAR */
+.topbar{position:fixed;top:0;left:0;right:0;z-index:100;padding:calc(env(safe-area-inset-top)+12px) 18px 12px;background:rgba(0,0,0,.8);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-bottom:.5px solid rgba(255,255,255,.06);display:flex;justify-content:space-between;align-items:center}
+.topbar h1{font-size:17px;font-weight:700;letter-spacing:-.3px}
+.topbar p{font-size:11px;color:var(--t3);margin-top:1px}
+.topbar-r{text-align:right}
+.tclock{font-size:17px;font-weight:600;font-variant-numeric:tabular-nums}
+.tdate{font-size:10px;color:var(--t3);margin-top:1px}
+
+/* PAGES */
+.page{display:none;padding:calc(env(safe-area-inset-top)+70px) 14px 16px}
 .page.on{display:block}
-.nav{position:fixed;bottom:0;left:0;right:0;z-index:99;background:rgba(0,0,0,.88);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);border-top:.5px solid rgba(255,255,255,.08);padding:8px 0 calc(8px + env(safe-area-inset-bottom));display:flex}
-.nb{flex:1;display:flex;flex-direction:column;align-items:center;gap:2px;border:none;background:none;cursor:pointer;padding:4px 0}
-.nb .ni{font-size:22px;transition:transform .15s}
-.nb .nl{font-size:10px;font-weight:500;color:var(--t3);letter-spacing:.02em}
-.nb.on .ni{transform:scale(1.12)}
-.nb.on .nl{color:var(--bl)}
-.card{background:var(--c1);border-radius:18px;padding:16px;border:.5px solid rgba(255,255,255,.07);margin-bottom:10px}
-.lbl{font-size:10px;font-weight:600;letter-spacing:.07em;text-transform:uppercase;color:var(--t3);margin-bottom:10px}
-.bnum{font-size:36px;font-weight:700;letter-spacing:-.6px;line-height:1}
+
+/* CARDS */
+.card{background:var(--c1);border:.5px solid rgba(255,255,255,.08);border-radius:18px;padding:16px;margin-bottom:10px;overflow:hidden}
+.lbl{font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--t3);margin-bottom:10px}
+.bignum{font-size:34px;font-weight:700;letter-spacing:-.6px;line-height:1}
 .sub{font-size:13px;color:var(--t2);margin-top:5px;line-height:1.5}
-.pill{display:inline-flex;align-items:center;padding:3px 9px;border-radius:100px;font-size:11px;font-weight:600;margin-top:6px}
-.pg{background:rgba(48,209,88,.15);color:var(--gr)}
-.pr{background:rgba(255,69,58,.15);color:var(--rd)}
-.pa{background:rgba(255,214,10,.15);color:var(--gd)}
-.pb{background:rgba(10,132,255,.15);color:var(--bl)}
-.pp{background:rgba(191,90,242,.15);color:var(--pr)}
+
+/* PILLS */
+.pill{display:inline-flex;align-items:center;padding:3px 9px;border-radius:100px;font-size:11px;font-weight:700;margin-top:6px}
+.pg{background:rgba(48,209,88,.12);color:var(--gr)}
+.pr{background:rgba(255,69,58,.12);color:var(--rd)}
+.pa{background:rgba(255,214,10,.12);color:var(--gd)}
+.pb{background:rgba(10,132,255,.12);color:var(--bl)}
+.pp{background:rgba(191,90,242,.12);color:var(--pr)}
+
+/* ROWS */
 .row{display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:.5px solid rgba(255,255,255,.06)}
 .row:last-child{border-bottom:none}
 .rl{font-size:13px;color:var(--t2)}
-.rv{font-size:14px;font-weight:500;font-variant-numeric:tabular-nums}
+.rv{font-size:13px;font-weight:600;font-variant-numeric:tabular-nums}
+
+/* GRIDS */
 .g2{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px}
 .g3{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:10px}
-.sec{font-size:20px;font-weight:700;letter-spacing:-.4px;margin:16px 0 10px;padding:0 2px}
 
-/* Streak */
-.str-wrap{display:flex;align-items:center;gap:16px}
-.str-num{font-size:52px;font-weight:800;letter-spacing:-2px;color:var(--or);line-height:1}
-.str-days{display:flex;gap:5px;margin-top:10px}
-.sd{flex:1;height:4px;border-radius:2px;background:var(--t4)}
-.sd.done{background:var(--or)}
-.sd.now{background:var(--gr)}
-
-/* Countdown */
-.cdg{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin-top:10px}
-.cdc{background:var(--c2);border-radius:12px;padding:10px;text-align:center}
-.cdn{font-size:24px;font-weight:700;letter-spacing:-.3px;font-variant-numeric:tabular-nums}
-.cdl{font-size:9px;color:var(--t3);text-transform:uppercase;letter-spacing:.07em;margin-top:2px}
-
-/* Weather */
-.wx-hero{display:flex;align-items:flex-end;gap:14px;margin-bottom:14px}
-.wx-ico{font-size:52px;line-height:1}
-.wx-temp{font-size:46px;font-weight:300;letter-spacing:-1px}
-.wx-desc{font-size:14px;color:var(--t2);margin-top:2px}
-.wx-feels{font-size:12px;color:var(--t3);margin-top:2px}
-.wx-cells{display:grid;grid-template-columns:repeat(3,1fr);gap:6px}
+/* WEATHER */
+.wx{display:flex;align-items:flex-end;gap:12px;margin-bottom:14px}
+.wxicon{font-size:52px;line-height:1}
+.wxt{font-size:44px;font-weight:300;letter-spacing:-1px}
+.wxd{font-size:14px;color:var(--t2);margin-top:3px}
+.wxf{font-size:12px;color:var(--t3)}
+.wxg{display:grid;grid-template-columns:repeat(3,1fr);gap:6px}
 .wxc{background:var(--t4);border-radius:12px;padding:10px;text-align:center}
 .wxcv{font-size:16px;font-weight:600}
 .wxcl{font-size:10px;color:var(--t3);margin-top:2px}
 
-/* Crypto */
+/* STREAK */
+.snum{font-size:52px;font-weight:700;letter-spacing:-1px;color:var(--or);line-height:1}
+.sbar{display:flex;gap:4px;margin-top:14px}
+.sd{flex:1;height:4px;border-radius:2px;background:var(--t4)}
+.sd.ok{background:var(--or)}
+.sd.now{background:var(--gr)}
+
+/* COUNTDOWN */
+.cdg{display:grid;grid-template-columns:repeat(4,1fr);gap:6px}
+.cdc{background:var(--c2);border-radius:12px;padding:10px;text-align:center}
+.cdn{font-size:22px;font-weight:700;letter-spacing:-.3px;font-variant-numeric:tabular-nums}
+.cdl{font-size:9px;color:var(--t3);text-transform:uppercase;letter-spacing:.07em;margin-top:2px}
+
+/* QUIZ */
+.qquestion{font-size:15px;font-weight:500;line-height:1.5;margin-bottom:14px}
+.qopts{display:flex;flex-direction:column;gap:8px}
+.qopt{background:var(--c2);border:1.5px solid var(--c3);border-radius:12px;padding:12px 14px;font-size:13px;color:var(--t1);cursor:pointer;text-align:left;transition:all .15s}
+.qopt:active{transform:scale(.98)}
+.qopt.ok{border-color:var(--gr);background:rgba(48,209,88,.08);color:var(--gr)}
+.qopt.no{border-color:var(--rd);background:rgba(255,69,58,.08);color:var(--rd)}
+.qexp{font-size:12px;color:var(--t2);line-height:1.6;margin-top:10px;display:none;padding:10px;background:var(--t4);border-radius:10px}
+
+/* WORD */
+.wword{font-size:28px;font-weight:700;letter-spacing:-.3px}
+.wpron{font-size:13px;color:var(--bl);font-style:italic;margin:4px 0 8px}
+.wtype{font-size:10px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--pr);margin-bottom:6px}
+.wdef{font-size:14px;color:var(--t2);line-height:1.6;margin-bottom:8px}
+.wex{font-size:13px;color:var(--t3);font-style:italic}
+
+/* HISTORY */
+.hdate{font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--bl);margin-bottom:10px}
+.hev{padding:10px 0;border-bottom:.5px solid rgba(255,255,255,.06)}
+.hev:last-child{border-bottom:none}
+.hyr{font-size:12px;font-weight:700;color:var(--gd);margin-right:8px}
+.htx{font-size:13px;color:var(--t1);line-height:1.5}
+
+/* TIP */
+.tipn{display:inline-flex;align-items:center;justify-content:center;width:28px;height:28px;border-radius:8px;background:rgba(10,132,255,.15);color:var(--bl);font-size:12px;font-weight:700;margin-bottom:10px}
+.tiptitle{font-size:16px;font-weight:600;margin-bottom:8px}
+.tipbody{font-size:14px;color:var(--t2);line-height:1.65}
+
+/* CRYPTO */
 .cr{display:flex;align-items:center;justify-content:space-between;padding:10px 0;border-bottom:.5px solid rgba(255,255,255,.06)}
 .cr:last-child{border-bottom:none}
 .crl{display:flex;align-items:center;gap:10px}
-.crico{width:36px;height:36px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:700;flex-shrink:0}
-.crn{font-size:14px;font-weight:500}
-.crs{font-size:11px;color:var(--t3)}
-.crp{font-size:14px;font-weight:600;font-variant-numeric:tabular-nums;text-align:right}
-.crch{font-size:11px;font-weight:600;font-variant-numeric:tabular-nums;text-align:right;margin-top:1px}
+.crico{width:34px;height:34px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:700;flex-shrink:0}
+.crname{font-size:14px;font-weight:500}
+.crsym{font-size:11px;color:var(--t3)}
+.crp{font-size:14px;font-weight:600;font-variant-numeric:tabular-nums}
+.crch{font-size:11px;font-weight:600;font-variant-numeric:tabular-nums;margin-top:1px}
 
-/* Forex */
-.fxg{display:grid;grid-template-columns:1fr 1fr;gap:6px}
+/* FOREX */
+.fxg{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-top:6px}
 .fxi{background:var(--t4);border-radius:12px;padding:10px 12px}
-.fxp{font-size:10px;font-weight:600;letter-spacing:.05em;color:var(--t3);text-transform:uppercase}
+.fxp{font-size:10px;font-weight:700;letter-spacing:.06em;color:var(--t3);text-transform:uppercase}
 .fxv{font-size:18px;font-weight:700;margin-top:2px;font-variant-numeric:tabular-nums}
 
+/* ETF */
+.etfrow{display:flex;align-items:center;justify-content:space-between;padding:11px 0;border-bottom:.5px solid rgba(255,255,255,.06)}
+.etfrow:last-child{border-bottom:none}
+.etfl{display:flex;align-items:center;gap:10px}
+.etfico{width:36px;height:36px;border-radius:10px;background:var(--c2);border:.5px solid rgba(255,255,255,.08);display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:700;color:var(--t2);flex-shrink:0}
+.etfname{font-size:13px;font-weight:500}
+.etfdesc{font-size:11px;color:var(--t3);margin-top:1px}
+.etfr{text-align:right}
+.etfp{font-size:14px;font-weight:600;font-variant-numeric:tabular-nums}
+.etfch{font-size:11px;font-weight:600;font-variant-numeric:tabular-nums;margin-top:1px}
+.sig{font-size:9px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:2px 7px;border-radius:4px;margin-top:3px;display:inline-block}
+.sbuy{color:var(--gr);background:rgba(48,209,88,.08);border:.5px solid rgba(48,209,88,.2)}
+.swatch{color:var(--gd);background:rgba(255,214,10,.08);border:.5px solid rgba(255,214,10,.2)}
+.shold{color:var(--t2);background:var(--c2);border:.5px solid rgba(255,255,255,.08)}
+
 /* AQI */
-.abar{height:6px;border-radius:3px;background:linear-gradient(90deg,var(--gr),var(--gd),var(--or),var(--rd));margin:10px 0 5px;position:relative}
-.an{position:absolute;top:-4px;width:14px;height:14px;border-radius:50%;background:#fff;border:2px solid #000;transform:translateX(-50%);transition:left .6s;box-shadow:0 2px 4px rgba(0,0,0,.4)}
+.aqibar{height:6px;border-radius:3px;background:linear-gradient(90deg,var(--gr),var(--gd),var(--or),var(--rd));margin:10px 0 5px;position:relative}
+.aqin{position:absolute;top:-4px;width:14px;height:14px;border-radius:50%;background:#fff;border:2px solid var(--bg);transform:translateX(-50%);transition:left .6s}
 
-/* Quiz */
-.qq{font-size:16px;font-weight:500;line-height:1.5;margin-bottom:14px}
-.qopts{display:flex;flex-direction:column;gap:8px}
-.qopt{background:var(--c2);border:1.5px solid var(--c3);border-radius:12px;padding:12px 14px;font-size:14px;color:var(--t1);cursor:pointer;text-align:left;transition:all .15s;-webkit-tap-highlight-color:transparent;width:100%}
-.qopt:active{transform:scale(.98)}
-.qopt.ok{border-color:var(--gr);background:rgba(48,209,88,.1);color:var(--gr)}
-.qopt.no{border-color:var(--rd);background:rgba(255,69,58,.1);color:var(--rd)}
-.qexp{font-size:13px;color:var(--t2);margin-top:12px;line-height:1.6;display:none;padding:12px;background:var(--t4);border-radius:10px}
-
-/* Word */
-.wword{font-size:30px;font-weight:700;letter-spacing:-.4px;margin-bottom:4px}
-.wpron{font-size:13px;color:var(--bl);font-style:italic;margin-bottom:8px}
-.wtype{font-size:10px;font-weight:700;color:var(--pr);text-transform:uppercase;letter-spacing:.07em;margin-bottom:8px}
-.wdef{font-size:14px;color:var(--t2);line-height:1.6;margin-bottom:8px}
-.wex{font-size:13px;color:var(--t3);font-style:italic;line-height:1.5}
-
-/* History */
-.hdate{font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--bl);margin-bottom:10px}
-.hev{padding:10px 0;border-bottom:.5px solid rgba(255,255,255,.06);font-size:14px;color:var(--t1);line-height:1.5}
-.hev:last-child{border-bottom:none}
-.hyr{font-size:13px;font-weight:700;color:var(--gd);margin-right:8px}
-
-/* Tip */
-.tnum{display:inline-block;width:28px;height:28px;border-radius:8px;background:rgba(10,132,255,.15);color:var(--bl);font-size:11px;font-weight:700;text-align:center;line-height:28px;margin-bottom:10px}
-.ttit{font-size:17px;font-weight:600;margin-bottom:8px;letter-spacing:-.2px}
-.tbody{font-size:14px;color:var(--t2);line-height:1.7}
-
-/* NASA */
-.nimg{width:100%;border-radius:14px;aspect-ratio:16/9;object-fit:cover;margin-bottom:12px;background:var(--c2);display:block}
-.ntit{font-size:15px;font-weight:600;margin-bottom:6px}
-.ndesc{font-size:13px;color:var(--t2);line-height:1.6}
-
-/* Movie */
-.mv{display:flex;gap:14px}
-.mposter{width:72px;height:108px;border-radius:12px;background:var(--c2);flex-shrink:0;overflow:hidden}
-.mposter img{width:100%;height:100%;object-fit:cover}
-.mtit{font-size:15px;font-weight:600;margin-bottom:6px}
-.mdesc{font-size:12px;color:var(--t3);line-height:1.5}
-
-/* Horo */
-.horo-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:12px}
-.horo-item{background:var(--t4);border-radius:12px;padding:10px}
-.horo-lbl{font-size:10px;color:var(--t3);text-transform:uppercase;letter-spacing:.06em}
-.horo-val{font-size:14px;font-weight:500;margin-top:3px}
-
-.ld{color:var(--t3);font-size:12px;font-style:italic}
+/* NEWS */
+.ni{padding:11px 0;border-bottom:.5px solid rgba(255,255,255,.06)}
+.ni:last-child{border-bottom:none}
 .na{text-decoration:none;color:inherit;display:block}
-.ni-news{padding:10px 0;border-bottom:.5px solid rgba(255,255,255,.06)}
-.ni-news:last-child{border-bottom:none}
+.na:active .nt{color:var(--bl)}
 .nt{font-size:13px;color:var(--t1);line-height:1.45}
 .ns{font-size:11px;color:var(--t3);margin-top:3px}
+
+/* MOVIE */
+.mv{display:flex;gap:14px}
+.mp{width:70px;height:105px;border-radius:12px;background:var(--c2);flex-shrink:0;overflow:hidden}
+.mp img{width:100%;height:100%;object-fit:cover}
+.mt{font-size:15px;font-weight:600;margin-bottom:6px}
+.md{font-size:12px;color:var(--t3);line-height:1.5}
+
+/* AI BOX */
+.aib{background:var(--c1);border:.5px solid rgba(10,132,255,.25);border-radius:18px;padding:18px;margin-bottom:10px;position:relative;overflow:hidden}
+.aib::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--bl),var(--pr),transparent)}
+.aibadge{display:inline-flex;align-items:center;gap:6px;font-size:10px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--bl);background:rgba(10,132,255,.1);border:.5px solid rgba(10,132,255,.2);padding:3px 9px;border-radius:6px;margin-bottom:12px}
+.aitx{font-size:14px;color:var(--t2);line-height:1.7;margin-bottom:12px}
+.aiact{font-size:13px;font-weight:600;color:var(--gr);background:rgba(48,209,88,.07);border:.5px solid rgba(48,209,88,.15);border-radius:10px;padding:10px 14px}
+.aiact::before{content:'→ '}
+
+/* CHART */
+.cwrap{position:relative;height:160px;margin-top:12px}
+.sr{display:flex;align-items:center;gap:10px;margin-bottom:10px}
+.sr label{font-size:11px;color:var(--t3);min-width:95px}
+.sr input[type=range]{flex:1;accent-color:var(--bl);height:2px;cursor:pointer}
+.sv{font-size:11px;font-weight:700;color:var(--bl);min-width:36px;text-align:right;font-variant-numeric:tabular-nums}
+
+/* PROJ */
+.prow{display:flex;align-items:baseline;justify-content:space-between;padding:10px 0;border-bottom:.5px solid rgba(255,255,255,.06)}
+.prow:last-child{border-bottom:none}
+.pyr{font-size:12px;color:var(--t2)}
+.pval{font-size:20px;font-weight:700;letter-spacing:-.3px;font-variant-numeric:tabular-nums}
+.pgain{font-size:11px;font-weight:600;color:var(--gr);font-variant-numeric:tabular-nums}
+
+/* TICKER */
+.ticker{overflow:hidden;mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);padding:9px 0;border-bottom:.5px solid rgba(255,255,255,.06)}
+.tscroll{display:flex;gap:0;animation:scroll 35s linear infinite;white-space:nowrap}
+@keyframes scroll{to{transform:translateX(-50%)}}
+.ti{display:inline-flex;align-items:center;gap:6px;padding:0 18px;flex-shrink:0}
+.tsym{font-size:10px;font-weight:700;color:var(--t3);letter-spacing:.05em}
+.tprice{font-size:11px;font-weight:500;font-variant-numeric:tabular-nums}
+.tch{font-size:11px;font-weight:600;font-variant-numeric:tabular-nums}
+.tch.up{color:var(--gr)}.tch.dn{color:var(--rd)}
+
+/* NASA */
+.nasaimg{width:100%;border-radius:14px;aspect-ratio:16/9;object-fit:cover;margin-bottom:12px;background:var(--c2);display:none}
+.nasatitle{font-size:15px;font-weight:600;margin-bottom:6px}
+.nasadesc{font-size:13px;color:var(--t2);line-height:1.6}
+
+.ld{color:var(--t3);font-size:12px;font-style:italic}
+::-webkit-scrollbar{display:none}
+@media(max-width:400px){.g2{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
 
 <div class="topbar">
-  <div class="tl"><h1 id="greet">Hola Isaac 👋</h1><p id="dstr">cargando...</p></div>
-  <div class="tr"><div class="clk" id="clk">--:--</div><div class="tz">Panamá 🇵🇦</div></div>
+  <div>
+    <h1 id="greeting">Isaac</h1>
+    <p id="dateStr">cargando...</p>
+  </div>
+  <div class="topbar-r">
+    <div class="tclock" id="clock">--:--</div>
+    <div class="tdate">Panamá 🇵🇦</div>
+  </div>
 </div>
 
-<!-- HOME -->
-<div class="page on" id="p-home">
-  <div class="card">
-    <div class="lbl">🔥 Racha diaria</div>
-    <div class="str-wrap">
-      <div><div id="strFire" style="font-size:32px">⭐</div><div class="str-num" id="strNum">1</div></div>
-      <div style="flex:1"><div class="str-days" id="strDays"></div><div style="font-size:12px;color:var(--t3);margin-top:8px" id="strMsg">Primer día</div></div>
+<!-- TICKER -->
+<div style="position:fixed;top:calc(env(safe-area-inset-top)+52px);left:0;right:0;z-index:99;background:rgba(0,0,0,.8);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px)">
+  <div class="ticker">
+    <div class="tscroll" id="tscroll">
+      <div class="ti"><span class="tsym">VOO</span><span class="tprice" id="t1p">-</span><span class="tch" id="t1c">-</span></div>
+      <span style="color:rgba(255,255,255,.2);font-size:8px;padding:0 4px">·</span>
+      <div class="ti"><span class="tsym">QQQ</span><span class="tprice" id="t2p">-</span><span class="tch" id="t2c">-</span></div>
+      <span style="color:rgba(255,255,255,.2);font-size:8px;padding:0 4px">·</span>
+      <div class="ti"><span class="tsym">SCHD</span><span class="tprice" id="t3p">-</span><span class="tch" id="t3c">-</span></div>
+      <span style="color:rgba(255,255,255,.2);font-size:8px;padding:0 4px">·</span>
+      <div class="ti"><span class="tsym">BTC</span><span class="tprice" id="t4p">-</span><span class="tch" id="t4c">-</span></div>
+      <span style="color:rgba(255,255,255,.2);font-size:8px;padding:0 4px">·</span>
+      <div class="ti"><span class="tsym">ETH</span><span class="tprice" id="t5p">-</span><span class="tch" id="t5c">-</span></div>
+      <span style="color:rgba(255,255,255,.2);font-size:8px;padding:0 4px">·</span>
+      <div class="ti"><span class="tsym">VOO</span><span class="tprice" id="t6p">-</span><span class="tch" id="t6c">-</span></div>
+      <span style="color:rgba(255,255,255,.2);font-size:8px;padding:0 4px">·</span>
+      <div class="ti"><span class="tsym">QQQ</span><span class="tprice" id="t7p">-</span><span class="tch" id="t7c">-</span></div>
+      <span style="color:rgba(255,255,255,.2);font-size:8px;padding:0 4px">·</span>
+      <div class="ti"><span class="tsym">SCHD</span><span class="tprice" id="t8p">-</span><span class="tch" id="t8c">-</span></div>
+      <span style="color:rgba(255,255,255,.2);font-size:8px;padding:0 4px">·</span>
+      <div class="ti"><span class="tsym">BTC</span><span class="tprice" id="t9p">-</span><span class="tch" id="t9c">-</span></div>
+      <span style="color:rgba(255,255,255,.2);font-size:8px;padding:0 4px">·</span>
+      <div class="ti"><span class="tsym">ETH</span><span class="tprice" id="t10p">-</span><span class="tch" id="t10c">-</span></div>
     </div>
   </div>
+</div>
 
-  <div class="card">
-    <div class="lbl">⏳ Cuenta regresiva</div>
-    <div style="font-size:13px;color:var(--t2);margin-bottom:2px" id="evName">cargando...</div>
-    <div class="cdg">
-      <div class="cdc"><div class="cdn" id="cd-d">--</div><div class="cdl">Días</div></div>
-      <div class="cdc"><div class="cdn" id="cd-h">--</div><div class="cdl">Horas</div></div>
-      <div class="cdc"><div class="cdn" id="cd-m">--</div><div class="cdl">Min</div></div>
-      <div class="cdc"><div class="cdn" id="cd-s">--</div><div class="cdl">Seg</div></div>
+<!-- ===== PAGE: HOME ===== -->
+<div class="page on" id="pg-home" style="padding-top:calc(env(safe-area-inset-top)+100px)">
+
+  <div class="g2">
+    <div class="card">
+      <div class="lbl">🔥 Racha diaria</div>
+      <div class="snum" id="snum">1</div>
+      <div class="sub" id="smsg">¡Día 1!</div>
+      <div class="sbar" id="sbar"></div>
+    </div>
+    <div class="card">
+      <div class="lbl">⏳ Countdown</div>
+      <div style="font-size:11px;color:var(--t2);margin-bottom:8px" id="cdname">-</div>
+      <div class="cdg">
+        <div class="cdc"><div class="cdn" id="cdd">--</div><div class="cdl">Días</div></div>
+        <div class="cdc"><div class="cdn" id="cdh">--</div><div class="cdl">Hrs</div></div>
+        <div class="cdc"><div class="cdn" id="cdm">--</div><div class="cdl">Min</div></div>
+        <div class="cdc"><div class="cdn" id="cds">--</div><div class="cdl">Seg</div></div>
+      </div>
     </div>
   </div>
 
   <div class="card">
     <div class="lbl">🌤️ Clima — Panamá City</div>
-    <div class="wx-hero">
-      <div class="wx-ico" id="wxIco">⏳</div>
-      <div><div class="wx-temp" id="wxT">--°</div><div class="wx-desc" id="wxD">cargando...</div><div class="wx-feels" id="wxF"></div></div>
+    <div class="wx">
+      <div class="wxicon" id="wxicon">⏳</div>
+      <div>
+        <div class="wxt" id="wxt">--°</div>
+        <div class="wxd" id="wxd">cargando...</div>
+        <div class="wxf" id="wxf"></div>
+      </div>
     </div>
-    <div class="wx-cells" id="wxC"></div>
+    <div class="wxg" id="wxg"></div>
   </div>
 
   <div class="card">
-    <div class="lbl">🔭 Cosmos — NASA APOD</div>
-    <img id="nasaImg" class="nimg" style="display:none" alt="NASA">
-    <div class="ntit" id="nasaT"><span class="ld">Cargando imagen del universo...</span></div>
-    <div class="ndesc" id="nasaD"></div>
+    <div class="lbl">🔭 NASA — Foto del cosmos</div>
+    <img class="nasaimg" id="nasaimg" alt="NASA">
+    <div class="nasatitle" id="nasatitle"><span class="ld">Cargando universo...</span></div>
+    <div class="nasadesc" id="nasadesc"></div>
   </div>
 
   <div class="card">
     <div class="lbl">🇵🇦 Panamá hoy</div>
-    <div id="newsPan"><div class="ld">Cargando noticias...</div></div>
+    <div id="newspan"><div class="ld">Cargando noticias...</div></div>
   </div>
+
 </div>
 
-<!-- LEARN -->
-<div class="page" id="p-learn">
-  <div class="card">
-    <div class="lbl">🧩 Quiz del día</div>
-    <div id="quizBox"><div class="ld">Cargando...</div></div>
-    <div style="font-size:11px;color:var(--t3);margin-top:8px" id="quizSc"></div>
+<!-- ===== PAGE: INVEST ===== -->
+<div class="page" id="pg-invest" style="padding-top:calc(env(safe-area-inset-top)+100px)">
+
+  <div class="aib">
+    <div class="aibadge">Análisis automático</div>
+    <div class="aitx" id="aitx">Cargando análisis del mercado...</div>
+    <div class="aiact" id="aiact">Obteniendo recomendación...</div>
+  </div>
+
+  <div class="g2">
+    <div class="card">
+      <div class="lbl">VOO — S&P 500</div>
+      <div class="bignum" id="mv1">---</div>
+      <div id="mc1" class="sub">cargando</div>
+    </div>
+    <div class="card">
+      <div class="lbl">QQQ — NASDAQ</div>
+      <div class="bignum" id="mv2">---</div>
+      <div id="mc2" class="sub">cargando</div>
+    </div>
+    <div class="card">
+      <div class="lbl">SCHD — Dividendos</div>
+      <div class="bignum" id="mv3">---</div>
+      <div id="mc3" class="sub">cargando</div>
+    </div>
+    <div class="card">
+      <div class="lbl">VIX — Volatilidad</div>
+      <div class="bignum" id="mv4">---</div>
+      <div id="mc4" class="sub">cargando</div>
+    </div>
   </div>
 
   <div class="card">
-    <div class="lbl">🔤 Palabra del día — Inglés</div>
-    <div id="wordBox"></div>
+    <div class="lbl">Tus ETFs — señales</div>
+    <div id="etflist"><div class="ld">Cargando precios...</div></div>
   </div>
 
   <div class="card">
-    <div class="lbl">📜 Hoy en la historia</div>
-    <div id="histBox"></div>
-  </div>
-
-  <div class="card">
-    <div class="lbl">💡 Concepto financiero del día</div>
-    <div id="tipBox"></div>
-  </div>
-
-  <div class="card">
-    <div class="lbl">🧠 Dato curioso</div>
-    <div style="font-size:15px;font-style:italic;line-height:1.7;color:var(--t2)" id="factBox"><span class="ld">Cargando...</span></div>
-  </div>
-</div>
-
-<!-- MARKETS -->
-<div class="page" id="p-market">
-  <div class="card">
-    <div class="lbl">₿ Crypto — en vivo</div>
-    <div id="cryptoBox"><div class="ld">Cargando...</div></div>
+    <div class="lbl">₿ Crypto en vivo</div>
+    <div id="cryptolist"><div class="ld">Cargando...</div></div>
   </div>
 
   <div class="card">
     <div class="lbl">💱 Tipos de cambio</div>
-    <div class="fxg" id="fxBox"><div class="ld">Cargando...</div></div>
+    <div class="fxg" id="forexdata"><div class="ld">Cargando...</div></div>
+  </div>
+
+  <div class="card">
+    <div class="lbl">📈 Proyección de crecimiento</div>
+    <div class="sr"><label>Capital inicial</label><input type="range" min="50" max="1000" step="50" value="200" id="sl1"><span class="sv" id="sv1">$200</span></div>
+    <div class="sr"><label>Aporte mensual</label><input type="range" min="0" max="300" step="10" value="50" id="sl2"><span class="sv" id="sv2">$50</span></div>
+    <div class="sr"><label>Retorno anual</label><input type="range" min="5" max="15" step="1" value="9" id="sl3"><span class="sv" id="sv3">9%</span></div>
+    <div class="g2" style="margin-top:10px">
+      <div><div style="font-size:11px;color:var(--t3)">1 año</div><div style="font-size:18px;font-weight:700" id="p1">-</div><div style="font-size:11px;color:var(--gr)" id="g1">-</div></div>
+      <div><div style="font-size:11px;color:var(--t3)">3 años</div><div style="font-size:18px;font-weight:700" id="p3">-</div><div style="font-size:11px;color:var(--gr)" id="g3">-</div></div>
+      <div><div style="font-size:11px;color:var(--t3)">5 años</div><div style="font-size:18px;font-weight:700" id="p5">-</div><div style="font-size:11px;color:var(--gr)" id="g5">-</div></div>
+      <div><div style="font-size:11px;color:var(--t3)">10 años</div><div style="font-size:18px;font-weight:700" id="p10">-</div><div style="font-size:11px;color:var(--gr)" id="g10">-</div></div>
+    </div>
+    <div class="cwrap"><canvas id="projchart"></canvas></div>
   </div>
 
   <div class="card">
     <div class="lbl">💨 Calidad del aire — Panamá</div>
-    <div style="display:flex;align-items:baseline;gap:8px"><div class="bnum" id="aqiN">--</div><div style="font-size:13px;color:var(--t2)" id="aqiL">AQI</div></div>
-    <div class="abar"><div class="an" id="aqiA" style="left:10%"></div></div>
-    <div style="display:flex;justify-content:space-between;font-size:9px;color:var(--t3)"><span>Bueno</span><span>Moderado</span><span>Dañino</span></div>
-    <div style="font-size:12px;color:var(--t2);margin-top:8px" id="aqiT"></div>
+    <div style="display:flex;align-items:baseline;gap:8px">
+      <div class="bignum" id="aqiv">--</div>
+      <div class="sub" id="aqil" style="margin-top:0">AQI</div>
+    </div>
+    <div class="aqibar"><div class="aqin" id="aqin" style="left:10%"></div></div>
+    <div style="display:flex;justify-content:space-between;font-size:9px;color:var(--t3)"><span>Bueno</span><span>Moderado</span><span>Malo</span></div>
+    <div style="font-size:12px;color:var(--t2);margin-top:8px" id="aqitip"></div>
   </div>
 
   <div class="card">
-    <div class="lbl">🌍 Noticias globales</div>
-    <div id="newsGlob"><div class="ld">Cargando...</div></div>
+    <div class="lbl">📋 Tu plan</div>
+    <div class="row"><span class="rl">✅ Cuenta eToro</span><span class="rv" style="color:var(--gr)">Creada</span></div>
+    <div class="row"><span class="rl">⏳ Aprobación</span><span class="rv" style="color:var(--gd)">Lunes/Martes</span></div>
+    <div class="row"><span class="rl">💳 Depositar $200</span><span class="rv" style="color:var(--t3)">Pendiente</span></div>
+    <div class="row"><span class="rl">📊 Comprar VOO+SCHD</span><span class="rv" style="color:var(--t3)">Pendiente</span></div>
+    <div class="row"><span class="rl">📅 $50 cada mes</span><span class="rv" style="color:var(--t3)">Mensual</span></div>
   </div>
+
 </div>
 
-<!-- FUN -->
-<div class="page" id="p-fun">
+<!-- ===== PAGE: LEARN ===== -->
+<div class="page" id="pg-learn" style="padding-top:calc(env(safe-area-inset-top)+100px)">
+
+  <div class="card">
+    <div class="lbl">🧩 Quiz del día</div>
+    <div id="quizbox"><div class="ld">Cargando...</div></div>
+    <div style="font-size:11px;color:var(--t3);margin-top:8px" id="quizscore"></div>
+  </div>
+
+  <div class="card">
+    <div class="lbl">🔤 Palabra del día — inglés</div>
+    <div id="wordbox"><div class="ld">Cargando...</div></div>
+  </div>
+
+  <div class="card">
+    <div class="lbl">📜 Hoy en la historia</div>
+    <div id="histbox"><div class="ld">Cargando...</div></div>
+  </div>
+
+  <div class="card">
+    <div class="lbl">💡 Concepto financiero del día</div>
+    <div id="tipbox"><div class="ld">Cargando...</div></div>
+  </div>
+
+  <div class="card">
+    <div class="lbl">🧠 Dato curioso</div>
+    <div style="font-size:14px;color:var(--t2);line-height:1.7;font-style:italic" id="factbox"><span class="ld">Cargando...</span></div>
+  </div>
+
+</div>
+
+<!-- ===== PAGE: MORE ===== -->
+<div class="page" id="pg-more" style="padding-top:calc(env(safe-area-inset-top)+100px)">
+
   <div class="card">
     <div class="lbl">♉ Tauro — hoy</div>
-    <div id="horoBox"></div>
+    <div id="horobox"><div class="ld">Cargando...</div></div>
   </div>
 
   <div class="card">
     <div class="lbl">🎬 Película del día</div>
-    <div id="movieBox"><div class="ld">Cargando...</div></div>
+    <div id="moviebox"><div class="ld">Cargando...</div></div>
+  </div>
+
+  <div class="card">
+    <div class="lbl">🌍 Noticias globales</div>
+    <div id="newsglobal"><div class="ld">Cargando...</div></div>
   </div>
 
   <div class="card">
     <div class="lbl">💬 Frase del día</div>
-    <div style="font-size:16px;font-style:italic;line-height:1.65;color:var(--t1)" id="quoteT"><span class="ld">Cargando...</span></div>
-    <div style="font-size:12px;color:var(--t3);margin-top:10px" id="quoteA"></div>
+    <div style="font-size:16px;font-style:italic;line-height:1.65" id="quotetx"><span class="ld">Cargando...</span></div>
+    <div style="font-size:12px;color:var(--t3);margin-top:10px" id="quoteauth"></div>
   </div>
+
 </div>
 
+<!-- NAV -->
 <nav class="nav">
-  <button class="nb on" onclick="go('home',this)"><span class="ni">🏠</span><span class="nl">Inicio</span></button>
-  <button class="nb" onclick="go('learn',this)"><span class="ni">📚</span><span class="nl">Aprender</span></button>
-  <button class="nb" onclick="go('market',this)"><span class="ni">📈</span><span class="nl">Mercados</span></button>
-  <button class="nb" onclick="go('fun',this)"><span class="ni">✨</span><span class="nl">Más</span></button>
+  <button class="nb on" onclick="nav('home',this)"><span class="i">🏠</span><span class="l">Inicio</span></button>
+  <button class="nb" onclick="nav('invest',this)"><span class="i">📈</span><span class="l">Invertir</span></button>
+  <button class="nb" onclick="nav('learn',this)"><span class="i">📚</span><span class="l">Aprender</span></button>
+  <button class="nb" onclick="nav('more',this)"><span class="i">✨</span><span class="l">Más</span></button>
 </nav>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
 <script>
 const TMDB='8ad8e063f18ad101bc4e1182deb40803';
 const NEWS_KEY='pub_86a7504a1f8a4ac7aeec026143ca84f3';
 
-// Nav
-function go(id,btn){
+// NAV
+function nav(id,btn){
   document.querySelectorAll('.page').forEach(p=>p.classList.remove('on'));
   document.querySelectorAll('.nb').forEach(b=>b.classList.remove('on'));
-  document.getElementById('p-'+id).classList.add('on');
+  document.getElementById('pg-'+id).classList.add('on');
   btn.classList.add('on');
   window.scrollTo(0,0);
 }
 
-// Clock
-function pty(){return new Date(new Date().toLocaleString('en-US',{timeZone:'America/Panama'}));}
+// CLOCK
+function pty(){return new Date(new Date().toLocaleString('en-US',{timeZone:'America/Panama'}))}
 function tick(){
   const n=pty();
+  document.getElementById('clock').textContent=n.toLocaleTimeString('en-US',{hour:'2-digit',minute:'2-digit',hour12:true});
   const h=n.getHours();
-  document.getElementById('clk').textContent=n.toLocaleTimeString('en-US',{hour:'2-digit',minute:'2-digit',hour12:true});
-  document.getElementById('greet').textContent=(h<12?'Buenos días':h<19?'Buenas tardes':'Buenas noches')+', Isaac 👋';
-  const ds=['Domingo','Lunes','Martes','Miércoles','Jueves','Viernes','Sábado'];
-  const ms=['enero','febrero','marzo','abril','mayo','junio','julio','agosto','septiembre','octubre','noviembre','diciembre'];
-  document.getElementById('dstr').textContent=ds[n.getDay()]+', '+n.getDate()+' de '+ms[n.getMonth()]+' '+n.getFullYear();
-  cd(n);
+  document.getElementById('greeting').textContent=(h<12?'Buenos días':h<19?'Buenas tardes':'Buenas noches')+', Isaac 👋';
+  const dias=['Domingo','Lunes','Martes','Miércoles','Jueves','Viernes','Sábado'];
+  const meses=['enero','febrero','marzo','abril','mayo','junio','julio','agosto','septiembre','octubre','noviembre','diciembre'];
+  document.getElementById('dateStr').textContent=dias[n.getDay()]+', '+n.getDate()+' de '+meses[n.getMonth()];
+  countdown(n);
 }
 setInterval(tick,1000);tick();
 
-// Streak — localStorage
+// STREAK — localStorage
 function streak(){
-  const t=new Date().toDateString();
-  let d=JSON.parse(localStorage.getItem('istr')||'{"n":0,"last":"","h":[]}');
-  if(d.last!==t){
-    const y=new Date(Date.now()-86400000).toDateString();
-    d.n=d.last===y?d.n+1:1;
-    d.last=t;
+  const today=new Date().toDateString();
+  const prev=new Date(Date.now()-86400000).toDateString();
+  let d=JSON.parse(localStorage.getItem('istreak')||'{"n":0,"last":"","h":[]}');
+  if(d.last!==today){
+    if(d.last===prev)d.n++;
+    else d.n=1;
+    d.last=today;
     d.h=[...d.h.slice(-6),1];
-    localStorage.setItem('istr',JSON.stringify(d));
+    localStorage.setItem('istreak',JSON.stringify(d));
   }
-  document.getElementById('strNum').textContent=d.n;
-  document.getElementById('strFire').textContent=d.n>=14?'🏆':d.n>=7?'🔥':d.n>=3?'⚡':'⭐';
-  document.getElementById('strMsg').textContent=d.n>=14?'¡Dos semanas! Increíble 🏆':d.n>=7?'¡Una semana completa! 🔥':d.n>=3?'¡Excelente racha!':'¡Sigue visitando cada día!';
-  const bar=document.getElementById('strDays');bar.innerHTML='';
-  for(let i=0;i<7;i++){const el=document.createElement('div');el.className='sd'+(i<d.h.length?' done':'')+(i===6&&d.h.length?' now':'');bar.appendChild(el);}
+  document.getElementById('snum').textContent=d.n;
+  document.getElementById('smsg').textContent='Día '+d.n+(d.n>=7?' 🏆':d.n>=3?' 🔥':' ⭐');
+  const bar=document.getElementById('sbar');
+  bar.innerHTML='';
+  for(let i=0;i<7;i++){const el=document.createElement('div');el.className='sd'+(i<d.h.length?' ok':'')+(i===6?' now':'');bar.appendChild(el);}
 }
 streak();
 
-// Countdown
-const evs=[
-  {n:'Fin de semana',f:d=>{const n=new Date(d);const diff=(6-n.getDay()+7)%7||7;n.setDate(n.getDate()+diff);n.setHours(0,0,0,0);return n;}},
-  {n:'Fin de mes',f:d=>{return new Date(d.getFullYear(),d.getMonth()+1,1,0,0,0,0);}},
-  {n:'Independencia 3 nov 🇵🇦',f:d=>{let t=new Date(d.getFullYear(),10,3);if(t<=d)t.setFullYear(t.getFullYear()+1);return t;}},
+// COUNTDOWN
+const events=[
+  {n:'Fin de semana',f:d=>{const t=new Date(d);const diff=(6-t.getDay()+7)%7||7;t.setDate(t.getDate()+diff);t.setHours(0,0,0,0);return t;}},
+  {n:'Fin de mes',f:d=>new Date(d.getFullYear(),d.getMonth()+1,1,0,0,0,0)},
+  {n:'Independencia 3 Nov 🇵🇦',f:d=>{let t=new Date(d.getFullYear(),10,3);if(t<=d)t.setFullYear(t.getFullYear()+1);return t;}},
   {n:'Navidad 🎄',f:d=>{let t=new Date(d.getFullYear(),11,25);if(t<=d)t.setFullYear(t.getFullYear()+1);return t;}},
-  {n:'Año Nuevo 🎆',f:d=>{return new Date(d.getFullYear()+1,0,1,0,0,0,0);}},
 ];
-function cd(now){
-  let near=null,nearMs=Infinity,nearN='';
-  evs.forEach(e=>{const t=e.f(now);const ms=t-now;if(ms>0&&ms<nearMs){nearMs=ms;near=t;nearN=e.n;}});
-  if(!near)return;
-  document.getElementById('evName').textContent='Para: '+nearN;
-  const s=Math.floor(nearMs/1000);
-  document.getElementById('cd-d').textContent=Math.floor(s/86400);
-  document.getElementById('cd-h').textContent=String(Math.floor((s%86400)/3600)).padStart(2,'0');
-  document.getElementById('cd-m').textContent=String(Math.floor((s%3600)/60)).padStart(2,'0');
-  document.getElementById('cd-s').textContent=String(s%60).padStart(2,'0');
+function countdown(now){
+  let best=null,bestMs=Infinity,bestName='';
+  events.forEach(e=>{const t=e.f(now);const ms=t-now;if(ms>0&&ms<bestMs){bestMs=ms;best=t;bestName=e.n;}});
+  if(!best)return;
+  document.getElementById('cdname').textContent='Para: '+bestName;
+  const s=Math.floor(bestMs/1000);
+  document.getElementById('cdd').textContent=Math.floor(s/86400);
+  document.getElementById('cdh').textContent=String(Math.floor((s%86400)/3600)).padStart(2,'0');
+  document.getElementById('cdm').textContent=String(Math.floor((s%3600)/60)).padStart(2,'0');
+  document.getElementById('cds').textContent=String(s%60).padStart(2,'0');
 }
 
-// Weather — Open-Meteo (NO CORS, 100% gratis)
-async function wx(){
+// WEATHER — Open-Meteo (100% GRATIS, sin CORS, sin key)
+async function loadWeather(){
   try{
     const r=await fetch('https://api.open-meteo.com/v1/forecast?latitude=8.9936&longitude=-79.5197&current=temperature_2m,apparent_temperature,relative_humidity_2m,weather_code,wind_speed_10m,precipitation,uv_index&timezone=America%2FPanama');
     const d=await r.json();const c=d.current;
-    const ico={0:'☀️',1:'🌤',2:'⛅',3:'☁️',45:'🌫',48:'🌫',51:'🌦',53:'🌦',55:'🌧',61:'🌧',63:'🌧',65:'🌧',80:'🌦',81:'🌧',82:'⛈',95:'⛈',96:'⛈'};
-    const dsc={0:'Despejado',1:'Mayormente despejado',2:'Parcialmente nublado',3:'Nublado',45:'Niebla',48:'Niebla',51:'Llovizna',53:'Llovizna moderada',55:'Llovizna intensa',61:'Lluvia ligera',63:'Lluvia moderada',65:'Lluvia fuerte',80:'Chubascos',81:'Chubascos moderados',82:'Chubascos fuertes',95:'Tormenta',96:'Tormenta con granizo'};
-    document.getElementById('wxIco').textContent=ico[c.weather_code]||'🌡';
-    document.getElementById('wxT').textContent=Math.round(c.temperature_2m)+'°';
-    document.getElementById('wxD').textContent=dsc[c.weather_code]||'Variable';
-    document.getElementById('wxF').textContent='Sensación '+Math.round(c.apparent_temperature)+'°C';
-    document.getElementById('wxC').innerHTML=`
+    const icons={0:'☀️',1:'🌤',2:'⛅',3:'☁️',45:'🌫',48:'🌫',51:'🌦',53:'🌦',55:'🌧',61:'🌧',63:'🌧',65:'🌧',80:'🌦',81:'🌧',82:'⛈',95:'⛈'};
+    const desc={0:'Despejado',1:'Mayormente despejado',2:'Parcialmente nublado',3:'Nublado',45:'Niebla',48:'Niebla',51:'Llovizna',53:'Llovizna moderada',61:'Lluvia ligera',63:'Lluvia moderada',65:'Lluvia fuerte',80:'Chubascos',81:'Chubascos moderados',82:'Chubascos fuertes',95:'Tormenta'};
+    document.getElementById('wxicon').textContent=icons[c.weather_code]||'🌡';
+    document.getElementById('wxt').textContent=Math.round(c.temperature_2m)+'°';
+    document.getElementById('wxd').textContent=desc[c.weather_code]||'Variable';
+    document.getElementById('wxf').textContent='Sensación '+Math.round(c.apparent_temperature)+'°C';
+    document.getElementById('wxg').innerHTML=`
       <div class="wxc"><div class="wxcv">${c.relative_humidity_2m}%</div><div class="wxcl">Humedad</div></div>
-      <div class="wxc"><div class="wxcv">${Math.round(c.wind_speed_10m)} km/h</div><div class="wxcl">Viento</div></div>
-      <div class="wxc"><div class="wxcv">${c.uv_index||'0'}</div><div class="wxcl">Índice UV</div></div>`;
-  }catch(e){document.getElementById('wxT').textContent='--°';}
+      <div class="wxc"><div class="wxcv">${Math.round(c.wind_speed_10m)}<span style="font-size:10px"> km/h</span></div><div class="wxcl">Viento</div></div>
+      <div class="wxc"><div class="wxcv">${c.uv_index??'--'}</div><div class="wxcl">Índice UV</div></div>`;
+  }catch(e){document.getElementById('wxt').textContent='--°';document.getElementById('wxd').textContent='Sin conexión';}
 }
 
-// AQI — Open-Meteo Air Quality (NO CORS)
-async function aqi(){
+// AQI — Open-Meteo Air Quality (100% GRATIS)
+async function loadAQI(){
   try{
     const r=await fetch('https://air-quality-api.open-meteo.com/v1/air-quality?latitude=8.9936&longitude=-79.5197&current=us_aqi,pm2_5&timezone=America%2FPanama');
-    const d=await r.json();const v=Math.round(d.current.us_aqi);
-    let l,c,p,t;
-    if(v<=50){l='Bueno';c='var(--gr)';p=10;t='Calidad excelente. Ideal para actividades al aire libre.';}
-    else if(v<=100){l='Moderado';c='var(--gd)';p=35;t='Calidad aceptable. Personas sensibles pueden sentir leve molestia.';}
-    else if(v<=150){l='No saludable para grupos sensibles';c='var(--or)';p=60;t='Reduce la exposición prolongada al exterior.';}
-    else{l='No saludable';c='var(--rd)';p=82;t='Evita actividades al aire libre prolongadas.';}
-    document.getElementById('aqiN').textContent=v;
-    document.getElementById('aqiN').style.color=c;
-    document.getElementById('aqiL').textContent=l;
-    document.getElementById('aqiA').style.left=p+'%';
-    document.getElementById('aqiT').textContent=t;
+    const d=await r.json();const aqi=Math.round(d.current.us_aqi);
+    let lbl,col,pct,tip;
+    if(aqi<=50){lbl='Bueno 😊';col='var(--gr)';pct=10;tip='Excelente calidad del aire. Perfecto para salir.';}
+    else if(aqi<=100){lbl='Moderado 😐';col='var(--gd)';pct=38;tip='Calidad aceptable. Personas sensibles, precaución.';}
+    else{lbl='No saludable ⚠️';col='var(--rd)';pct=68;tip='Reduce actividades al aire libre prolongadas.';}
+    document.getElementById('aqiv').textContent=aqi;
+    document.getElementById('aqiv').style.color=col;
+    document.getElementById('aqil').textContent=lbl;
+    document.getElementById('aqin').style.left=pct+'%';
+    document.getElementById('aqitip').textContent=tip;
   }catch(e){}
 }
 
-// Forex — Frankfurter (NO CORS)
-async function forex(){
-  try{
-    const r=await fetch('https://api.frankfurter.app/latest?from=USD&to=EUR,GBP,JPY,MXN,COP,CAD');
-    const d=await r.json();
-    const ps=[['EUR','€'],['GBP','£'],['JPY','¥'],['MXN','MX$'],['COP','COP$'],['CAD','C$']];
-    document.getElementById('fxBox').innerHTML=ps.map(([k,s])=>`<div class="fxi"><div class="fxp">USD → ${k}</div><div class="fxv">${s}${d.rates[k]?.toFixed(k==='JPY'||k==='COP'?0:2)||'--'}</div></div>`).join('');
-  }catch(e){document.getElementById('fxBox').innerHTML='<div class="ld">Sin conexión</div>';}
-}
-
-// Crypto — CoinGecko (NO CORS en mayoría de casos)
-async function crypto(){
-  try{
-    const r=await fetch('https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,ethereum,solana,ripple,cardano&vs_currencies=usd&include_24hr_change=true');
-    const d=await r.json();
-    const cs=[{id:'bitcoin',sym:'BTC',ico:'₿',bg:'#f7931a'},{id:'ethereum',sym:'ETH',ico:'Ξ',bg:'#627eea'},{id:'solana',sym:'SOL',ico:'◎',bg:'#9945ff'},{id:'ripple',sym:'XRP',ico:'✕',bg:'#346aa9'},{id:'cardano',sym:'ADA',ico:'₳',bg:'#0033ad'}];
-    document.getElementById('cryptoBox').innerHTML=cs.map(c=>{
-      const p=d[c.id];if(!p)return'';
-      const ch=(p.usd_24h_change||0).toFixed(2);const up=parseFloat(ch)>=0;
-      return`<div class="cr"><div class="crl"><div class="crico" style="background:${c.bg}22;color:${c.bg}">${c.ico}</div><div><div class="crn">${c.sym}</div><div class="crs">${c.id.charAt(0).toUpperCase()+c.id.slice(1)}</div></div></div><div><div class="crp">$${p.usd.toLocaleString('en-US',{maximumFractionDigits:c.id==='bitcoin'?0:3})}</div><div class="crch" style="color:${up?'var(--gr)':'var(--rd)'}">${up?'↑ +':'↓ '}${Math.abs(ch)}%</div></div></div>`;
-    }).join('');
-  }catch(e){document.getElementById('cryptoBox').innerHTML='<div class="ld">Sin datos momentáneamente</div>';}
-}
-
-// NASA — DEMO_KEY (30 calls/hora, suficiente)
-async function nasa(){
+// NASA APOD (key DEMO_KEY = 30 calls/hora gratis)
+async function loadNASA(){
   try{
     const r=await fetch('https://api.nasa.gov/planetary/apod?api_key=DEMO_KEY');
     const d=await r.json();
-    if(d.media_type==='image'){const img=document.getElementById('nasaImg');img.src=d.url;img.style.display='block';}
-    document.getElementById('nasaT').textContent=d.title||'';
-    document.getElementById('nasaD').textContent=(d.explanation||'').slice(0,180)+'...';
-  }catch(e){document.getElementById('nasaT').textContent='Sin conexión con NASA';}
+    if(d.media_type==='image'){const img=document.getElementById('nasaimg');img.src=d.hdurl||d.url;img.style.display='block';}
+    document.getElementById('nasatitle').textContent=d.title||'';
+    document.getElementById('nasadesc').textContent=(d.explanation||'').slice(0,200)+'...';
+  }catch(e){document.getElementById('nasatitle').textContent='Imagen no disponible hoy';}
 }
 
-// News Panama via RSS2JSON — funciona sin CORS
-async function newsPan(){
+// ETFs — via Netlify Function (backend)
+async function loadETFs(){
   try{
-    const feed='https://www.tvn-2.com/rss/portada.xml';
-    const r=await fetch(`https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(feed)}&count=6`);
+    const r=await fetch('/.netlify/functions/market');
     const d=await r.json();
-    if(d.items?.length){
-      document.getElementById('newsPan').innerHTML=d.items.map(i=>`
-        <a class="na" href="${i.link}" target="_blank">
-          <div class="ni-news"><div class="nt">${i.title}</div><div class="ns">TVN · ${ago(i.pubDate)}</div></div>
-        </a>`).join('');
-      return;
+    if(!d.etfs)return;
+    const descs={VOO:['S&P 500','500 mejores EE.UU.'],QQQ:['NASDAQ 100','Big Tech'],SCHD:['Dividendos','Pago trimestral'],VYM:['Alto dividendo','Bajo riesgo'],GLD:['Oro','Refugio seguro']};
+    const sigs={VOO:'buy',SCHD:'buy',QQQ:'watch',VYM:'watch',GLD:'hold'};
+    const tids=[['t1p','t1c'],['t2p','t2c'],['t3p','t3c']];
+    const mids=[['mv1','mc1'],['mv2','mc2'],['mv3','mc3'],['mv4','mc4']];
+    let html='';
+    d.etfs.forEach((e,i)=>{
+      const up=e.change>=0;
+      const cs=(up?'+':'')+e.change.toFixed(2)+'%';
+      if(tids[i]){
+        ['p','c'].forEach((_,j)=>{
+          [tids[i][j],tids[i+5]?.[j]].forEach(id=>{
+            if(!id)return;
+            const el=document.getElementById(id);
+            if(!el)return;
+            el.textContent=j===0?'$'+e.price.toFixed(2):cs;
+            if(j===1)el.className='tch '+(up?'up':'dn');
+          });
+        });
+      }
+      if(mids[i]){
+        document.getElementById(mids[i][0]).textContent='$'+e.price.toFixed(2);
+        const mc=document.getElementById(mids[i][1]);
+        mc.textContent=(up?'↑ +':'↓ ')+Math.abs(e.change).toFixed(2)+'%';
+        mc.style.color=up?'var(--gr)':'var(--rd)';
+      }
+      const dd=descs[e.symbol]||[e.symbol,''];
+      const s=sigs[e.symbol]||'hold';
+      const sc={buy:'sbuy',watch:'swatch',hold:'shold'};
+      const st={buy:'Comprar',watch:'Observar',hold:'Mantener'};
+      html+=`<div class="etfrow"><div class="etfl"><div class="etfico">${e.symbol.slice(0,4)}</div><div><div class="etfname">${dd[0]}</div><div class="etfdesc">${dd[1]}</div></div></div><div class="etfr"><div class="etfp">$${e.price.toFixed(2)}</div><div class="etfch" style="color:${up?'var(--gr)':'var(--rd)'}">${up?'↑ +':'↓ '}${Math.abs(e.change).toFixed(2)}%</div><div class="sig ${sc[s]}">${st[s]}</div></div></div>`;
+    });
+    document.getElementById('etflist').innerHTML=html;
+    // AI analysis
+    const voo=d.etfs.find(e=>e.symbol==='VOO');
+    if(voo){
+      const c=voo.change;let tx,ac;
+      if(c<=-3){tx=`VOO cayó ${Math.abs(c).toFixed(2)}% hoy. Para inversores de largo plazo, esta es una oportunidad de compra a precio de descuento.`;ac='Compra $50 extra de VOO — precio de descuento real';}
+      else if(c<=-1){tx=`Corrección moderada (${c.toFixed(2)}%). Los fundamentos siguen sólidos. Este tipo de movimiento es completamente normal.`;ac='Buen momento para tu aporte mensual de $50 en VOO';}
+      else if(c>=2){tx=`Día positivo (+${c.toFixed(2)}%). Tu estrategia ETF está funcionando. Mantén el plan.`;ac='Sin cambios — mantén tu $50 mensual';}
+      else{tx=`Mercado estable hoy (${c>=0?'+':''}${c.toFixed(2)}%). Momento ideal para construir tu portafolio.`;ac='Sin cambios necesarios — agrega $50 el 1ro del mes';}
+      document.getElementById('aitx').textContent=tx;
+      document.getElementById('aiact').textContent=ac;
+    }
+  }catch(e){
+    document.getElementById('etflist').innerHTML='<div class="ld">Error cargando ETFs. Verifica conexión.</div>';
+  }
+}
+
+// CRYPTO — CoinGecko (gratis, funciona desde front)
+async function loadCrypto(){
+  try{
+    const r=await fetch('https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,ethereum,solana,ripple,cardano&vs_currencies=usd&include_24hr_change=true');
+    const d=await r.json();
+    const coins=[{id:'bitcoin',sym:'BTC',ico:'₿',c:'#f7931a'},{id:'ethereum',sym:'ETH',ico:'Ξ',c:'#627eea'},{id:'solana',sym:'SOL',ico:'◎',c:'#9945ff'},{id:'ripple',sym:'XRP',ico:'✕',c:'#346aa9'},{id:'cardano',sym:'ADA',ico:'₳',c:'#0033ad'}];
+    // update ticker crypto
+    const btc=d.bitcoin;const eth=d.ethereum;
+    if(btc){['t4p','t9p'].forEach(id=>{const el=document.getElementById(id);if(el)el.textContent='$'+btc.usd.toLocaleString('en-US',{maximumFractionDigits:0})});['t4c','t9c'].forEach(id=>{const el=document.getElementById(id);if(el){el.textContent=(btc.usd_24h_change>=0?'+':'')+btc.usd_24h_change.toFixed(1)+'%';el.className='tch '+(btc.usd_24h_change>=0?'up':'dn');}});}
+    if(eth){['t5p','t10p'].forEach(id=>{const el=document.getElementById(id);if(el)el.textContent='$'+eth.usd.toLocaleString('en-US',{maximumFractionDigits:0})});['t5c','t10c'].forEach(id=>{const el=document.getElementById(id);if(el){el.textContent=(eth.usd_24h_change>=0?'+':'')+eth.usd_24h_change.toFixed(1)+'%';el.className='tch '+(eth.usd_24h_change>=0?'up':'dn');}});}
+    document.getElementById('cryptolist').innerHTML=coins.map(c=>{
+      const p=d[c.id];if(!p)return'';
+      const ch=(p.usd_24h_change||0).toFixed(2);const up=parseFloat(ch)>=0;
+      return`<div class="cr"><div class="crl"><div class="crico" style="background:${c.c}22;color:${c.c}">${c.ico}</div><div><div class="crname">${c.sym}</div><div class="crsym">${c.id.charAt(0).toUpperCase()+c.id.slice(1)}</div></div></div><div style="text-align:right"><div class="crp">$${p.usd.toLocaleString('en-US',{maximumFractionDigits:c.id==='bitcoin'?0:2})}</div><div class="crch" style="color:${up?'var(--gr)':'var(--rd)'}">${up?'↑ +':'↓ '}${Math.abs(ch)}%</div></div></div>`;
+    }).join('');
+  }catch(e){document.getElementById('cryptolist').innerHTML='<div class="ld">Sin datos crypto</div>';}
+}
+
+// FOREX — Frankfurter (100% gratis, sin CORS)
+async function loadForex(){
+  try{
+    const r=await fetch('https://api.frankfurter.app/latest?from=USD&to=EUR,GBP,JPY,MXN,COP,CAD');
+    const d=await r.json();
+    const pairs=[['EUR','€'],['GBP','£'],['JPY','¥'],['MXN','MX$'],['COP','COP$'],['CAD','C$']];
+    document.getElementById('forexdata').innerHTML=pairs.map(([k,s])=>`<div class="fxi"><div class="fxp">USD → ${k}</div><div class="fxv">${s}${d.rates[k]?.toFixed(k==='JPY'||k==='COP'?0:2)||'--'}</div></div>`).join('');
+  }catch(e){document.getElementById('forexdata').innerHTML='<div class="ld">Sin conexión</div>';}
+}
+
+// NEWS — NewsData (200 calls/día gratis)
+async function loadNews(){
+  try{
+    const rp=await fetch(`https://newsdata.io/api/1/news?apikey=${NEWS_KEY}&country=pa&language=es&size=5`);
+    const dp=await rp.json();
+    if(dp.results?.length){
+      document.getElementById('newspan').innerHTML=dp.results.map(i=>`<a class="na" href="${i.link}" target="_blank"><div class="ni"><div class="nt">${i.title}</div><div class="ns">${i.source_name||'Panamá'} · ${ago(i.pubDate)}</div></div></a>`).join('');
+    }else{document.getElementById('newspan').innerHTML='<div class="ld">Sin noticias disponibles ahora</div>';}
+  }catch(e){document.getElementById('newspan').innerHTML='<div class="ld">Sin conexión a noticias</div>';}
+  try{
+    const rg=await fetch(`https://newsdata.io/api/1/news?apikey=${NEWS_KEY}&language=en&category=top&size=5`);
+    const dg=await rg.json();
+    if(dg.results?.length){
+      document.getElementById('newsglobal').innerHTML=dg.results.map(i=>`<a class="na" href="${i.link}" target="_blank"><div class="ni"><div class="nt">${i.title}</div><div class="ns">${i.source_name||'Global'} · ${ago(i.pubDate)}</div></div></a>`).join('');
     }
   }catch(e){}
-  // Fallback: La Estrella de Panama RSS
-  try{
-    const r2=await fetch(`https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent('https://www.laestrella.com.pa/rss.xml')}&count=6`);
-    const d2=await r2.json();
-    if(d2.items?.length){
-      document.getElementById('newsPan').innerHTML=d2.items.map(i=>`<a class="na" href="${i.link}" target="_blank"><div class="ni-news"><div class="nt">${i.title}</div><div class="ns">La Estrella · ${ago(i.pubDate)}</div></div></a>`).join('');
-    }
-  }catch(e){document.getElementById('newsPan').innerHTML='<div class="ld">Noticias no disponibles</div>';}
 }
 
-// News Global via RSS
-async function newsGlob(){
-  try{
-    const r=await fetch(`https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent('https://feeds.bbcnews.com/rss/world/latin_america/rss.xml')}&count=6`);
-    const d=await r.json();
-    if(d.items?.length){
-      document.getElementById('newsGlob').innerHTML=d.items.map(i=>`<a class="na" href="${i.link}" target="_blank"><div class="ni-news"><div class="nt">${i.title}</div><div class="ns">BBC · ${ago(i.pubDate)}</div></div></a>`).join('');
-      return;
-    }
-  }catch(e){}
-  try{
-    const r2=await fetch(`https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent('https://rss.nytimes.com/services/xml/rss/nyt/World.xml')}&count=6`);
-    const d2=await r2.json();
-    if(d2.items?.length){
-      document.getElementById('newsGlob').innerHTML=d2.items.map(i=>`<a class="na" href="${i.link}" target="_blank"><div class="ni-news"><div class="nt">${i.title}</div><div class="ns">NYT · ${ago(i.pubDate)}</div></div></a>`).join('');
-    }
-  }catch(e){document.getElementById('newsGlob').innerHTML='<div class="ld">Noticias no disponibles</div>';}
-}
-
-// Movie
-async function movie(){
+// MOVIE — TMDB
+async function loadMovie(){
   try{
     const r=await fetch(`https://api.themoviedb.org/3/trending/movie/day?api_key=${TMDB}&language=es-ES`);
     const d=await r.json();
     const n=pty();const doy=Math.floor((n-new Date(n.getFullYear(),0,0))/86400000);
     const m=d.results[doy%d.results.length];
-    const poster=m.poster_path?`<img src="https://image.tmdb.org/t/p/w200${m.poster_path}" alt="poster" loading="lazy">`:'🎬';
-    document.getElementById('movieBox').innerHTML=`<div class="mv"><div class="mposter">${poster}</div><div style="flex:1;min-width:0"><div class="mtit">${m.title}</div><div style="display:flex;gap:5px;flex-wrap:wrap;margin-bottom:8px"><span class="pill pa">⭐ ${m.vote_average.toFixed(1)}</span><span class="pill pb">${m.release_date?.slice(0,4)||''}</span></div><div class="mdesc">${(m.overview||'Sin descripción.').slice(0,140)}...</div></div></div>`;
-  }catch(e){document.getElementById('movieBox').innerHTML='<div class="ld">Sin datos</div>';}
+    document.getElementById('moviebox').innerHTML=`<div class="mv"><div class="mp">${m.poster_path?`<img src="https://image.tmdb.org/t/p/w200${m.poster_path}" alt="poster" loading="lazy">`:'🎬'}</div><div style="flex:1;min-width:0"><div class="mt">${m.title}</div><div style="display:flex;gap:5px;margin-bottom:8px"><span class="pill pa">⭐ ${m.vote_average.toFixed(1)}</span><span class="pill pb">${m.release_date?.slice(0,4)||''}</span></div><div class="md">${(m.overview||'Sin descripción.').slice(0,150)}...</div></div></div>`;
+  }catch(e){document.getElementById('moviebox').innerHTML='<div class="ld">Sin datos</div>';}
 }
 
-// ---- All local data (ALWAYS works, no API needed) ----
-const DOY=Math.floor((pty()-new Date(pty().getFullYear(),0,0))/86400000);
-
-// Horoscope — local rotativo (aztro está muerto, esto es más confiable)
-const horoData=[
-  {stars:'⭐⭐⭐⭐⭐',desc:'Venus ilumina tus finanzas hoy. Es un día excelente para revisar tus inversiones y tomar decisiones con claridad. Tu intuición financiera está en su punto más alto.',color:'Verde esmeralda',num:'8',mood:'Optimista',compat:'Virgo'},
-  {stars:'⭐⭐⭐⭐',desc:'La persistencia que caracteriza a Tauro te llevará lejos hoy. Un ciclo de prosperidad se está abriendo. Mantén tus inversiones a largo plazo y no te dejes llevar por el pánico del mercado.',color:'Azul cielo',num:'3',mood:'Tranquilo',compat:'Capricornio'},
-  {stars:'⭐⭐⭐⭐⭐',desc:'Mercurio activa tu mente analítica. Es un día perfecto para estudiar nuevos conceptos financieros y ampliar tu conocimiento. Las decisiones que tomes hoy tendrán impacto duradero.',color:'Dorado',num:'7',mood:'Concentrado',compat:'Escorpio'},
-  {stars:'⭐⭐⭐',desc:'La Luna en tu signo te invita a reflexionar antes de actuar. No es el mejor día para grandes movimientos financieros, pero sí para planificar tu estrategia de inversión del próximo mes.',color:'Blanco perla',num:'2',mood:'Reflexivo',compat:'Piscis'},
-  {stars:'⭐⭐⭐⭐',desc:'La energía de Marte impulsa tu ambición. Tu determinación para alcanzar la libertad financiera es admirable. Pequeños pasos consistentes llevan a grandes resultados.',color:'Rojo burdeos',num:'5',mood:'Ambicioso',compat:'Cáncer'},
-  {stars:'⭐⭐⭐⭐⭐',desc:'El Sol favorece a los nacidos bajo Tauro hoy. Tu sentido práctico y tu paciencia son tus mejores aliados. Las inversiones de largo plazo que has iniciado están en el camino correcto.',color:'Amarillo sol',num:'1',mood:'Radiante',compat:'Libra'},
-  {stars:'⭐⭐⭐⭐',desc:'Saturno te recuerda que la disciplina es clave. Mantén tu plan de invertir $50 mensuales sin excepciones. La consistencia es lo que separa a los inversores exitosos de los demás.',color:'Marrón tierra',num:'6',mood:'Disciplinado',compat:'Tauro'},
-];
-function loadHoro(){
-  const h=horoData[DOY%horoData.length];
-  document.getElementById('horoBox').innerHTML=`
-    <div style="font-size:26px;margin-bottom:10px">${h.stars}</div>
-    <div style="font-size:14px;color:var(--t2);line-height:1.7;margin-bottom:14px">${h.desc}</div>
-    <div class="horo-grid">
-      <div class="horo-item"><div class="horo-lbl">Color</div><div class="horo-val">${h.color}</div></div>
-      <div class="horo-item"><div class="horo-lbl">Número</div><div class="horo-val">${h.num}</div></div>
-      <div class="horo-item"><div class="horo-lbl">Humor</div><div class="horo-val">${h.mood}</div></div>
-      <div class="horo-item"><div class="horo-lbl">Compatib.</div><div class="horo-val">${h.compat}</div></div>
-    </div>`;
+// HOROSCOPE — Aztro API (POST, gratis)
+async function loadHoro(){
+  try{
+    const r=await fetch('https://aztro.sameerkumar.website/?sign=taurus&day=today',{method:'POST'});
+    const d=await r.json();
+    document.getElementById('horobox').innerHTML=`
+      <div style="font-size:24px;margin-bottom:10px">⭐⭐⭐⭐</div>
+      <div style="font-size:14px;color:var(--t2);line-height:1.65;margin-bottom:12px">${d.description||'Venus favorece tus decisiones financieras hoy. Confía en tu intuición.'}</div>
+      <div class="g2" style="gap:6px">
+        <div style="background:var(--t4);border-radius:10px;padding:8px 10px"><div style="font-size:9px;color:var(--t3);text-transform:uppercase;letter-spacing:.06em">Color suerte</div><div style="font-size:13px;font-weight:500;margin-top:3px">${d.color||'Verde'}</div></div>
+        <div style="background:var(--t4);border-radius:10px;padding:8px 10px"><div style="font-size:9px;color:var(--t3);text-transform:uppercase;letter-spacing:.06em">Número</div><div style="font-size:13px;font-weight:500;margin-top:3px">${d.lucky_number||'7'}</div></div>
+        <div style="background:var(--t4);border-radius:10px;padding:8px 10px"><div style="font-size:9px;color:var(--t3);text-transform:uppercase;letter-spacing:.06em">Humor</div><div style="font-size:13px;font-weight:500;margin-top:3px">${d.mood||'Positivo'}</div></div>
+        <div style="background:var(--t4);border-radius:10px;padding:8px 10px"><div style="font-size:9px;color:var(--t3);text-transform:uppercase;letter-spacing:.06em">Compatible</div><div style="font-size:13px;font-weight:500;margin-top:3px">${d.compatibility||'Virgo'}</div></div>
+      </div>`;
+  }catch(e){
+    document.getElementById('horobox').innerHTML='<div style="font-size:24px;margin-bottom:10px">⭐⭐⭐⭐</div><div style="font-size:14px;color:var(--t2);line-height:1.65">Día favorable para tomar decisiones financieras. Tu intuición está afilada hoy.</div>';
+  }
 }
 
-// Quiz
+// QUIZ — local content, rotativo por día
 const quizzes=[
-  {q:'¿Qué significa ETF?',opts:['Exchange Traded Fund','Extra Treasury Fund','Equity Transfer Finance','European Trade Fund'],ans:0,exp:'Un ETF cotiza en bolsa como una acción pero diversifica en muchos activos. VOO tiene las 500 mejores empresas de EE.UU.'},
-  {q:'¿Qué es el interés compuesto?',opts:['Interés solo sobre el capital inicial','Interés sobre capital + intereses acumulados','Un tipo de préstamo bancario','Comisión de un broker'],ans:1,exp:'Einstein lo llamó "la octava maravilla". Los intereses se reinvierten y generan más intereses — así $200 se convierten en $11,000.'},
-  {q:'¿Qué es el S&P 500?',opts:['500 bancos más grandes','Índice de las 500 empresas más grandes de EE.UU.','Un tipo de criptomoneda','Un fondo de pensiones'],ans:1,exp:'El S&P 500 incluye Apple, Google, Amazon, Microsoft y otras 496 empresas top de EE.UU. VOO lo replica.'},
-  {q:'¿Qué es un dividendo?',opts:['Una deuda','Parte de ganancias que la empresa paga a accionistas','El precio de una acción','Un tipo de bono'],ans:1,exp:'SCHD paga dividendos trimestrales. Son ingresos pasivos reales que recibes solo por ser dueño de acciones.'},
-  {q:'¿Qué significa diversificar?',opts:['Invertir todo en una acción','Guardar en efectivo','Invertir en diferentes activos para reducir riesgo','Vender todas las inversiones'],ans:2,exp:'No pongas todos los huevos en una canasta. VOO ya tiene 500 empresas — si una quiebra, apenas afecta.'},
-  {q:'¿En qué año se inauguró el Canal de Panamá?',opts:['1904','1914','1924','1934'],ans:1,exp:'El Canal de Panamá fue inaugurado el 15 de agosto de 1914, conectando el Atlántico con el Pacífico.'},
-  {q:'¿Qué es el VIX?',opts:['Un ETF de tecnología','El índice de volatilidad y miedo del mercado','Una criptomoneda','Una tasa de interés'],ans:1,exp:'VIX alto (>30) = pánico = ETFs baratos = oportunidad de compra. VIX bajo = mercado tranquilo.'},
-  {q:'¿Qué es Dollar Cost Averaging?',opts:['Comprar solo cuando el mercado sube','Invertir una cantidad fija regularmente sin importar el precio','Vender cuando baja','Cambiar a dólares físicos'],ans:1,exp:'Tu estrategia de $50/mes es exactamente DCA. Compras más acciones cuando está barato y menos cuando está caro — funciona perfecto.'},
+  {q:'¿Qué es un ETF?',o:['Un banco','Fondo que cotiza en bolsa','Un tipo de crypto','Un bono del gobierno'],a:1,e:'Un ETF (Exchange Traded Fund) cotiza en bolsa y diversifica en muchos activos. VOO tiene las 500 mejores empresas de EE.UU.'},
+  {q:'¿Qué es el interés compuesto?',o:['Interés solo sobre capital inicial','Interés sobre capital + intereses acumulados','Un préstamo bancario','Una comisión'],a:1,e:'Interés sobre interés. $200 al 9% durante 10 años se convierte en más de $400 sin hacer nada.'},
+  {q:'¿Cuándo es mejor comprar ETFs?',o:['Cuando el mercado sube','Nunca, es muy riesgoso','Cuando el mercado cae — están más baratos','Solo los lunes'],a:2,e:'Las caídas son oportunidades. Comprar VOO cuando baja 3% es como comprar algo en oferta.'},
+  {q:'¿Qué es el VIX?',o:['Una crypto','Índice de volatilidad y miedo del mercado','Un ETF de tecnología','El precio del dólar'],a:1,e:'El VIX mide el miedo del mercado. VIX alto = pánico = oportunidad de compra para largo plazo.'},
+  {q:'¿Qué es la regla del 72?',o:['Un impuesto','Años para duplicar dinero = 72/tasa de retorno','El mínimo para invertir','Una regulación bancaria'],a:1,e:'Al 9% anual, tu dinero se duplica en 8 años (72/9=8). ¡Empieza antes para aprovechar más duplicaciones!'},
+  {q:'¿Cuándo se inauguró el Canal de Panamá?',o:['1904','1914','1924','1934'],a:1,e:'El Canal de Panamá fue inaugurado el 15 de agosto de 1914, conectando el Atlántico con el Pacífico.'},
+  {q:'¿Qué es SCHD?',o:['Una crypto','ETF de dividendos de Schwab','Un banco panameño','Una acción de Apple'],a:1,e:'SCHD es un ETF que paga dividendos trimestrales. Perfecto para generar ingresos pasivos a largo plazo.'},
 ];
 let qDone=false;
 function loadQuiz(){
-  const q=quizzes[DOY%quizzes.length];
-  qDone=false;
+  const n=pty();const doy=Math.floor((n-new Date(n.getFullYear(),0,0))/86400000);
+  const q=quizzes[doy%quizzes.length];
   const saved=JSON.parse(localStorage.getItem('iquiz')||'{"c":0,"t":0}');
-  document.getElementById('quizSc').textContent=`Tu puntaje: ${saved.c}/${saved.t} correctas`;
-  document.getElementById('quizBox').innerHTML=`
-    <div class="qq">${q.q}</div>
-    <div class="qopts">${q.opts.map((o,i)=>`<button class="qopt" onclick="ans(${i},${q.ans},'${q.exp.replace(/'/g,"\\'")}',this)">${o}</button>`).join('')}</div>
+  document.getElementById('quizscore').textContent=saved.t>0?`Puntaje: ${saved.c}/${saved.t} correctas`:'';
+  document.getElementById('quizbox').innerHTML=`
+    <div class="qquestion">${q.q}</div>
+    <div class="qopts">${q.o.map((o,i)=>`<button class="qopt" onclick="answer(${i},${q.a},'${q.e.replace(/'/g,"\\'")}',this)">${o}</button>`).join('')}</div>
     <div class="qexp" id="qexp"></div>`;
 }
-function ans(i,correct,exp,btn){
+function answer(idx,ans,exp,btn){
   if(qDone)return;qDone=true;
-  document.querySelectorAll('.qopt').forEach((o,j)=>{o.disabled=true;if(j===correct)o.classList.add('ok');else if(j===i&&i!==correct)o.classList.add('no');});
-  const el=document.getElementById('qexp');el.style.display='block';
-  el.textContent=(i===correct?'✅ Correcto! ':'❌ Incorrecto. ')+exp;
+  document.querySelectorAll('.qopt').forEach((b,i)=>{b.disabled=true;if(i===ans)b.classList.add('ok');else if(i===idx)b.classList.add('no');});
+  const ex=document.getElementById('qexp');ex.style.display='block';
+  ex.textContent=(idx===ans?'✅ Correcto! ':'❌ Incorrecto. ')+exp;
   const s=JSON.parse(localStorage.getItem('iquiz')||'{"c":0,"t":0}');
-  if(i===correct)s.c++;s.t++;
-  localStorage.setItem('iquiz',JSON.stringify(s));
-  document.getElementById('quizSc').textContent=`Tu puntaje: ${s.c}/${s.t} correctas`;
+  if(idx===ans)s.c++;s.t++;localStorage.setItem('iquiz',JSON.stringify(s));
+  document.getElementById('quizscore').textContent=`Puntaje: ${s.c}/${s.t} correctas`;
 }
 
-// Word
+// WORD — local, rotativo
 const words=[
-  {w:'Compound',p:'/ˈkɒmpaʊnd/',t:'adjective/verb',def:'In finance: interest that accumulates on both the initial principal and the interest already earned.',ex:'"Compound interest turns your $200 into $11,000 over 10 years — without you doing anything."'},
-  {w:'Diversify',p:'/daɪˈvɜːrsɪfaɪ/',t:'verb',def:'To spread investments across different assets to reduce risk and exposure to any single investment.',ex:'"Instead of buying one stock, he decided to diversify by investing in a VOO ETF."'},
-  {w:'Resilient',p:'/rɪˈzɪliənt/',t:'adjective',def:'Able to recover quickly from difficulties; tough and adaptable under pressure.',ex:'"Despite the market crash, his long-term portfolio proved resilient and recovered within months."'},
-  {w:'Leverage',p:'/ˈlevərɪdʒ/',t:'noun/verb',def:'Using borrowed capital or other tools to multiply the potential return of an investment.',ex:'"He used leverage to increase his position, but it also significantly increased his risk."'},
-  {w:'Volatility',p:'/ˌvɒləˈtɪlɪti/',t:'noun',def:'The degree of variation in the price of a financial instrument over time — how wildly prices swing.',ex:'"High market volatility means prices can change dramatically in a single trading session."'},
-  {w:'Dividend',p:'/ˈdɪvɪdɛnd/',t:'noun',def:'A portion of a company\'s earnings paid to shareholders, typically on a quarterly basis.',ex:'"SCHD is known for its reliable and growing dividends every single quarter."'},
-  {w:'Portfolio',p:'/pɔːrtˈfoʊliˌoʊ/',t:'noun',def:'A collection of financial investments — stocks, ETFs, bonds, crypto — owned by an individual.',ex:'"His portfolio of VOO and SCHD grew 12% last year through consistent monthly contributions."'},
+  {w:'Compound',p:'/ˈkɒmpaʊnd/',t:'adjective',d:'Made of several parts; in finance, interest that grows on itself.',e:'"Compound interest turned $200 into $400 over 8 years."'},
+  {w:'Diversify',p:'/daɪˈvɜːrsɪfaɪ/',t:'verb',d:'To spread investments across different assets to reduce risk.',e:'"You should diversify your portfolio instead of betting on one stock."'},
+  {w:'Resilient',p:'/rɪˈzɪliənt/',t:'adjective',d:'Able to recover quickly from difficulties.',e:'"The Panama economy has proven resilient despite global challenges."'},
+  {w:'Leverage',p:'/ˈlevərɪdʒ/',t:'noun',d:'Using borrowed money to multiply returns (and risks).',e:'"He used leverage to increase gains, but it also increased the risk."'},
+  {w:'Volatility',p:'/ˌvɒləˈtɪlɪti/',t:'noun',d:'Tendency to change rapidly and unpredictably in financial markets.',e:'"High volatility means prices can swing dramatically in one day."'},
+  {w:'Portfolio',p:'/pɔːrtˈfoʊliˌoʊ/',t:'noun',d:'A collection of investments like stocks, bonds, and ETFs.',e:'"His portfolio grew 15% last year thanks to consistent investing."'},
+  {w:'Dividend',p:'/ˈdɪvɪdɛnd/',t:'noun',d:'Regular payment from a company\'s profits to its shareholders.',e:'"SCHD pays reliable dividends every quarter to its investors."'},
 ];
 function loadWord(){
-  const w=words[DOY%words.length];
-  document.getElementById('wordBox').innerHTML=`
-    <div class="wword">${w.w}</div>
-    <div class="wpron">${w.p}</div>
-    <div class="wtype">${w.t}</div>
-    <div class="wdef">${w.def}</div>
-    <div class="wex">"${w.ex}"</div>`;
+  const n=pty();const doy=Math.floor((n-new Date(n.getFullYear(),0,0))/86400000);
+  const w=words[doy%words.length];
+  document.getElementById('wordbox').innerHTML=`<div class="wword">${w.w}</div><div class="wpron">${w.p}</div><div class="wtype">${w.t}</div><div class="wdef">${w.d}</div><div class="wex">${w.e}</div>`;
 }
 
-// History
+// HISTORY — local
 const hist=[
-  [{y:1914,e:'Se inaugura el Canal de Panamá.'},{y:1969,e:'Neil Armstrong pisa la Luna por primera vez.'},{y:2007,e:'Steve Jobs presenta el primer iPhone.'}],
-  [{y:1903,e:'Panamá se independiza de Colombia.'},{y:1976,e:'Apple Computer es fundada por Steve Jobs.'},{y:2009,e:'Se crea Bitcoin — la primera criptomoneda.'}],
-  [{y:1928,e:'Alexander Fleming descubre la penicilina.'},{y:1991,e:'Se lanza Linux, el sistema operativo libre.'},{y:2004,e:'Facebook nace en Harvard.'}],
-  [{y:1945,e:'Termina la Segunda Guerra Mundial.'},{y:1981,e:'IBM lanza su primera PC personal.'},{y:1998,e:'Google es fundado por Page y Brin.'}],
-  [{y:1955,e:'McDonald\'s abre su primer restaurante franquiciado.'},{y:1971,e:'Intel lanza el primer microprocesador.'},{y:2010,e:'Apple lanza el iPad.'}],
-  [{y:1903,e:'Los hermanos Wright logran el primer vuelo motorizado.'},{y:1962,e:'JFK anuncia el programa Apollo.'},{y:1994,e:'Jeff Bezos funda Amazon desde un garaje.'}],
-  [{y:1912,e:'Panamá firma el Tratado Hay-Bunau-Varilla sobre el Canal.'},{y:1984,e:'Apple lanza el Macintosh con el famoso anuncio de Ridley Scott.'},{y:2020,e:'Comienza la pandemia de COVID-19.'}],
+  [{y:1914,e:'Se inaugura el Canal de Panamá.'},{y:1969,e:'Neil Armstrong pisa la Luna.'},{y:2007,e:'Steve Jobs presenta el primer iPhone.'}],
+  [{y:1903,e:'Panamá se independiza de Colombia.'},{y:1998,e:'Google es fundado en un garaje de California.'},{y:2009,e:'Se crea Bitcoin, la primera criptomoneda.'}],
+  [{y:1912,e:'El Titanic parte en su viaje inaugural.'},{y:1976,e:'Apple Computer es fundada por Steve Jobs.'},{y:2004,e:'Facebook es lanzado desde Harvard.'}],
+  [{y:1928,e:'Fleming descubre la penicilina.'},{y:1991,e:'Se anuncia Linux, el sistema operativo libre.'},{y:2020,e:'Comienza la pandemia de COVID-19.'}],
+  [{y:1903,e:'Los hermanos Wright logran el primer vuelo.'},{y:1955,e:'McDonald\'s abre su primer restaurante franquiciado.'},{y:2010,e:'Apple lanza el iPad.'}],
+  [{y:1945,e:'Termina la Segunda Guerra Mundial.'},{y:1971,e:'Intel lanza el primer microprocesador comercial.'},{y:2016,e:'Se lanza Pokémon GO, fenómeno mundial.'}],
+  [{y:1962,e:'JFK anuncia el programa Apollo para ir a la Luna.'},{y:1989,e:'Cae el Muro de Berlín.'},{y:2023,e:'ChatGPT supera 100 millones de usuarios en 2 meses.'}],
 ];
-function loadHist(){
-  const n=pty();
-  const ms=['enero','febrero','marzo','abril','mayo','junio','julio','agosto','septiembre','octubre','noviembre','diciembre'];
-  const ev=hist[DOY%hist.length];
-  document.getElementById('histBox').innerHTML=`
-    <div class="hdate">${n.getDate()} de ${ms[n.getMonth()]}</div>
-    ${ev.map(e=>`<div class="hev"><span class="hyr">${e.y}</span>${e.e}</div>`).join('')}`;
+function loadHistory(){
+  const n=pty();const doy=Math.floor((n-new Date(n.getFullYear(),0,0))/86400000);
+  const meses=['enero','febrero','marzo','abril','mayo','junio','julio','agosto','septiembre','octubre','noviembre','diciembre'];
+  const evs=hist[doy%hist.length];
+  document.getElementById('histbox').innerHTML=`<div class="hdate">${n.getDate()} de ${meses[n.getMonth()]}</div>${evs.map(e=>`<div class="hev"><span class="hyr">${e.y}</span><span class="htx">${e.e}</span></div>`).join('')}`;
 }
 
-// Fin tips
+// FIN TIPS — local
 const tips=[
-  {n:1,t:'Interés compuesto',b:'$200 hoy + $50/mes al 9% anual = $11,240 en 10 años. Einstein lo llamó "la octava maravilla del mundo". El secreto es empezar hoy, no mañana.'},
-  {n:2,t:'Regla del 72',b:'Divide 72 entre tu tasa de retorno para saber cuánto tarda en duplicarse tu dinero. Al 9% se duplica en ~8 años. Al 12%, en 6 años. Con $200 invertidos hoy.'},
-  {n:3,t:'ETFs vs Acciones individuales',b:'1 acción de Apple = apostarle a 1 empresa. VOO = las 500 mejores. Si una quiebra, apenas te afecta. Los ETFs dan diversificación automática.'},
-  {n:4,t:'Dollar Cost Averaging (DCA)',b:'Invertir $50 fijos cada mes — sin importar si el mercado sube o baja — reduce el riesgo automáticamente. Es exactamente lo que estás haciendo. Es la estrategia más probada.'},
-  {n:5,t:'Qué son los dividendos',b:'SCHD paga ~3% anual en dividendos. Con $200 son $6 al año. Pero reinvertidos por 10 años con aportes mensuales, se convierten en cientos de dólares anuales.'},
-  {n:6,t:'El VIX y cuándo comprar',b:'VIX >30 = pánico en el mercado = ETFs baratos = mejor momento para comprar más. VIX <15 = mercado calmado. Aprende a ver el miedo ajeno como oportunidad.'},
-  {n:7,t:'Panamá y los impuestos',b:'Panamá tiene sistema territorial: no pagas impuestos sobre ingresos generados fuera del país. Las ganancias de tus ETFs en eToro no están sujetas a impuestos panameños.'},
+  {n:1,t:'Interés compuesto',b:'$200 hoy + $50/mes al 9% anual = $11,240 en 10 años. El tiempo es tu mayor ventaja. Cuanto antes empieces, más rico terminas.'},
+  {n:2,t:'Regla del 72',b:'Divide 72 entre tu tasa de retorno para saber cuánto tarda en duplicarse tu dinero. Al 9%, tu dinero se duplica cada 8 años.'},
+  {n:3,t:'ETFs vs acciones individuales',b:'Comprar Apple es apostarle a 1 empresa. Comprar VOO es apostarle a las 500 mejores. Los ETFs diversifican sin reducir los retornos promedio.'},
+  {n:4,t:'Dollar Cost Averaging',b:'Invertir $50 fijos cada mes, sin importar si el mercado sube o baja, es la estrategia más probada. Reduces el riesgo de comprar en el peor momento.'},
+  {n:5,t:'Los dividendos de SCHD',b:'SCHD paga dividendos cada trimestre. Con $200 recibirás poco ahora, pero reinvertidos durante 10 años crean un efecto compuesto poderoso.'},
+  {n:6,t:'VIX = oportunidad',b:'Cuando el VIX supera 30, el mercado tiene pánico y los ETFs están baratos. Es el mejor momento para comprar más. Miedo ajeno = oportunidad tuya.'},
+  {n:7,t:'Impuestos en Panamá',b:'Panamá tiene sistema territorial — no pagas impuestos sobre ingresos generados fuera del país. Tus ganancias en eToro no están sujetas a impuestos panameños.'},
 ];
 function loadTip(){
-  const t=tips[DOY%tips.length];
-  document.getElementById('tipBox').innerHTML=`<div class="tnum">${t.n}</div><div class="ttit">${t.t}</div><div class="tbody">${t.b}</div>`;
+  const n=pty();const doy=Math.floor((n-new Date(n.getFullYear(),0,0))/86400000);
+  const t=tips[doy%tips.length];
+  document.getElementById('tipbox').innerHTML=`<div class="tipn">${t.n}</div><div class="tiptitle">${t.t}</div><div class="tipbody">${t.b}</div>`;
 }
 
-// Facts
+// FACT — local
 const facts=[
-  '"Los pulpos tienen 3 corazones, 9 cerebros y sangre azul. Son los ingenieros más creativos del océano."',
-  '"La Torre Eiffel crece hasta 15 cm en verano por dilatación térmica del metal."',
-  '"El cerebro humano tiene ~86 mil millones de neuronas — más conexiones que estrellas en la Vía Láctea."',
-  '"Una abeja visita ~2 millones de flores para producir 450 gramos de miel."',
-  '"El ADN de todos los humanos vivos es 99.9% idéntico. Lo que nos diferencia es solo el 0.1%."',
-  '"Los tiburones han existido por más tiempo que los árboles — aparecieron hace 400 millones de años."',
-  '"Si el Sol fuera del tamaño de una naranja, la Tierra sería un grano de arena a 10 metros de distancia."',
+  '"Los pulpos tienen 3 corazones, 9 cerebros y sangre azul."',
+  '"La Torre Eiffel crece 15 cm en verano por dilatación térmica del metal."',
+  '"El cerebro humano tiene más conexiones que estrellas en la Vía Láctea."',
+  '"Una abeja visita 2 millones de flores para producir 450g de miel."',
+  '"El Sol representa el 99.86% de toda la masa del sistema solar."',
+  '"Los bananos son levemente radiactivos por su contenido de potasio-40."',
+  '"Un rayo golpea la Tierra unas 100 veces por segundo."',
 ];
-function loadFact(){document.getElementById('factBox').textContent=facts[DOY%facts.length];}
+function loadFact(){
+  const n=pty();const doy=Math.floor((n-new Date(n.getFullYear(),0,0))/86400000);
+  document.getElementById('factbox').textContent=facts[doy%facts.length];
+}
 
-// Quotes
+// QUOTE — local
 const quotes=[
   {q:'La única manera de hacer un gran trabajo es amar lo que haces.',a:'Steve Jobs'},
   {q:'La inversión más importante que puedes hacer es en ti mismo.',a:'Warren Buffett'},
   {q:'No importa lo lento que vayas, siempre y cuando no te detengas.',a:'Confucio'},
   {q:'El éxito no es definitivo, el fracaso no es fatal. Lo que cuenta es el coraje de continuar.',a:'Winston Churchill'},
-  {q:'El dinero es una herramienta. Usada correctamente, puede hacer cualquier cosa.',a:'Ayn Rand'},
-  {q:'No esperes condiciones perfectas para comenzar. Comienza y crea las condiciones.',a:'Anónimo'},
-  {q:'Los mercados son dispositivos para transferir dinero del impaciente al paciente.',a:'Warren Buffett'},
+  {q:'Quien controla sus finanzas, controla su libertad.',a:'Anónimo'},
+  {q:'El mercado es una máquina de transferir dinero del impaciente al paciente.',a:'Warren Buffett'},
+  {q:'Comienza donde estás. Usa lo que tienes. Haz lo que puedas.',a:'Arthur Ashe'},
 ];
 function loadQuote(){
-  const q=quotes[DOY%quotes.length];
-  document.getElementById('quoteT').textContent='"'+q.q+'"';
-  document.getElementById('quoteA').textContent='— '+q.a;
+  const n=pty();const doy=Math.floor((n-new Date(n.getFullYear(),0,0))/86400000);
+  const q=quotes[doy%quotes.length];
+  document.getElementById('quotetx').textContent='"'+q.q+'"';
+  document.getElementById('quoteauth').textContent='— '+q.a;
 }
 
-function ago(s){
-  if(!s)return'';
-  try{const m=Math.floor((Date.now()-new Date(s))/60000);return m<60?`hace ${m}m`:m<1440?`hace ${Math.floor(m/60)}h`:`hace ${Math.floor(m/1440)}d`;}catch{return'';}
+// CHART
+function calc(i,m,r,y){let v=i;const mr=r/100/12;for(let mo=0;mo<y*12;mo++)v=v*(1+mr)+m;return Math.round(v);}
+let chart;
+function buildChart(i,m,r){
+  const lb=[],dt=[],inv=[];
+  for(let y=0;y<=10;y++){lb.push('Año '+y);dt.push(calc(i,m,r,y));inv.push(i+m*12*y);}
+  if(chart)chart.destroy();
+  chart=new Chart(document.getElementById('projchart'),{type:'line',data:{labels:lb,datasets:[
+    {data:dt,borderColor:'#30d158',backgroundColor:'rgba(48,209,88,0.06)',fill:true,tension:.4,pointRadius:3,pointBackgroundColor:'#30d158',borderWidth:1.5},
+    {data:inv,borderColor:'rgba(10,132,255,0.4)',fill:false,tension:0,pointRadius:0,borderWidth:1,borderDash:[4,4]}
+  ]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>' $'+c.parsed.y.toLocaleString()}}},scales:{y:{ticks:{callback:v=>'$'+(v>=1000?(v/1000).toFixed(0)+'k':v),font:{size:10},color:'rgba(235,235,245,0.3)'},grid:{color:'rgba(255,255,255,0.03)'}},x:{ticks:{font:{size:10},color:'rgba(235,235,245,0.3)'},grid:{display:false}}}}});
 }
+function updateProj(){
+  const i=+document.getElementById('sl1').value,m=+document.getElementById('sl2').value,r=+document.getElementById('sl3').value;
+  document.getElementById('sv1').textContent='$'+i;document.getElementById('sv2').textContent='$'+m;document.getElementById('sv3').textContent=r+'%';
+  [1,3,5,10].forEach(y=>{const v=calc(i,m,r,y),inv=i+m*12*y;document.getElementById('p'+y).textContent='$'+v.toLocaleString();document.getElementById('g'+y).textContent='+$'+(v-inv).toLocaleString();});
+  buildChart(i,m,r);
+}
+['sl1','sl2','sl3'].forEach(id=>document.getElementById(id).addEventListener('input',updateProj));
+updateProj();
 
-// Init
-wx();aqi();forex();crypto();nasa();newsPan();newsGlob();movie();
-loadHoro();loadQuiz();loadWord();loadHist();loadTip();loadFact();loadQuote();
+// UTILS
+function ago(d){if(!d)return'';try{const m=Math.floor((Date.now()-new Date(d))/60000);return m<60?`hace ${m}m`:m<1440?`hace ${Math.floor(m/60)}h`:`hace ${Math.floor(m/1440)}d`;}catch{return'';}}
 
-// Refresh intervals
-setInterval(wx,10*60*1000);
-setInterval(aqi,10*60*1000);
-setInterval(forex,60*60*1000);
-setInterval(crypto,60*1000);
-setInterval(newsPan,15*60*1000);
-setInterval(newsGlob,15*60*1000);
+// INIT
+loadWeather();
+loadNASA();
+loadNews();
+loadETFs();
+loadCrypto();
+loadForex();
+loadAQI();
+loadMovie();
+loadHoro();
+loadQuiz();
+loadWord();
+loadHistory();
+loadTip();
+loadFact();
+loadQuote();
+
+// AUTO REFRESH
+setInterval(loadCrypto,60000);         // 1 min
+setInterval(loadETFs,30000);           // 30 seg
+setInterval(loadWeather,10*60*1000);   // 10 min
+setInterval(loadAQI,10*60*1000);       // 10 min
+setInterval(loadForex,60*60*1000);     // 1 hora
+setInterval(loadNews,15*60*1000);      // 15 min
 </script>
 </body>
 </html>
