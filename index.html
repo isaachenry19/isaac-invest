@@ -401,9 +401,10 @@ body{color:var(--t1);font-family:-apple-system,BlinkMacSystemFont,'SF Pro Text',
   <div class="card">
     <div class="lbl">⚽ Deportes en vivo</div>
     <div class="sport-tabs">
-      <button class="sport-tab on" onclick="showSport('football',this)">Fútbol</button>
-      <button class="sport-tab" onclick="showSport('basketball',this)">NBA</button>
-      <button class="sport-tab" onclick="showSport('baseball',this)">MLB</button>
+      <button class="sport-tab on" onclick="showSport('panama',this)">🇵🇦 Panamá</button>
+      <button class="sport-tab" onclick="showSport('football',this)">⚽ Fútbol</button>
+      <button class="sport-tab" onclick="showSport('basketball',this)">🏀 NBA</button>
+      <button class="sport-tab" onclick="showSport('baseball',this)">⚾ MLB</button>
     </div>
     <div id="sportContent"><span style="color:var(--t3);font-size:13px">Cargando partidos...</span></div>
   </div>
@@ -647,22 +648,45 @@ async function loadMovie(){
 }
 
 // ── SPORTS — TheSportsDB (gratis, sin key) ──
-let sportData={football:[],basketball:[],baseball:[]};
+let sportData={panama:[],football:[],basketball:[],baseball:[]};
 async function loadSports(){
+  const today=new Date().toISOString().slice(0,10);
+  // Panama — team ID 133741 = Selección de Panamá, also search by league
   try{
-    // Soccer — top leagues events today
-    const today=new Date().toISOString().slice(0,10);
+    const r=await sf(`https://www.thesportsdb.com/api/v1/json/3/searchteams.php?t=Panama`);
+    const d=await r.json();
+    const team=d?.teams?.find(t=>t.strSport==='Soccer'&&t.strCountry==='Panama');
+    if(team){
+      const r2=await sf(`https://www.thesportsdb.com/api/v1/json/3/eventsnext.php?id=${team.idTeam}`);
+      const d2=await r2.json();
+      sportData.panama=(d2?.events||[]).slice(0,5);
+    }
+  }catch{}
+  // Also get Panama Liga events
+  try{
+    const r=await sf(`https://www.thesportsdb.com/api/v1/json/3/eventsday.php?d=${today}&s=Soccer&l=Panama%20Liga`);
+    const d=await r.json();
+    if(d?.events?.length) sportData.panama=[...sportData.panama,...d.events.slice(0,3)];
+  }catch{}
+  // Soccer global
+  try{
     const r=await sf(`https://www.thesportsdb.com/api/v1/json/3/eventsday.php?d=${today}&s=Soccer`);
     const d=await r.json();
-    sportData.football=(d.events||[]).slice(0,6);
+    sportData.football=(d?.events||[]).slice(0,6);
   }catch{}
+  // Basketball
   try{
-    const today=new Date().toISOString().slice(0,10);
     const r=await sf(`https://www.thesportsdb.com/api/v1/json/3/eventsday.php?d=${today}&s=Basketball`);
     const d=await r.json();
-    sportData.basketball=(d.events||[]).slice(0,6);
+    sportData.basketball=(d?.events||[]).slice(0,6);
   }catch{}
-  showSport('football',document.querySelector('.sport-tab.on'));
+  // Baseball
+  try{
+    const r=await sf(`https://www.thesportsdb.com/api/v1/json/3/eventsday.php?d=${today}&s=Baseball`);
+    const d=await r.json();
+    sportData.baseball=(d?.events||[]).slice(0,6);
+  }catch{}
+  showSport('panama',document.querySelector('.sport-tab.on'));
 }
 function showSport(type,btn){
   document.querySelectorAll('.sport-tab').forEach(b=>b.classList.remove('on'));
