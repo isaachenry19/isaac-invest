@@ -466,6 +466,25 @@ function pty(){return new Date(new Date().toLocaleString('en-US',{timeZone:'Amer
 const DAYS=['Domingo','Lunes','Martes','Miércoles','Jueves','Viernes','Sábado'];
 const MONTHS=['enero','febrero','marzo','abril','mayo','junio','julio','agosto','septiembre','octubre','noviembre','diciembre'];
 
+// ── COUNTDOWN ──
+const EVTS=[
+  {n:'Fin de semana',f:d=>{const t=new Date(d),diff=(6-t.getDay()+7)%7||7;t.setDate(t.getDate()+diff);t.setHours(0,0,0,0);return t;}},
+  {n:'Fin de mes',f:d=>new Date(d.getFullYear(),d.getMonth()+1,1)},
+  {n:'Independencia 3 Nov 🇵🇦',f:d=>{let t=new Date(d.getFullYear(),10,3);if(t<=d)t.setFullYear(t.getFullYear()+1);return t;}},
+  {n:'Navidad 🎄',f:d=>{let t=new Date(d.getFullYear(),11,25);if(t<=d)t.setFullYear(t.getFullYear()+1);return t;}},
+];
+function countdown(now){
+  let best=null,ms=Infinity,nm='';
+  EVTS.forEach(e=>{const t=e.f(now),m=t-now;if(m>0&&m<ms){ms=m;best=t;nm=e.n;}});
+  if(!best)return;
+  document.getElementById('cdnm').textContent=nm;
+  const s=Math.floor(ms/1000);
+  document.getElementById('cdd').textContent=Math.floor(s/86400);
+  document.getElementById('cdh').textContent=String(Math.floor((s%86400)/3600)).padStart(2,'0');
+  document.getElementById('cdm').textContent=String(Math.floor((s%3600)/60)).padStart(2,'0');
+  document.getElementById('cds').textContent=String(s%60).padStart(2,'0');
+}
+
 function tick(){
   const n=pty();
   document.getElementById('clk').textContent=n.toLocaleTimeString('en-US',{hour:'2-digit',minute:'2-digit',hour12:true});
@@ -486,25 +505,6 @@ setInterval(tick,1000);tick();
   const bar=document.getElementById('strbar');
   for(let i=0;i<7;i++){const el=document.createElement('div');el.className='srd'+(i<d.h.length?' ok':'')+(i===6?' now':'');bar.appendChild(el);}
 })();
-
-// ── COUNTDOWN ──
-const EVTS=[
-  {n:'Fin de semana',f:d=>{const t=new Date(d),diff=(6-t.getDay()+7)%7||7;t.setDate(t.getDate()+diff);t.setHours(0,0,0,0);return t;}},
-  {n:'Fin de mes',f:d=>new Date(d.getFullYear(),d.getMonth()+1,1)},
-  {n:'Independencia 3 Nov 🇵🇦',f:d=>{let t=new Date(d.getFullYear(),10,3);if(t<=d)t.setFullYear(t.getFullYear()+1);return t;}},
-  {n:'Navidad 🎄',f:d=>{let t=new Date(d.getFullYear(),11,25);if(t<=d)t.setFullYear(t.getFullYear()+1);return t;}},
-];
-function countdown(now){
-  let best=null,ms=Infinity,nm='';
-  EVTS.forEach(e=>{const t=e.f(now),m=t-now;if(m>0&&m<ms){ms=m;best=t;nm=e.n;}});
-  if(!best)return;
-  document.getElementById('cdnm').textContent=nm;
-  const s=Math.floor(ms/1000);
-  document.getElementById('cdd').textContent=Math.floor(s/86400);
-  document.getElementById('cdh').textContent=String(Math.floor((s%86400)/3600)).padStart(2,'0');
-  document.getElementById('cdm').textContent=String(Math.floor((s%3600)/60)).padStart(2,'0');
-  document.getElementById('cds').textContent=String(s%60).padStart(2,'0');
-}
 
 // ── SAFE FETCH ── wraps fetch with timeout + error handling
 async function sf(url,opts={},timeout=8000){
